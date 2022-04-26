@@ -1,0 +1,154 @@
+html, body {
+	max-width: 100%;
+	width: 100%;
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+@font-face {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-style: bold;
+}
+.btn{
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 36px;
+    /* margin-top: 10px; */
+}
+.btn-blue-icon{
+    background: DodgerBlue;
+    color:white;
+}
+/* .btn .fa{
+    margin-right:12px;
+} */
+
+.btn-blue-icon:hover{
+    background: #5cafff;
+    color:white;
+}
+
+.btn-blue-green-icon{
+    background: #33b5e5;
+    color:white;
+}
+
+.btn-blue-green-icon:hover{
+    background: #33b5e5;
+    color:white;
+}
+
+.btn-blue-green-icon:active{
+    background: #17a2b8;
+    color:white;
+}
+
+.btn-blue-green{
+    background: #33b5e5;
+    color:white;
+}
+
+.btn-blue-green:hover{
+    background: #33b5e5;
+    color:white;
+}
+.btn-blue-green:active{
+    background: #17a2b8;
+    color:white;
+}
+
+.btn-blue-green-icon:active{
+    background: #17a2b8;
+    color:white;
+}
+
+
+
+.btn-green {
+    background-color: #17ADB0;
+    color:white;
+}
+.btn-green:hover {
+    background-color: rgb(71, 210, 212);
+    color:white
+}
+.btn-blue{
+    background: DodgerBlue;
+    color:white;
+}
+.btn-blue:hover{
+    background: #5cafff;
+    color:white;
+}
+.btn-outline-green{
+    background:white;
+    border:1px solid #33b5e5;
+    color:#33b5e5;
+}
+.btn-outline-green:hover{
+    background:#33b5e5;
+    border:1px solid #33b5e5;
+    color:white;
+}
+.btn-outline-blue{
+    background:white;
+    border:1px solid DodgerBlue;
+    color:DodgerBlue;
+}
+.btn-outline-blue:hover{
+    background:DodgerBlue;
+    border:1px solid DodgerBlue;
+    color:white;
+}
+.btn-green-icon{
+    background: #17adb0;
+    color:white;
+}
+.btn-green-icon:hover{
+    background: #17adb0;
+    color:white;
+}
+.btn-red{
+    background:rgb(240, 84, 78);
+    color:white
+}
+.btn-red:hover{
+    background:rgb(248, 103, 98);
+    color:white
+}
+.btn-orange{
+    background:#FFA301;
+    color:white;
+}
+.btn-orange:hover{
+    background:rgb(250, 170, 32);
+    color:white;
+}
+.btn-orange svg{
+    width:16px;
+    height:16px;
+}

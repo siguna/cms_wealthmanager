@@ -1,0 +1,181 @@
+stages:
+  - init
+  #- test
+  - build
+  - deploy
+
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  DIST_DIR: dist/webfw20
+  IMAGE: dist/image/web
+  CLI_VERSION: 8.3.19
+  CONTAINER_IMAGE: webfw20:latest
+  DOCKER_USER: anhnt
+  DOCKER_PASSWORD: Mrdeath27
+
+cache:
+  key: ${CI_COMMIT_SHA}
+  paths: ['node_modules']
+
+#before_script:
+#- "[ -d node_modules ] || npm ci"
+
+init:
+  stage: init
+  image: trion/ng-cli:${CLI_VERSION}
+  script: ['']
+  cache:
+    policy: push
+    key: ${CI_COMMIT_SHA}
+    paths: ['node_modules']
+  tags:
+    - docker
+    - gce
+
+#lint:nglint:
+#  stage: test
+#  image: trion/ng-cli:${CLI_VERSION}
+#  script:
+#  - node_modules\.bin ng lint
+#  tags:
+#  - docker
+#  - gce
+
+##### TEST JEST #####
+#test:jest:
+#  stage: test
+#  image: trion/ng-cli:${CLI_VERSION}
+#  allow_failure: false
+#  script:
+#  - npm run test
+#  tags:
+#  - docker
+#  - gce
+
+#build:
+#  stage: build
+#  image: trion/ng-cli-karma:${CLI_VERSION}
+#  script:
+#  - ng build --prod
+#  - sed -i "s/commit_hash = ''/commit_hash = '${CI_COMMIT_SHA}'/" $DIST_DIR/index.html
+#  - sed -i "s/build_date = ''/build_date = '$(date)'/" $DIST_DIR/index.html
+#  artifacts:
+#    expire_in: 1 day
+#    paths:
+#    - $DIST_DIR
+#  tags:
+#  - docker
+#  - gce
+
+##### BUILD #####
+#build:
+#  stage: build
+#  image: trion/ng-cli-karma:${CLI_VERSION}
+#  script:
+#  - npm run build --aot
+#  - sed -i "s/commit_hash = ''/commit_hash = '${CI_COMMIT_SHA}'/" $DIST_DIR/index.html
+#  - sed -i "s/build_date = ''/build_date = '$(date)'/" $DIST_DIR/index.html
+#  artifacts:
+#    expire_in: 1 day
+#    paths:
+#    - $DIST_DIR
+#  tags:
+#  - docker
+#  - gce
+
+#build:
+#      stage: build
+#      image: trion/ng-cli-karma:${CLI_VERSION}
+#      script:
+#      - npm run build --aot
+#      artifacts:
+#        expire_in: 1 day
+#        paths:
+#        - $DIST_DIR
+#      tags:
+#      - docker
+
+
+build:
+  stage: build
+
+  script:
+    - cd 'D:\Vissoft\Angular 8\webfw20\'
+    #  - docker login https://hub.docker.com/ -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE}
+    - docker tag ${CONTAINER_IMAGE} anhnt/webfw20:latest
+    - docker push ${CONTAINER_IMAGE}
+
+
+##### END BUILD #####
+
+##### BUILD #####
+# deploy:
+#   stage: deploy
+#   image: docker:stable
+#   services:
+#   - docker:dind
+#   variables:
+#     DOCKER_HOST: tcp://docker:2375/
+#     DOCKER_DRIVER: overlay
+#   before_script: ['cd /']
+#   script:
+#   - docker build -t $IMAGE .
+#   - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+#   - docker push $IMAGE
+#   - IMAGE_ID=$(docker inspect ${IMAGE} --format={{.Id}})
+#   - 'echo deploying: ..${IMAGE_ID}.. for ..${IMAGE}..'
+#   - apk add curl
+#   - >
+#       curl -Ssl -X PATCH https://api.heroku.com/apps/angular-quality/formation
+#       -d "{
+#       \"updates\": [
+#       {
+#         \"type\": \"web\",
+#         \"docker_image\": \"${IMAGE_ID}\"
+#       }
+#       ]
+#       }"
+#       -H "Content-Type: application/json"
+#       -H "Authorization: Bearer ${HEROKU_API_KEY}"
+#       -H "Accept: application/vnd.heroku+json; version=3.docker-releases"
+#   tags:
+#   - docker
+#   - gce
+
+#deploy production
+#deploy:
+#  stage: deploy
+#  environment:
+#    name: production
+#  before_script:
+#  - node_modules/.bin docker build -t webfw20:v1
+#  - node_modules/.bin docker build -t webfw20:v1
+#  script:
+#  - kubectl apply -f spa-deployment.yaml
+#    #for internal communicating to angualar application
+#  - kubeclt apply -f SPA-service.yaml
+#    #for access the angular application outside kubernetes
+#  - kubeclt apply -f SPA-load-balancer-service.yaml
+#  - kubectl get svc -owide
+#  only:
+#  - master
+
+#deploy:
+#  stage: deploy
+#  image: dtzar/helm-kubectl
+#  script:
+#  - kubectl config set-cluster k8s --server="${SERVER}"
+#  - kubectl config set clusters.k8s.certificate-authority-data ${CERTIFICATE_AUTHORITY_DATA}
+#  - kubectl config set-credentials gitlab --token="${USER_TOKEN}"
+#  - kubectl config set-context default --cluster=k8s --user=gitlab
+#  - kubectl config use-context default
+#  - sed -i "s/<VERSION>/${CI_COMMIT_SHORT_SHA}/g" deployment.yaml
+#  - kubectl apply -f deployment.yaml
+
+##### END DEPLOY #####
+
