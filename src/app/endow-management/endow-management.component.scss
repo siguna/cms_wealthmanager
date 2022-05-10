@@ -1,0 +1,24 @@
+#asset-list {
+    margin: 30px;
+
+    .asset-list__title {
+        margin-left: 2px;
+    }
+    .content-title {
+        margin-left: -10px;
+    }
+    .btn-delete {
+        color: white;
+        background-color: red;
+        margin-right: 25px;
+        width: 100px;
+    }
+    .btn-asset {
+        margin-bottom: 5px;
+        margin-right: 3px;
+        justify-content: flex-end;
+    }
+    .btn-asset__item {
+        display: contents;
+    }
+}

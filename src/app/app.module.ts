@@ -1,4 +1,6 @@
+import { AssetService } from '@shared/services/asset/asset.service';
 import { Injector, NgModule } from '@angular/core';
+import { FuncsService } from '@shared/common/wealth/funcs.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +9,10 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
+// import { ApiService } from '@shared/services/common/api';
+import { UserService } from '../shared/services/user.service';
+import { ExcelService } from '../shared/common/ui-component/datatables/export-excel.service';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -14,14 +20,18 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    ErrorPageModule, ApiService, ExcelService,
-    UtilsService, ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule
+    ErrorPageModule, 
+    ApiService,
+    ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule, UtilsService, 
 } from 'mobile-money';
-import { LayoutModule } from 'mobile-money-layout';
+// import { LayoutModule } from 'mobile-money-layout';
 import { reducers, metaReducers, effects } from '@shared/store';
 import { CustomSharedModule } from '@shared/custom-shared.module';
 import { MenuConfigNavigate } from './menu-config';
 import { AppConfig } from './app.config';
+import { MaterialModule } from '@shared/common/wealth/material.module';
+// import { UtilsService } from '@shared/services/common/utils.service';
+// import { ReactiveFormsModule } from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/langs/', '.json');
@@ -31,12 +41,18 @@ export function createTranslateLoader(http: HttpClient) {
 
     declarations: [
         AppComponent,
+        
     ],
     imports: [
-        AppRoutingModule, BrowserAnimationsModule,
-        FormsModule, BrowserModule,
+        // LayoutModule,
+        BrowserAnimationsModule,
+        FormsModule, 
+        BrowserModule,
         CommonModule,
         HttpClientModule,
+        AppRoutingModule, 
+        MaterialModule,
+        // ReactiveFormsModule,
 
         // ngrx modules
         StoreModule.forRoot(reducers, {
@@ -62,14 +78,22 @@ export function createTranslateLoader(http: HttpClient) {
             },
             isolate: true
         }),
-        ErrorPageModule, LayoutModule,
+        ErrorPageModule,
         MobileMoneyModule,
         AccountModule,
         CustomSharedModule,
     ],
-    exports: [FormsModule, TranslateModule],
-    providers: [ApiService, HttpClient,
-        ExcelService, UtilsService, TranslateService,
+    exports: [FormsModule, TranslateModule, ],
+    providers: [
+        ApiService, 
+        HttpClient, 
+        UserService,
+        ExcelService, 
+        FuncsService,
+        AssetService,
+        UtilsService, 
+        MaterialModule,
+        TranslateService,
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         { provide: LAZY_MODULES_MAP, useValue: MenuConfigNavigate },

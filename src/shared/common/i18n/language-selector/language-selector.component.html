@@ -1,0 +1,15 @@
+
+
+<div class='flex-language'>
+  <details class='details'>
+        <summary class="language-select">
+          <span class="flag-icon flag-icon-{{currentLanguage.flag}} m-r-10"></span>
+          {{currentLanguage.title}}<i style="margin-top:2px;" class="fa fa-angle-down m-r-0 floatRight"></i></summary>
+        <div class='opt-wrapper'>
+                          <button *ngFor="let language of languages"  (click)="setLanguage(language)" type="button" data-lang='vietnam' class='opt'>
+                            <span class="flag-icon flag-icon-{{language.flag}} m-r-10"></span>
+                            {{language.title}}</button>
+              </div>
+  </details>
+</div>
+

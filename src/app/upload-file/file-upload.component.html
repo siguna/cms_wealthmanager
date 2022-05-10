@@ -1,0 +1,25 @@
+<div>
+    <div class="input-group-append mt-n3" (click)="fileInput.click()">
+        <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                class="fa fa-cloud-upload mr-2 text-muted"></i>
+            <small class="text-uppercase font-weight-bold text-muted">Chọn ảnh</small>
+        </label>
+        <input style="visibility:hidden;" accept="image/*" type="file" #fileInput
+        (change)="processFile(fileInput)">
+    </div>
+    <label class="text-danger">Định dạng JPG, PNG | Dung lượng: 10Kb | Kích thước: 30x40</label>
+
+    <div *ngIf="selectedFile" class="img-preview-container">
+
+        <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+             [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+        </div>
+      
+        <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+          <div class="img-spinning-circle"></div>
+        </div>
+      
+        <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+        <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+      </div>
+</div>

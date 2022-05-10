@@ -1,0 +1,36 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+
+<div class="{{ beHide ? 'hide-nav' : '' }} navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
+        <div class="app-sidebar__inner min-height-menu scrollbar-style" *ngIf="vm$ | async as vm">
+            <ul class="nav vertical-nav-menu" id="side-menu">
+                <li>
+                    <menu-nav-filter></menu-nav-filter>
+                </li>
+                <li>
+                    <div class="nav" id="nav">
+                        <ul class="navbar-nav" routerLinkActive="active">
+                            
+                            <li class="nav-item" *ngFor="let item of sideBarData">
+                                <i class="fa fa-file-o"></i
+                                ><a class="nav-link" [routerLink]="[item.path]">{{item.name}}</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
+                <li
+                    menu-nav-item
+                    *ngFor="let item of vm.items; trackBy: trackByFn"
+                    [item]="item"
+                    [minified]="vm.minified"
+                ></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Left Sidebar -->
+<!-- ============================================================== -->

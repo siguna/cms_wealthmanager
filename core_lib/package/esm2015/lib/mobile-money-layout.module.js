@@ -1,0 +1,17 @@
+import * as tslib_1 from "tslib";
+import { LayoutModule } from './layout/layout.module';
+import { NgModule } from '@angular/core';
+import { MobileMoneyLayoutComponent } from './mobile-money-layout.component';
+let MobileMoneyLayoutModule = class MobileMoneyLayoutModule {
+};
+MobileMoneyLayoutModule = tslib_1.__decorate([
+    NgModule({
+        declarations: [MobileMoneyLayoutComponent],
+        imports: [
+            LayoutModule
+        ],
+        exports: [MobileMoneyLayoutComponent, LayoutModule]
+    })
+], MobileMoneyLayoutModule);
+export { MobileMoneyLayoutModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9iaWxlLW1vbmV5LWxheW91dC5tb2R1bGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9tb2JpbGUtbW9uZXktbGF5b3V0LyIsInNvdXJjZXMiOlsibGliL21vYmlsZS1tb25leS1sYXlvdXQubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFDdEQsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsMEJBQTBCLEVBQUUsTUFBTSxpQ0FBaUMsQ0FBQztBQVc3RSxJQUFhLHVCQUF1QixHQUFwQyxNQUFhLHVCQUF1QjtDQUFJLENBQUE7QUFBM0IsdUJBQXVCO0lBUG5DLFFBQVEsQ0FBQztRQUNSLFlBQVksRUFBRSxDQUFDLDBCQUEwQixDQUFDO1FBQzFDLE9BQU8sRUFBRTtZQUNQLFlBQVk7U0FDYjtRQUNELE9BQU8sRUFBRSxDQUFDLDBCQUEwQixFQUFFLFlBQVksQ0FBQztLQUNwRCxDQUFDO0dBQ1csdUJBQXVCLENBQUk7U0FBM0IsdUJBQXVCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTGF5b3V0TW9kdWxlIH0gZnJvbSAnLi9sYXlvdXQvbGF5b3V0Lm1vZHVsZSc7XHJcbmltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XHJcbmltcG9ydCB7IE1vYmlsZU1vbmV5TGF5b3V0Q29tcG9uZW50IH0gZnJvbSAnLi9tb2JpbGUtbW9uZXktbGF5b3V0LmNvbXBvbmVudCc7XHJcblxyXG5cclxuXHJcbkBOZ01vZHVsZSh7XHJcbiAgZGVjbGFyYXRpb25zOiBbTW9iaWxlTW9uZXlMYXlvdXRDb21wb25lbnRdLFxyXG4gIGltcG9ydHM6IFtcclxuICAgIExheW91dE1vZHVsZVxyXG4gIF0sXHJcbiAgZXhwb3J0czogW01vYmlsZU1vbmV5TGF5b3V0Q29tcG9uZW50LCBMYXlvdXRNb2R1bGVdXHJcbn0pXHJcbmV4cG9ydCBjbGFzcyBNb2JpbGVNb25leUxheW91dE1vZHVsZSB7IH1cclxuIl19

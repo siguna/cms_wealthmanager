@@ -1,7 +1,7 @@
 export const environment = {
     clientId: 'insurance-social-client',
     clientSecret: 'insurance-social-secret',
-    apiUrl: 'http://localhost:8080',
+    apiUrl: 'http://10.10.151.188:9000',
     authenUrl: 'http://localhost:8080/insurance/vsa/v1',
     production: false,
     CHANGEPASS_VSA_URL: 'http://14.225.5.246:8889/passportv3',

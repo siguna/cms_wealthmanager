@@ -1,0 +1,52 @@
+<div id="asset-add-new">
+    <div class="modal-header">
+        <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
+            <h4 class="text-right" style="margin-right: 10%;">Thêm mới loại tài sản</h4>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <div class="col-md-6 offset-md-3 mt-5">
+            <form>
+                <div class="form-group d-flex">
+                    <label class="w-25" for="assetInputName">Tên tài sản<small
+                            class="pl-2 text-danger">(*)</small></label>
+                    <input type="text" name="name" class="form-control" id="assetInputName"
+                        placeholder="Nhập tên tài sản" required="required" [(ngModel)]="assetNameValue">
+                </div>
+                <div class="form-group d-flex">
+                    <label class="w-25" for="exampleInputName">Icon tài sản <small
+                            class="ml-1 text-danger">(*)</small></label>
+                    <div class="form-group mt-3 d-flex flex-column" style="margin-left: -40px">
+                        <vt-file-upload></vt-file-upload>
+                    </div>
+                </div>
+                <div class="form-group d-flex">
+                    <label class="w-25" for="color" required="required">Màu hiển thị</label>
+                    <input type="color" name="color" class="form-control text-input" #color value="#e66465"
+                        aria-describedby="color">
+                    <!-- <input class="color-picker" value="#F80" data-huebee />
+                        <button class="color-picker" data-huebee>Select A Color</button> -->
+                </div>
+                <div class="form-group d-flex">
+                    <label class="w-25" for="exampleFormControlSelect1">Trạng thái</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="platform" required="required"
+                        [(ngModel)]="assetStatusValue">
+                        <option [value]="opt.value" *ngFor="let opt of assetStatusOption">
+                            {{opt.name}}
+                        </option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="line0 text-center modal-btn">
+            <button type="button" class="btn-outline-green btn btn-secondary modal-btn__cancel"
+                data-dismiss="modal">Hủy</button>
+            <button type="button" class="btn-green btn" (click)="addNew()">Lưu</button>
+        </div>
+    </div>
+
+</div>

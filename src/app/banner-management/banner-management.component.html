@@ -1,0 +1,114 @@
+<div class="banner-search my-3 p-4 border pt-3">
+    <h5 class="banner-search-title mb-3">
+        Điều kiện tìm kiếm
+    </h5>
+    <div class="row">
+        
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+            
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="banner-search-left__title">
+                    <p class="m-0">ID</p>
+                </div>
+                
+                <div class="banner-input input-group">
+                    <input type="text" class="form-control" >
+                </div>
+                
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="banner-search-left__title">
+                    <p class="m-0">Trạng thái</p>
+                </div>
+                
+                <div class="banner-input input-group ">
+                    <select class="form-select form-control" aria-label="Default select example">
+                        <option selected>Tất cả</option>
+                        <option value="true">Hoạt động</option>
+                        <option value="false">Không hoạt động</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+            
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="banner-search-left__title">
+                    <p class="m-0">Tên cấu hình</p>
+                </div>
+                
+                <div class="banner-input input-group">
+                    <input type="text" class="form-control" >
+                </div>
+                
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="banner-search-left__title">
+                    <p class="m-0">Tìm kiếm theo ngày</p>
+                </div>
+                
+                <div class="banner-input input-group ">
+                    <select class="form-select form-control" aria-label="Default select example">
+                        <option selected value="true">Ngày tạo</option>
+                        <option value="false">Ngày cập nhật</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+            
+            <div class="d-flex align-items-center justify-content-between mt-3">
+                <div class="banner-search-left__title">
+                    <p class="m-0">Loại banner</p>
+                </div>
+                
+                <div class="banner-input input-group ">
+                    <select class="form-select form-control" aria-label="Default select example">
+                        <option selected value="all">Tất cả</option>
+                        <option value="home">Trang chủ</option>
+                        <option value="Onboarding">Onboarding</option>
+                        <option value="home">Thu chi trong tháng</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="row align-items-center justify-content-between mt-3">
+                <div class="d-flex align-items-center col-12 col-xs-6 mt-2">
+                    <p class="m-0 w-100">Từ ngày: </p>
+                    <input type="date" class="form-control" name="" id="">
+                </div>
+                
+                <div class="d-flex align-items-center col-12 col-xs-6 mt-2">
+                    <p class="m-0 w-100">Đến ngày: </p>
+                    <input type="date" class="form-control" name="" id="">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center mt-3">
+        <button type="button" class="btn btn-remove-search">Xóa điều kiện</button>
+        <button type="button" class="btn btn-submit-search">Tìm kiếm</button>
+    </div>
+</div>
+
+<div class="py-3">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="banner-search-title m-0">
+            Danh sách banner
+        </h5>
+        <div class="d-flex ">
+            
+            <a [routerLink]="['add-banner']" routerLinkActive="router-link-active"  type="button" class="btn btn-submit-search">Thêm mới</a>
+            <button type="button" class="btn btn-remove">Xoá</button>
+        </div>
+    </div>
+    <vt-banner-list></vt-banner-list>
+</div>
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+    bkLib.onDomLoaded(nicEditors.allTextAreas);
+</script>

@@ -1,0 +1,41 @@
+<div class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+
+    <div id="wrapper">
+        <vt-top-bar (humberger)="clickHide($event)"></vt-top-bar>
+        <vt-sidebar [beHide]="hide"></vt-sidebar>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+
+    <div id="page-wrapper" class="{{hide ? 'page-wrapper-out' : 'page-wrapper'}}">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="tab-page">
+                        <vt-main-content></vt-main-content>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="text-center">
+                    <p class="m-0">Viettel Digital 2.0</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="isLoading" class="spinner-container ">
+    <div class="spinner spiner-loading">
+        <div class="spinner-border text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+

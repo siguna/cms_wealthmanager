@@ -1,0 +1,19 @@
+
+<div class="modal-content modal-small">
+
+    <div class="row modal-header text-center line0">
+        <h4 class="font-weight-bold" style="width: 100%;" [innerHTML]="title"></h4>
+
+    </div>
+    <div class="modal-body">
+        <p class="text-center" [innerHTML]="message"></p>
+    </div>
+    <div class="row confirm-btn">
+        <button class="col-6 cancel" (click)="confirm($event)">
+            <span>{{buttons.confirm.label}}</span>
+        </button>
+        <button class="col-6 confirm" (click)="cancel($event)">
+            <span>{{buttons.cancel.label}}</span>
+        </button>
+    </div>
+</div>

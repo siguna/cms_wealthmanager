@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnDestroy} from '@angular/core';
-import {ApiService, Environment} from 'mobile-money';
+import {
+    // ApiService, 
+    Environment} from 'mobile-money';
 import {environment} from 'src/environments/environment';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
@@ -17,13 +19,13 @@ export class AppComponent implements OnDestroy {
     unsubscribeAll = new Subject<void>();
 
     constructor(private el: ElementRef,
-                private apiService: ApiService,
+                // private apiService: ApiService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private translateService: TranslateService,
                 private titleService: Title) {
         Environment.environment = {...environment};
-        this.apiService.authenUrl = Environment.environment.authenUrl;
+        // this.apiService.authenUrl = Environment.environment.authenUrl;
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd),
                 map(() => {

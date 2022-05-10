@@ -1,0 +1,22 @@
+<div id="asset-list">
+    <!-- <vt-simple-search *ngIf="!searchExpand"></vt-simple-search>
+    <vt-search-config *ngIf="searchExpand" [searchData]="searchList"
+                      (searchClick)="getData($event)"></vt-search-config> -->
+
+    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-8">
+        <div class="content-title">
+            <h3>Danh sách tài sản</h3>
+        </div>
+    </div>
+    <div class="row btn-asset">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 btn-asset__item">
+            <button type="button" class="btn btn-delete" (click)="openModalWithComponent()"><i
+                    class="fa fa-trash"></i>Xóa
+            </button>
+            <button type="button" class="btn btn-add" [routerLink]="'/asset/add-vtp'"><i class="fa fa-plus"></i>Tạo mới
+            </button>
+        </div>
+    </div>
+    <vt-asset-list [pagination]="pagination"></vt-asset-list>
+</div>
+<router-outlet></router-outlet>

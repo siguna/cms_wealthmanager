@@ -1,0 +1,30 @@
+import { AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { NavTabService, TabsComponent } from 'mobile-money';
+import { NavigationItem } from 'mobile-money/lib/shared/common/nav-tab/store/navigation-tab';
+import { Observable, Subject } from 'rxjs';
+export declare class MainContentComponent implements OnInit, OnDestroy, AfterViewInit {
+    private router;
+    private route;
+    private navTabService;
+    private appConfigToken;
+    tabMenu: TabsComponent;
+    tabs: any[];
+    activeTab$: Observable<NavigationItem[]>;
+    subscription: Subject<any>;
+    showInTab: any;
+    lengthTabHindenText: number;
+    previousLengthTabs: number;
+    loadedMenu: boolean;
+    isRemoveTab: boolean;
+    constructor(router: Router, route: ActivatedRoute, navTabService: NavTabService, appConfigToken: any);
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    onCloseTab(index: any): void;
+    spaceEvent($event: any): void;
+    onSelectTab(index: any): void;
+    getWidthTab(numTab: any): number;
+    prepareRoute(outlet: RouterOutlet): "" | ActivatedRoute;
+    trackByFn(index: any, item: any): any;
+    ngOnDestroy(): void;
+}

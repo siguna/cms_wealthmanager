@@ -1,0 +1,27 @@
+<ng-container *ngIf="(item.items && item.items.length > 0)">
+    <a (click)="toggleSection($event)" title="{{ item.title }}">
+        <img *ngIf="item.icon" class="metismenu-icon" src="{{ item.icon}}">
+        {{ item.title }}
+        <i class="{{ item.open ? 'fa menu-arrow fa-chevron-down' : 'fa menu-arrow fa-chevron-right' }}"></i>
+    </a>
+    <ul
+            *ngIf="item.open"
+            class="d-block ov-h"
+    >
+        <li
+                menu-nav-item
+                *ngFor="let child of item.items; trackBy: trackByFn"
+                [item]="child"
+                [minified]="minified"
+        ></li>
+    </ul>
+</ng-container>
+<ng-container *ngIf="(!item.items || item.items.length == 0) && item.routerLink">
+    <a title="{{ item.title }}" (click)="onClick(item)">
+        <img *ngIf="item.icon" class="metismenu-icon" src="{{ item.icon}}">
+        {{ item.title }}
+    </a>
+</ng-container>
+<ng-container *ngIf="item.navTitle">
+    {{ item.title }}
+</ng-container>

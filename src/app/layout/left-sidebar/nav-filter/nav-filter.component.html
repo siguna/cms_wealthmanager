@@ -1,0 +1,8 @@
+<div class="search-box" *ngIf="vm$ | async as vm">
+  <input class="form-input ml-2 ng-pristine ng-valid ng-touched" placeholder="Tìm kiếm"
+         name="searchTerm" type="text" #input
+         (keyup)="handleKeyup($event, input.value)"
+         value="{{vm.text}}"
+         tabindex="0">
+</div>
+
