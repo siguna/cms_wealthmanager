@@ -3,7 +3,7 @@ import { Injector, NgModule } from '@angular/core';
 import { FuncsService } from '@shared/common/wealth/funcs.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -30,8 +30,11 @@ import { CustomSharedModule } from '@shared/custom-shared.module';
 import { MenuConfigNavigate } from './menu-config';
 import { AppConfig } from './app.config';
 import { MaterialModule } from '@shared/common/wealth/material.module';
+import {MatSlideToggleModule, MatCheckboxModule} from '@angular/material'
+import { FormsModule } from '@angular/forms';
 // import { UtilsService } from '@shared/services/common/utils.service';
-// import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxColorsModule } from 'ngx-colors';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/langs/', '.json');
@@ -52,8 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
         HttpClientModule,
         AppRoutingModule, 
         MaterialModule,
-        // ReactiveFormsModule,
-
+        ReactiveFormsModule,
+        MatSlideToggleModule,
         // ngrx modules
         StoreModule.forRoot(reducers, {
             metaReducers,

@@ -19,7 +19,8 @@ import { LayoutModule } from '../layout/layout.module';
 import { CustomSharedModule } from '@shared/custom-shared.module';
 import { FileUploadComponent } from '@shared/common/wealth/components/upload-file/file-upload.component';
 import { ModalComponent } from '@shared/common/wealth/components/modal/modal.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
 @NgModule({
   declarations: [
     AssetManageComponent, 
@@ -27,7 +28,8 @@ import { ModalComponent } from '@shared/common/wealth/components/modal/modal.com
     AssetEditComponent,
     AssetAddComponent,
     FileUploadComponent,
-    ModalComponent
+    ModalComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { ModalComponent } from '@shared/common/wealth/components/modal/modal.com
     // DatatablesModule,
     // LayoutModule,
     AssetManageRoutingModule,
+    MatSlideToggleModule 
     // CustomSharedModule,
     // StoreModule.forFeature('assets', assetReducer),
     // EffectsModule.forFeature([AssetEffects])
@@ -46,10 +49,12 @@ import { ModalComponent } from '@shared/common/wealth/components/modal/modal.com
     AssetListComponent, 
     AssetEditComponent,
     AssetAddComponent,
-    ModalComponent
+    ModalComponent,
+    PaginationComponent
   ],
   providers: [AssetService],
   exports: [
+    MatSlideToggleModule
     // LayoutModule
   ]
 })

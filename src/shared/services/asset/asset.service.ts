@@ -32,7 +32,13 @@ export class AssetService {
     return this.http.put(`${environment.apiUrl}/api/asset/update` + assetId, changes);
   }
 
-  getAssetbyId(assetId: string): Observable<any> {
+  updateAssetList(priorityList: Array<any>): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/asset/update-list`, { "body": {  "sortList": priorityList } });
+  }
+
+  getAssetDetail(assetId: string): Observable<any> {
+    console.log(40)
+    console.log('assetId',assetId)
     return this.http.post<any>(`${environment.apiUrl}/api/asset/detail`, { "body": {  "id": assetId } });
   }
 

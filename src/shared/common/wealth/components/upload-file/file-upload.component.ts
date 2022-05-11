@@ -16,6 +16,8 @@ class ImageSnippet {
 export class FileUploadComponent implements OnInit {
 
   selectedFile: ImageSnippet;
+  imageText;
+
 
   constructor(private imageService: FileUploadService){}
 
@@ -24,11 +26,13 @@ export class FileUploadComponent implements OnInit {
 
   private onSuccess() {
     this.selectedFile.pending = false;
+    this.imageText = false
     this.selectedFile.status = 'ok';
   }
 
   private onError() {
     this.selectedFile.pending = false;
+    this.imageText = false
     this.selectedFile.status = 'fail';
     this.selectedFile.src = '';
   }

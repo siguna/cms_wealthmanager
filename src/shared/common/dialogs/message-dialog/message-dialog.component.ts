@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface DialogData {
+  animal: '';
+}
 @Component({
   selector: 'vt-message-dialog',
   templateUrl: './message-dialog.component.html',

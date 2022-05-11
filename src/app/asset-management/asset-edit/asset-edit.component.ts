@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Update } from '@ngrx/entity';
 import { Asset } from '@shared/models/asset.model';
-import { assetActionTypes } from '@store/asset/asset.actions';
+import { assetActionTypes, loadAssets } from '@store/asset/asset.actions';
 import { getAllAssets } from '@store/asset/asset.selectors';
 import { DOCUMENT, Location } from '@angular/common';
 import { map } from 'rxjs/operators';
@@ -37,6 +37,8 @@ export class AssetEditComponent implements OnInit {
     { name: "Ngừng hoạt động", value: false }
   ]
 
+  dataItem;
+
   constructor(
     private fb: FormBuilder,
     private store: Store<AppState>,
@@ -48,29 +50,53 @@ export class AssetEditComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
   ) {
     // this.assets$ = this.store.select(getAllAssets);
-  }
+    // this.route.params.subscribe(params => {
+    //   console.log(params);
+    // });
 
+    console.log(this.route)
+    this.activatedRoute.params.subscribe(paramsId => {
+      this.assetId = paramsId.id;
+      console.log(this.assetId);
+    });
+  }
+ data
   newFormGroup: FormGroup;
   ngOnInit() {
 
     this.activatedRoute.params.subscribe(paramsId => {
       this.assetId = paramsId.id;
+      console.log(this.assetId);
+      const assetId = this.assetId
     });
-    console.log(this.assetId);
-
-    this.assetService.getAssetbyId(this.assetId).subscribe(
-      res => {
-        console.log(res)
-        console.log(res.body)
-
+    // this.store.dispatch(loadAssets())
+    this.store.select(getAllAssets).subscribe(res => {
         if (res.length > 0) {
-            this.assetNameValue = res.body.assetDTO.assetName
-            this.assetIconValue = res.body.assetDTO.imgUrl
-            this.assetColorValue = res.body.assetDTO.textColor
-            this.assetStatusValue = res.body.assetDTO.activated
+          this.dataItem = res.find(data => data.id == this.assetId)
+          console.log(res.find(data => data.id == this.assetId))
+          this.assetNameValue = this.dataItem['assetName']
+          this.assetColorValue = this.dataItem['textColor']
+          this.assetIconValue = this.dataItem['imgUrl']
+          this.assetStatusValue = this.dataItem['actived']
 
+          console.log(this.assetIconValue)
         }
     });
+
+
+    // this.assetService.getAssetbyId(this.assetId).subscribe(
+    //   res => {
+    //     console.log(res)
+    //     console.log(res.body)
+
+    //     if (res.length > 0) {
+    //         this.assetNameValue = res.body.assetDTO.assetName
+    //         this.assetIconValue = res.body.assetDTO.imgUrl
+    //         this.assetColorValue = res.body.assetDTO.textColor
+    //         this.assetStatusValue = res.body.assetDTO.activated
+
+    //     }
+    // });
 
     console.log(this.assetIconValue)
 
@@ -106,5 +132,9 @@ export class AssetEditComponent implements OnInit {
 
     // this.isUpdateActivated = false;
     // this.assetToBeUpdated = null;
+  }
+
+  selectStatusOption($event) {
+    this.assetStatusValue = $event.target.value
   }
 }

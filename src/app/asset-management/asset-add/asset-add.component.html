@@ -1,4 +1,4 @@
-<div id="asset-add-new">
+<!-- <div id="asset-add-new">
     <div class="modal-header">
         <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
             <h4 class="text-right" style="margin-right: 10%;">Thêm mới loại tài sản</h4>
@@ -25,8 +25,7 @@
                     <label class="w-25" for="color" required="required">Màu hiển thị</label>
                     <input type="color" name="color" class="form-control text-input" #color value="#e66465"
                         aria-describedby="color">
-                    <!-- <input class="color-picker" value="#F80" data-huebee />
-                        <button class="color-picker" data-huebee>Select A Color</button> -->
+                    
                 </div>
                 <div class="form-group d-flex">
                     <label class="w-25" for="exampleFormControlSelect1">Trạng thái</label>
@@ -47,6 +46,99 @@
                 data-dismiss="modal">Hủy</button>
             <button type="button" class="btn-green btn" (click)="addNew()">Lưu</button>
         </div>
+    </div>
+
+</div> -->
+
+<div id="asset-add-new">
+    <div class="modal-header">
+        <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
+            <h4 class="text-right" style="float:left">Loại tài sản</h4>
+        </div>
+    </div>
+    <div class="row search-content">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"></div>
+    </div>
+    <div class="modal-body">
+        <!-- <form #banner="ngForm" (ngSubmit)="submitAddBannerForm(banner)"> -->
+            <div class="row align-items-center mt-2">
+            </div>
+            <div class="row align-items-center mt-3">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <p class="m-0">Tên tài sản <span class="text-red">(*)</span></p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" class="form-control" required="required" name="bannerName"
+                     [(ngModel)]="assetNameValue" maxlength="255" />
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <p class="m-0" *ngIf="assetNameValue && assetNameValue.length > 0; else elseBlock">
+                        Đã nhập <span class="text-red"> {{assetNameValue.length}} </span>còn
+                        <span class="text-red">{{255 - (assetNameValue.length)}}</span>
+                    </p>
+                    <ng-template #elseBlock>
+                        Đã nhập <span class="text-red"> 0 </span>còn
+                        <span class="text-red">255</span>
+                    </ng-template>
+                </div>
+            </div>
+            <div *ngIf="bannerType !== '3'">
+                <div class="row align-items-center mt-3">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <p class="m-0">Ảnh Logo <span class="text-red">(*)</span></p>
+                    </div>
+
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 asset-image">
+                        <vt-file-upload></vt-file-upload>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <p class="m-0">Màu hiển thị</p>
+                </div>
+
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <input type="color" [(ngModel)]="assetColorValue" class="colorInput"/>
+                </div>
+
+            </div>
+
+            <div class="row align-items-center mt-2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <p class="m-0">Trạng thái</p>
+                </div>
+
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" >
+                          <!-- <select  [(ngModel)]="assetStatusValue" class="form-select form-control" aria-label="Default select example" >
+                        <option selected value="true">Hoạt động</option>
+                        <option value="false">Không hoạt động</option>
+                    </select> -->
+                    <!-- <select required="required" ngModel name="actived" #actived="ngModel" id="input"
+                        class="form-control asset-status" required="required">
+                        <option [value]='true' selected>Hoạt động</option>
+                        <option [value]='false'>Không hoạt động</option>
+                    </select> -->
+                    <select class="form-control" id="exampleFormControlSelect1" name="platform" required="required"
+                    (change)="selectStatusOption($event)">
+                        <option [value]="opt.value" [selected]="opt.value === true" *ngFor="let opt of assetStatusOption"
+                        >
+                            {{opt.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex my-4 justify-content-center">
+                <div class="line0 text-center modal-btn">
+                    <a [routerLink]="['/asset']" routerLinkActive="router-link-active" type="button"
+                        class="btn-outline-green btn btn-secondary modal-btn__cancel" data-dismiss="modal">
+                        Hủy
+                    </a>
+                    <button type="submit" class="btn-green btn ms-3" (click)="addNew()">Lưu</button>
+                </div>
+            </div>
+        <!-- </form> -->
     </div>
 
 </div>

@@ -3,7 +3,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 import { TabService } from '../../../shared/services/common/tab.service';
 import { NavigationItem, reloadAllItems } from '../../../shared/store/navigation';
 import { UserToken } from '../../../shared/models/user-token';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { NavigationService } from '../../../shared/services/common/navigation.service';
 import { AccountService } from '../../../account/account.service';
 // import {APP_CONFIG, STORAGE_KEY} from "../../app.config";
@@ -59,6 +59,8 @@ export class AssetManageComponent implements OnInit {
   name1: string;
   iPay: object[] = [{ id: '1', name: 'ViettelPay' }, { id: '2', name: 'Vina' }, { id: '3', name: 'Mobi' }];
   private searchExpandSubscription: Subscription;
+
+  eventsSubject: Subject<void> = new Subject<void>();
 
   searchExpand: boolean = true;
 
@@ -203,8 +205,11 @@ export class AssetManageComponent implements OnInit {
     this.dialogService.confirm('', this.translate.instant('Bạn chắc chắn xóa ?')).subscribe(next => {
       if (next) {
         console.log(1)
+        this.eventsSubject.next();
         // this.addFeatzure(template);
       }
     });
   }
+
+  
 }
