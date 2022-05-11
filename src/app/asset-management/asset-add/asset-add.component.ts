@@ -1,16 +1,11 @@
 import { Asset } from '@shared/models/asset.model';
 import { AppState } from '@store/appstate';
 import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
-import { DialogsService } from '../../../shared/common/dialogs/dialogs.service';
-import { TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import { AssetService } from '@shared/services/asset/asset.service';
 import { createAsset } from '@store/asset/asset.actions';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { NgForm } from '@angular/forms';
-import { Banner } from '@model/banner.model';
+import { getAllAssets } from '@store/asset/asset.selectors';
 
 @Component({
   selector: 'vt-asset-add',
@@ -38,35 +33,42 @@ export class AssetAddComponent implements OnInit {
   assetColorValue;
   assetStatusValue: string;
 
+  assetId
+  dataItem
+
   assetStatusOption: any[] = [
     { name: "Hoạt động", value: true },
-    { name: "Ngừng hoạt động", value: false }
+    { name: "Không hoạt động", value: false }
   ]
 
   constructor(
-    private dialogService: DialogsService,
-    private translate: TranslateService,
-    private http: HttpClient,
     private store: Store<AppState>,
-    private assetService: AssetService,
     private router: Router,
+    private route: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
+    this.assetId = this.route.snapshot.paramMap.get('id');
+
+    this.store.select(getAllAssets).subscribe(res => {
+      if (res.length > 0) {
+        this.dataItem = res.find(data => data.id == this.assetId)
+        console.log(res.find(data => data.id == this.assetId))
+        this.assetNameValue = this.dataItem['assetName']
+        this.assetColorValue = this.dataItem['textColor']
+        this.assetIconValue = this.dataItem['imgUrl']
+        this.assetStatusValue = this.dataItem['actived']
+      }
+    });
   }
 
-
-  async addNew(template: TemplateRef<any>) {
-
+  addNewAsset() {
     console.log(this.assetNameValue)
     console.log(this.assetColorValue)
     console.log(this.assetStatusValue);
-    
 
-    if (this.assetNameValue != '') {
+    if (this.assetIconValue != '') {
 
       const assetDTO: Asset = {
         assetName: this.assetNameValue,
@@ -81,43 +83,15 @@ export class AssetAddComponent implements OnInit {
         priority: null
       }
 
-      await this.store.dispatch(createAsset({ assetDTO }));
-      await this.router.navigateByUrl('/asset');
-      // await this.document.location.reload()
+      this.store.dispatch(createAsset({ assetDTO }));
+      setTimeout(() => {
+        this.router.navigateByUrl('/asset');
+        this.document.location.reload()
+      }, 2000);
     } else {
-       
+
     }
 
-  }
-
-  listFormGroupLogo = ['1'];
-  // ngOnInit() {}
-
-  submitAddBannerForm(f: NgForm) {
-
-    // const { value } = f;
-    // const banner: Banner = {
-    //   bannerType: this.bannerType,
-    //   bannerName: value.bannerName,
-    //   bannerContent: value.bannerContent,
-    //   imgUrl: value.imgUrl ? value.imgUrl : 'https://jes.edu.vn/wp-content/uploads/2017/10/h%C3%ACnh-%E1%BA%A3nh.jpg',
-    //   buttonText: value.buttonText,
-    //   attachedLink: value.attachedLink,
-    //   createdBy: 'admin',
-    //   lastModifiedBy: 'admin',
-    //   actived: value.actived === 'true' ? true : false,
-    //   startActiveTime: '2022-03-17T16:29:35Z',
-    //   finishActiveTime: '2022-05-19T16:29:36Z'
-    // };
-    // const banners = {
-    //   body: {
-    //     banner: banner
-    //   }
-    // }
-    // this.store.dispatch(createBanner({banners}))
-    // this.bannerService.createBanner(banners).subscribe((res) => {
-    //   console.log(res)
-    // })
   }
 
   selectStatusOption($event) {

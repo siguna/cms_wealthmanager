@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     ErrorPageModule, 
     ApiService,
-    ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule, UtilsService, 
+    ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule, UtilsService, PaginationComponent, 
 } from 'mobile-money';
 // import { LayoutModule } from 'mobile-money-layout';
 import { reducers, metaReducers, effects } from '@shared/store';
@@ -43,8 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
 
     declarations: [
-        AppComponent,
-        
+        AppComponent
     ],
     imports: [
         // LayoutModule,
@@ -102,7 +101,7 @@ export function createTranslateLoader(http: HttpClient) {
         { provide: LAZY_MODULES_MAP, useValue: MenuConfigNavigate },
         { provide: APP_CONFIG_TOKEN, useClass: AppConfig },
     ],
-    entryComponents: [],
+    entryComponents: [PaginationComponent],
     bootstrap: [AppComponent]
 })
 

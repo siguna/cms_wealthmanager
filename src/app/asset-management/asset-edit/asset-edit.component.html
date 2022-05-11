@@ -28,7 +28,7 @@
               </div>
               <div class="form-group d-flex">
                   <label class="w-25" for="exampleFormControlSelect1">Trạng thái</label>
-                  <span>{{assetStatusValue}}</span>
+                  <span>{{assetStatusValue ?"Hoạt động":"Không hoạt động"}}</span>
               </div>
           </form>
       </div>
@@ -38,7 +38,8 @@
       <div class="line0 text-center modal-btn">
           <button type="button" class="btn-outline-green btn btn-secondary modal-btn__cancel"
               data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn-green btn" (click)="updateAsset()">Cập nhật</button>
+          <button type="button" class="btn-green btn"
+          [routerLink]="['/asset/add-vtp', assetId]">Cập nhật</button>
       </div>
   </div>
 

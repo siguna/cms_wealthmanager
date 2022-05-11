@@ -14,7 +14,6 @@ import { AssetService } from '@shared/services/asset/asset.service';
 import { AssetEffects } from '@store/asset/asset.effects';
 import { assetReducer } from '@store/asset/asset.reducer';
 // import { CustomSharedModule } from '@shared/custom-shared.module';
-import { DatatablesModule } from 'mobile-money';
 import { LayoutModule } from '../layout/layout.module';
 import { CustomSharedModule } from '@shared/custom-shared.module';
 import { FileUploadComponent } from '@shared/common/wealth/components/upload-file/file-upload.component';
