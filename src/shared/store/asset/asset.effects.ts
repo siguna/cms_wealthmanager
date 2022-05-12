@@ -14,7 +14,11 @@ export class AssetEffects {
     this.actions$.pipe(
       ofType(assetActionTypes.loadAssets),
       concatMap(() => this.assetService.getAllAssets()),
-      map((assets: any) => assetActionTypes.assetsLoaded(assets.body))
+      map((assets: any) => {
+        console.log(assets);
+        return assetActionTypes.assetsLoaded(assets)
+      }),
+      tap((assets:any) => {})
     )
   );
 
@@ -23,6 +27,7 @@ export class AssetEffects {
       ofType(assetActionTypes.createAsset),
       concatMap((action) => this.assetService.createAsset(action.assetDTO)),
       tap((assets: any) => {
+        console.log(assets);
         assetActionTypes.assetsLoaded(assets.body)
         return this.router.navigateByUrl('/asset')
       })
@@ -34,14 +39,22 @@ export class AssetEffects {
     this.actions$.pipe(
       ofType(assetActionTypes.deleteAsset),
       concatMap((action) => this.assetService.deleteAsset(action.assetId)),
-      map(() => assetActionTypes.loadAssets())
+      map(() => assetActionTypes.loadAssets()),
+      tap((assets: any) => {
+        assetActionTypes.assetsLoaded(assets.body)
+        return this.router.navigateByUrl('/asset')
+      })
     ),
   );
 
   updateAsset$ = createEffect(() =>
     this.actions$.pipe(
       ofType(assetActionTypes.updateAsset),
-      concatMap((action) => this.assetService.updateAsset(action.assetDTO.id, action.assetDTO.changes))
+      concatMap((action) => this.assetService.updateAsset(action.assetDTO)),
+      tap((assets: any) => {
+        assetActionTypes.assetsLoaded(assets.body)
+        return this.router.navigateByUrl('/asset')
+      })
     ),
     {dispatch: false}
   );

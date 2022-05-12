@@ -25,6 +25,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { deleteAsset } from '@store/asset/asset.actions';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $: any;
 
@@ -78,6 +79,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         private translate: TranslateService,
         private router: Router,
         private route: ActivatedRoute,
+        private toastr: ToastrService,
+        private assetSerive: AssetService,
         formBuilder: FormBuilder
     ) {
         this.formGroup = formBuilder.group({
@@ -86,8 +89,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         });
 
         this.columnOption = [
-            { columnName: 'ID', columnId: 'id', defaultVisible: true },
-            { columnName: 'Tên tài sản', columnId: 'assetName', defaultVisible: true },
+            { columnName: 'ID', columnId: 'assetId', defaultVisible: true },
+            { columnName: 'Tên tài sản', columnId: 'assetNameId', defaultVisible: true },
             { columnName: 'Trạng thái', columnId: 'confirm', defaultVisible: true, allowSort: false },
             { columnName: 'Người tạo', columnId: 'createdBy', defaultVisible: true, allowSort: false },
             { columnName: 'Ngày tạo', columnId: 'createdDateId', defaultVisible: true },
@@ -122,19 +125,19 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                     this.activated = item['actived']
                 }
                 )
+                // this.fillDataToTable(1)
             }
         });
 
-        // this.assetService.getAllAssets().subscribe(data => {
-        //     this.funcsService.getData(data);
-        //     this.fillDataToTable(1)
-        // }, err => {
-        //     console.log(err);
-        // }
-        // )
+        this.assetService.getAllAssets().subscribe(data => {
+            this.funcsService.getData(data);
+            this.fillDataToTable(1)
+        }, err => {
+            console.log(err);
+        }
+        )
 
         this.eventsSubscription = this.events.subscribe(() => {
-            console.log(2);
             this.delete('')
         });
 
@@ -144,29 +147,33 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         this.eventsSubscription.unsubscribe();
     }
 
-    showStatusPopup(id, act) {
+    showStatusPopup(item) {
         this.dialogService.confirm('', this.translate.instant('Bạn có chắc chắn muốn active/ inactive loại tài sản ?')).subscribe(next => {
             if (next) {
-                const assetDTO = id
-                const changes:any = {
-                    id: id,
-                    assetName: null,
-                    actived: act,
-                    imgUrl: null,
-                    textColor: null,
-                    createdBy: null,
-                    createdDate: null,
-                    lastModifiedBy: null,
-                    lastModifiedDate: null,
-                    priority: null
+                const assetDTO: Asset = {
+                    ...item,
+                    actived: !item.actived
                 }
-                // this.store.dispatch(updateAsset({ assetDTO , changes }))
+                // this.store.dispatch(updateAsset({ assetDTO }))
+                this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
+                    if (data && data.status && data.status.message == "successful") {
+                        this.toastr.success("Cập nhật thành công")
+                    } else if (data && data.status && data.status.message == "error") {
+                        this.toastr.error(data.status.displayMessages[0].message)
+                    } else {
+
+                    }
+                    // this.router.navigateByUrl('/asset');
+                    // this.document.location.reload()
+                })
+            } else {
+                this.router.navigateByUrl('/asset');
             }
         });
     }
 
     sortByColumn($event: TableColumnModel) {
-        this.userService.sortPaymentPartner(this.pagination.current, this.pagination.sizeOnPage, $event.columnId, $event.sortAsc).subscribe(res => {
+        this.funcsService.sortPaymentPartner(this.pagination.current, this.pagination.sizeOnPage, $event.columnId, $event.sortAsc).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -181,7 +188,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     fillDataToTable(pageNumber) {
-        this.userService.getLconfigPageNumberAndRecordNumber(pageNumber, this.recordNumber).subscribe(res => {
+        this.funcsService.getLconfigPageNumberAndRecordNumber(pageNumber, this.recordNumber).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -193,7 +200,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     setPage(event: any) {
-        this.userService.getLconfigPageNumberAndRecordNumber(event, this.pagination.sizeOnPage).subscribe(res => {
+        this.funcsService.getLconfigPageNumberAndRecordNumber(event, this.pagination.sizeOnPage).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -207,7 +214,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     setRecordNumber(event: any) {
-        this.userService.getLconfigPageNumberAndRecordNumber(this.pagination.current, event)
+        this.funcsService.getLconfigPageNumberAndRecordNumber(this.pagination.current, event)
             .subscribe(res => {
                 this.pagination = {
                     current: res[0].pageNumber,
@@ -224,7 +231,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
 
         this.messageBox.confirm("Xóa dữ liệu", "Bạn có chắc chắn muốn xóa dữ liệu không?").subscribe(next => {
             if (next) {
-                this.userService.removeListConfig(tableInstance.getSelectedData(), this.pagination.current, this.pagination.sizeOnPage).subscribe(res => {
+                this.funcsService.removeListConfig(tableInstance.getSelectedData(), this.pagination.current, this.pagination.sizeOnPage).subscribe(res => {
                     this.pagination = {
                         current: res[0].pageNumber,
                         sizeOnPage: res[0].itemOfPage,
@@ -245,8 +252,9 @@ export class AssetListComponent implements OnInit, AfterViewInit {
 
         let priority: Priority;
         this.dataItems.forEach((data, idx) => {
-            console.log(data)
-            console.log(data.order);
+            console.log("idx",idx)
+            console.log("----")
+            console.log("id",data.id)
 
             if (data.order = idx) {
                 console.log(data.id)
@@ -256,6 +264,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                 };
             }
             data.order = idx + 1;
+            console.log("order",data.order);
+            console.log("----");
 
         });
         this.sortList.push(priority)

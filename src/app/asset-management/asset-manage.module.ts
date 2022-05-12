@@ -14,11 +14,9 @@ import { AssetService } from '@shared/services/asset/asset.service';
 import { AssetEffects } from '@store/asset/asset.effects';
 import { assetReducer } from '@store/asset/asset.reducer';
 // import { CustomSharedModule } from '@shared/custom-shared.module';
-import { DatatablesModule } from 'mobile-money';
 import { LayoutModule } from '../layout/layout.module';
 import { CustomSharedModule } from '@shared/custom-shared.module';
 import { FileUploadComponent } from '@shared/common/wealth/components/upload-file/file-upload.component';
-import { ModalComponent } from '@shared/common/wealth/components/modal/modal.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
 @NgModule({
@@ -28,7 +26,6 @@ import { PaginationComponent } from '@shared/common/ui-component/datatables/pagi
     AssetEditComponent,
     AssetAddComponent,
     FileUploadComponent,
-    ModalComponent,
     PaginationComponent
   ],
   imports: [
@@ -49,12 +46,12 @@ import { PaginationComponent } from '@shared/common/ui-component/datatables/pagi
     AssetListComponent, 
     AssetEditComponent,
     AssetAddComponent,
-    ModalComponent,
-    PaginationComponent
+    // PaginationComponent
   ],
   providers: [AssetService],
   exports: [
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    // PaginationComponent
     // LayoutModule
   ]
 })

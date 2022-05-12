@@ -25,6 +25,12 @@
                             <td *ngFor="let column of columnOption" vtTableColDef>
                                 <div>
                                     {{item[column.columnId]}}</div>
+                                <div *ngIf="column.columnId=='assetId'">
+                                    <a class="assetId" [routerLink]="['/asset/edit-vtp',item.id]">{{item.id}}</a>
+                                </div>
+                                <div *ngIf="column.columnId=='assetNameId'">
+                                    <a class="assetName" [routerLink]="['/asset/edit-vtp',item.id]">{{item.assetName}}</a>
+                                </div>
                                 <div *ngIf="column.columnId=='createdDateId'">
                                     <span class="createdDateId">{{item.createdDate | date:"dd/MM/yyyy hh:mm"}}</span>
                                 </div>
@@ -32,22 +38,25 @@
                                     <div
                                         class="custom-control custom-switch align-items-center d-flex justify-content-center">
                                         <input hidden type="checkbox" [checked]="item.actived"
-                                            class="custom-control-input" [id]="item.id" (click)="showStatusPopup(item.id, item.actived)">
+                                            class="custom-control-input" [id]="item.id"
+                                            (click)="showStatusPopup(item)">
                                         <label class="custom-control-label mt-2 d-block" [htmlFor]="item.id"></label>
                                     </div>
                                 </div>
                                 <div *ngIf="column.columnId=='lastModifiedDateId'">
-                                    <span class="createdDateId">{{item.lastModifiedDate | date:"dd/MM/yyyy hh:mm"}}</span>
+                                    <span class="createdDateId">{{item.lastModifiedDate | date:"dd/MM/yyyy
+                                        hh:mm"}}</span>
                                 </div>
                             </td>
                             <td>
                                 <a href="javascript:void(0)" (click)="openAssetEdit(item, 'DETAIL')" name="UPDATE">
                                     <img src="../../../assets/images/info.svg" alt="edit"
-                                        [routerLink]="['/asset/edit-vtp/',item.id]">
+                                        [routerLink]="['/asset/edit-vtp/', item.id]">
                                 </a>
 
-                                <a href="javascript:void(0)" name="EDIT" (click)="openAssetEdit(item, 'EDIT')">
-                                    <img src="../../../assets/images/ic_action_edit.svg" alt="delte"></a>
+                                <a href="javascript:void(0)" name="EDIT">
+                                    <img src="../../../assets/images/ic_action_edit.svg" alt="delte"
+                                        [routerLink]="['/asset/add-vtp/', item.id]"></a>
                             </td>
                         </tr>
                     </tbody>

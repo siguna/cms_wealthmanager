@@ -8,7 +8,7 @@ export const loadAssets = createAction(
 
 export const assetsLoaded = createAction(
   '[Assets Effect] Assets Loaded Successfully',
-  props<{assets: Asset[]}>()
+  props<{data: any}>()
 );
 
 export const createAsset = createAction(
@@ -23,7 +23,7 @@ export const deleteAsset = createAction(
 
 export const updateAsset = createAction(
   '[Assets List Operations] Update Asset',
-  props<{assetDTO: Update<Asset>}>()
+  props<{assetDTO: Asset}>()
 );
 
 export const assetActionTypes = {

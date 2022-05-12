@@ -1,8 +1,9 @@
 <div id="asset-add-new">
   <div class="modal-header">
       <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
-          <h4 class="text-right" style="margin-right: 10%;">Chi tiết loại tài sản</h4>
-      </div>
+          <h4 class="text-right" style="margin-right: 10%; float: left">Loại tài sản</h4>
+        </div>
+        <h4 class="btn-outline-green btn btn-secondary" style="float: right; pointer-events: none;">Xem chi tiết</h4>
   </div>
 
   <div class="modal-body">
@@ -28,7 +29,7 @@
               </div>
               <div class="form-group d-flex">
                   <label class="w-25" for="exampleFormControlSelect1">Trạng thái</label>
-                  <span>{{assetStatusValue}}</span>
+                  <span>{{assetStatusValue ?"Hoạt động":"Không hoạt động"}}</span>
               </div>
           </form>
       </div>
@@ -38,7 +39,8 @@
       <div class="line0 text-center modal-btn">
           <button type="button" class="btn-outline-green btn btn-secondary modal-btn__cancel"
               data-dismiss="modal">Đóng</button>
-          <button type="button" class="btn-green btn" (click)="updateAsset()">Cập nhật</button>
+          <button type="button" class="btn-green btn"
+          [routerLink]="['/asset/add-vtp', assetId]">Cập nhật</button>
       </div>
   </div>
 

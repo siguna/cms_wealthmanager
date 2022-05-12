@@ -14,7 +14,7 @@ export const routes: Routes = [
         path:'edit-vtp/:id', component: AssetEditComponent
     },
     {
-        path:'add-vtp', component: AssetAddComponent
+        path:'add-vtp/:id', component: AssetAddComponent
     }
 ];
 

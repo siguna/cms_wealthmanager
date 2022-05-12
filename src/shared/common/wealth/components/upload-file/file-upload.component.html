@@ -7,14 +7,15 @@
     <div class="image-text__warning d-flex flex-row">
       <div *ngIf="imageText; else elseBlock">
         <p>Có 1 tệp được chọn</p>
-        <i class="fa-solid fa-image ml-2 mt-n1 image-icon__warning"></i>
+        <i class="fa-solid fa-image ml-2 mt-n1 image-icon__warning"
+        (click)="showImage()"></i>
       </div>
       <ng-template #elseBlock>
-        <p>Không có ảnh nào được chọn</p>
+        <p class="image-text__warning-title">Không có ảnh nào được chọn</p>
       </ng-template>
     </div>
   </div>
-  <label class="text-danger">Định dạng JPG, PNG | Dung lượng: 10Kb | Kích thước: 30x40</label>
+  <label class="text-danger">Định dạng JPG, PNG | Dung lượng: 1024Kb | Kích thước: 300x400</label>
 
   <div *ngIf="selectedFile" class="img-preview-container">
 
@@ -25,9 +26,11 @@
     <div *ngIf="selectedFile.pending" class="img-loading-overlay">
       <div class="img-spinning-circle"></div>
     </div>
-
-    <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
-    <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+    <div *ngIf="imageCheck">
+      <img class="assetIconValue" style="width: 50%; height: 50%; margin-left: 10%; margin-bottom: -40px;" [src]="imageUrl">
+    </div>
+    <!-- <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+    <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div> -->
   </div>
 
 </div>

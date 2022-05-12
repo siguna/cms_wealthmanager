@@ -5,7 +5,7 @@ class ImageSnippet {
   pending: boolean = false;
   status: string = 'init';
 
-  constructor(public src: string, public file: File) {}
+  constructor(public src: string, public file: File) { }
 }
 
 @Component({
@@ -17,11 +17,15 @@ export class FileUploadComponent implements OnInit {
 
   selectedFile: ImageSnippet;
   imageText;
-
-
-  constructor(private imageService: FileUploadService){}
+  imageCheck;
+  imageUrl;
+  constructor(private imageService: FileUploadService) { }
 
   ngOnInit() {
+  }
+
+  showImage() {
+    this.imageCheck = !this.imageCheck
   }
 
   private onSuccess() {
@@ -49,6 +53,8 @@ export class FileUploadComponent implements OnInit {
       this.imageService.upload(this.selectedFile.file).subscribe(
         (res) => {
           this.onSuccess();
+          console.log(res)
+          res.length > 0 && res.link ? this.imageUrl = res.link : ''
         },
         (err) => {
           this.onError();
