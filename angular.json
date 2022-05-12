@@ -48,7 +48,8 @@
               "src/theme/html/css/language.css",
               "src/theme/html/css/colors/default.css",
               "src/theme/html/css/btn.css",
-              "src/theme/html/css/login.css"
+              "src/theme/html/css/login.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",

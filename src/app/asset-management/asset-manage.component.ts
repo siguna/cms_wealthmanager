@@ -20,10 +20,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { AssetAddComponent } from './asset-add/asset-add.component';
 import { SearchModel } from "../../shared/models/searchModel";
 import { UserService } from "../../shared/services/user.service";
-import { ModalComponent } from '@shared/common/wealth/components/modal/modal.component';
 import { MatDialog } from '@angular/material';
 import { DialogsService } from '../../shared/common/dialogs/dialogs.service';
-import { ConfirmDialogComponent } from '@shared/common/dialogs/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 
 declare var $: any;

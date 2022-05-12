@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     ErrorPageModule, 
     ApiService,
-    ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule, UtilsService, PaginationComponent, 
+    ErrorInterceptor, LAZY_MODULES_MAP, APP_CONFIG_TOKEN, MobileMoneyModule, AccountModule, UtilsService, 
 } from 'mobile-money';
 // import { LayoutModule } from 'mobile-money-layout';
 import { reducers, metaReducers, effects } from '@shared/store';
@@ -34,7 +34,8 @@ import {MatSlideToggleModule, MatCheckboxModule} from '@angular/material'
 import { FormsModule } from '@angular/forms';
 // import { UtilsService } from '@shared/services/common/utils.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxColorsModule } from 'ngx-colors';
+import { ToastrModule } from 'ngx-toastr';
+import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/langs/', '.json');
@@ -84,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
         MobileMoneyModule,
         AccountModule,
         CustomSharedModule,
+        ToastrModule.forRoot()
     ],
     exports: [FormsModule, TranslateModule, ],
     providers: [
@@ -101,7 +103,7 @@ export function createTranslateLoader(http: HttpClient) {
         { provide: LAZY_MODULES_MAP, useValue: MenuConfigNavigate },
         { provide: APP_CONFIG_TOKEN, useClass: AppConfig },
     ],
-    entryComponents: [PaginationComponent],
+    // entryComponents: [PaginationComponent],
     bootstrap: [AppComponent]
 })
 

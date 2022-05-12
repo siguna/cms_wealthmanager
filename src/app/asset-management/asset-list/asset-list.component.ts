@@ -86,8 +86,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         });
 
         this.columnOption = [
-            { columnName: 'ID', columnId: 'id', defaultVisible: true },
-            { columnName: 'Tên tài sản', columnId: 'assetName', defaultVisible: true },
+            { columnName: 'ID', columnId: 'assetId', defaultVisible: true },
+            { columnName: 'Tên tài sản', columnId: 'assetNameId', defaultVisible: true },
             { columnName: 'Trạng thái', columnId: 'confirm', defaultVisible: true, allowSort: false },
             { columnName: 'Người tạo', columnId: 'createdBy', defaultVisible: true, allowSort: false },
             { columnName: 'Ngày tạo', columnId: 'createdDateId', defaultVisible: true },
@@ -161,6 +161,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                     priority: null
                 }
                 // this.store.dispatch(updateAsset({ assetDTO , changes }))
+            } else {
+                this.router.navigateByUrl('/asset');
             }
         });
     }

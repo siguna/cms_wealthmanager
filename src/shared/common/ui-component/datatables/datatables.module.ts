@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ExcelService} from "./export-excel.service";
-// import {PaginationComponent} from "./pagination/pagination.component";
+import {PaginationComponent} from "./pagination/pagination.component";
 import {TableButtonComponent} from "./table-button/table-button.component";
 // import {DatatablesDirective} from "./directives/datatables.directive";
 // import {TableColDefDirective} from "./directives/table-col-def.directive";
