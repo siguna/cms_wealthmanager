@@ -20,7 +20,7 @@ export const assetReducer = createReducer(
 
   on(assetActionTypes.assetsLoaded, (state, action: any) => {
     return adapter.addAll(
-      action.body.assets,
+      action.body.listAssetDTO,
       {...state, assetsLoaded: true, status: action.status}
     );
   }),

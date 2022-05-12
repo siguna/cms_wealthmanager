@@ -7,6 +7,7 @@ import {
 import {
     Observable
 } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
     environment
 } from 'src/environments/environment';
@@ -58,6 +59,11 @@ export class BannerService {
     }
 
     getAllBannerSortedByPriority(): Observable < any > {
-        return this.http.post < any > (`${environment.apiUrl}/api/banner/find-all-sort`,null); 
+        let data = {
+            "body" : {
+            "page" : 0,
+            "size" :100
+        }}
+        return this.http.post < any > (`${environment.apiUrl}/api/banner/find-all-sort`,data); 
     }
 }

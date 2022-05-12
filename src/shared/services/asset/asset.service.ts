@@ -14,9 +14,10 @@ export class AssetService {
 
   getAllAssets(): Observable<Asset[]> {
     console.log(1)
-    return this.http.post<Asset[]>(`${environment.apiUrl}/api/asset/find-all`, {
+    return this.http.post<Asset[]>(`${environment.apiUrl}/api/asset/get-all`, {
       "body": {
-        "assetDTO": {}
+        "pageNumber": 0,
+        "pageSize": 100
       }
     })
   }
@@ -29,7 +30,7 @@ export class AssetService {
   }
 
   deleteAsset(assetId: string): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/asset/delete`, { "body": {  "id": assetId } }).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/asset/delete`, { "body": { "id": assetId } }).pipe(
       tap((assets: any) => {
         return this.router.navigateByUrl('/asset')
       })
@@ -38,14 +39,14 @@ export class AssetService {
 
   updateAsset(assetDTO: Asset | any): Observable<any> {
     console.log(assetDTO)
-    return this.http.post(`${environment.apiUrl}/api/asset/update`,{ "body": { assetDTO } }).pipe(
+    return this.http.post(`${environment.apiUrl}/api/asset/update`, { "body": { assetDTO } }).pipe(
       tap((assets: any) => {
         return this.router.navigateByUrl('/asset')
       }));
   }
 
   updateAssetList(priorityList: Array<any>): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/api/asset/update-list`, { "body": {  "sortList": priorityList } }).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/asset/update-list`, { "body": { "sortList": priorityList } }).pipe(
       tap((assets: any) => {
         return this.router.navigateByUrl('/asset')
       }));
@@ -53,8 +54,8 @@ export class AssetService {
 
   getAssetDetail(assetId: string): Observable<any> {
     console.log(40)
-    console.log('assetId',assetId)
-    return this.http.post<any>(`${environment.apiUrl}/api/asset/detail`, { "body": {  "id": assetId } });
+    console.log('assetId', assetId)
+    return this.http.post<any>(`${environment.apiUrl}/api/asset/detail`, { "body": { "id": assetId } });
   }
 
 }

@@ -69,8 +69,9 @@ export class AssetEditComponent implements OnInit {
       console.log(this.assetId);
       const assetId = this.assetId
     });
-    // this.store.dispatch(loadAssets())
+    this.store.dispatch(loadAssets())
     this.store.select(getAllAssets).subscribe(res => {
+      console.log(res)
         if (res.length > 0) {
           this.dataItem = res.find(data => data.id == this.assetId)
           console.log(res.find(data => data.id == this.assetId))
@@ -78,11 +79,9 @@ export class AssetEditComponent implements OnInit {
           this.assetColorValue = this.dataItem['textColor']
           this.assetIconValue = this.dataItem['imgUrl']
           this.assetStatusValue = this.dataItem['actived']
-
           console.log(this.assetIconValue)
         }
     });
-
 
     // this.assetService.getAssetbyId(this.assetId).subscribe(
     //   res => {
