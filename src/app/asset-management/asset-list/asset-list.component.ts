@@ -160,7 +160,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                     lastModifiedDate: null,
                     priority: null
                 }
-                this.store.dispatch(updateAsset({ assetDTO , changes }))
+                // this.store.dispatch(updateAsset({ assetDTO , changes }))
             }
         });
     }

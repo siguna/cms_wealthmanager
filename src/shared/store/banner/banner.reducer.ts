@@ -3,21 +3,23 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { bannerActionTypes } from './banner.actions';
 export interface BannerState extends EntityState<any> {
   bannerssLoaded: boolean;
+  status: any;
 }
 
 export const adapter: EntityAdapter<any> = createEntityAdapter<any>();
 
 export const initialState = adapter.getInitialState({
-  bannerssLoaded: false
+  bannerssLoaded: false,
+  status: {}
 });
 
 export const bannerReducer = createReducer(
   initialState,
 
-  on(bannerActionTypes.bannersLoaded, (state, action) => {
+  on(bannerActionTypes.bannersLoaded, (state, action: any) => {
     return adapter.addAll(
-      action.banners,
-      {...state}
+      action.body.banner,
+      {...state, status: action.status}
     );
   }),
 );

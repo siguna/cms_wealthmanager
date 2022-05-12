@@ -1,3 +1,4 @@
+import { getAllAssets } from '@store/asset/asset.selectors';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { concatMap, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -13,8 +14,13 @@ export class BannerEffects {
   loadBanners$ = createEffect(() =>
     this.actions$.pipe(
       ofType(bannerActionTypes.loadBanners),
-      concatMap(() => this.bannerService.getBannerByType()),
-      map((banners: any) => bannerActionTypes.bannersLoaded(banners.body))
+      concatMap(() => 
+      this.bannerService.getAllBannerSortedByPriority()
+      ),
+      map((banner: any) => { 
+        console.log(banner);
+        return bannerActionTypes.bannersLoaded(banner)
+      })
     )
   );
 

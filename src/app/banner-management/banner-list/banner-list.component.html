@@ -3,60 +3,41 @@
         <div class="p-0 white-box">
             <!-- <vt-table-button [actionConfig]="actionConfig" [dataTableRef]="paymentPartnerTable" (actionListener)="customActionListner($event)" (zoomListener)="onResize($event)"></vt-table-button> -->
             <div class="table-responsive">
-                <table
-                    class="table"
-                    vtTable
-                    (sort)="sortByColumn($event)"
-                    (dataChecked)="resetData($event)"
-                >
+                <table class="table" vtTable (sort)="sortByColumn($event)" (dataChecked)="resetData($event)">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th><input type="checkbox" vtTblCheckBtn [checked]="masterSelected" value="m1"
+                                (change)="checkUncheckAll($event)" /></th>
                             <th>STT</th>
-                            <th
-                                *ngFor="let column of columnOption"
-                                id="{{ column.columnId }}"
-                                vtTableColDef
-                                (sortEvent)="sortByColumn($event)"
-                            >
+                            <th *ngFor="let column of columnOption" id="{{ column.columnId }}" vtTableColDef
+                                (sortEvent)="sortByColumn($event)">
                                 {{ column.columnName }}
                             </th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="dataItems || dataItems.length > 0">
-                        <tr *ngFor="let item of dataItems; index as i">
+                    <tbody *ngIf="dataItems || dataItems.length > 0" cdkDropList (cdkDropListDropped)="onDrop($event)">
+                        <tr *ngFor="let item of dataItems; index as i" cdkDrag>
                             <td>
-                                <input
-                                    type="checkbox"
-                                    vtTblCheckBtn
-                                    (change)="onSelectData(item)"
-                                    [checked]="item.checked"
-                                />
+                                <input type="checkbox" vtTblCheckBtn (change)="onSelectData(item)"
+                                    [checked]="item.checked" />
                             </td>
                             <td style="width: 5%;">{{ i + 1 }}</td>
 
                             <td *ngFor="let column of columnOption" vtTableColDef>
-                                <div
-                                    *ngIf="
+                                <div *ngIf="
                                         column.columnId != 'confirm' && column.columnId != 'lPay'
-                                    "
-                                >
+                                    "  >
                                     {{ item[column.columnId] }}
                                 </div>
                                 <div *ngIf="column.columnId == 'confirm'">
                                     <!-- <i class="ic-table phe-duyet"><img src="assets/images/ic_approved.svg"></i>
                                     {{item[column.columnId]?'Có':'Không'}} -->
-                                    <div>
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary btn-toggle"
-                                            data-toggle="button"
-                                            aria-pressed="false"
-                                            autocomplete="off"
-                                        >
-                                            <div class="handle"></div>
-                                        </button>
+                                    <div
+                                        class="custom-control custom-switch align-items-center d-flex justify-content-center">
+                                        <input hidden type="checkbox" [checked]="item.actived" [(ngModel)]="item.actived" 
+                                            class="custom-control-input" [id]="item.id" >
+                                        <label class="custom-control-label mt-2 d-block" (click)="showStatusPopup(item.id, item.actived)"></label>
                                     </div>
                                 </div>
                                 <div *ngIf="column.columnId == 'lPay'">
@@ -67,23 +48,17 @@
                                 </div>
                             </td>
                             <td>
-                                <a
-                                    href="javascript:void(0)"
-                                    (click)="openDialogEdit(item)"
-                                    name="UPDATE"
-                                >
-                                    <img
-                                        src="../../../assets/images/ic_action_edit.svg"
-                                        alt="edit"
-                                        [routerLink]="'/banner/edit-banner'"
-                                    />
+                                <a href="javascript:void(0)" name="VIEW" (click)="openDialogView(item)">
+                                    <img src="../../../assets/images/ic_action_view.svg" alt="delete" 
+                                    [routerLink]="['/banner/view-banner/',item.id]"
+                                    /></a>
+
+                                <a href="javascript:void(0)" (click)="openDialogEdit(item)" name="UPDATE">
+                                    <img src="../../../assets/images/ic_action_edit.svg" alt="edit"
+                                        [routerLink]="['/banner/edit-banner/',item.id]" />
                                 </a>
 
-                                <a href="javascript:void(0)" name="DELETE" (click)="delete(item)">
-                                    <img
-                                        src="../../../assets/images/ic_action_delete.svg"
-                                        alt="delte"
-                                /></a>
+
                             </td>
                         </tr>
                     </tbody>
