@@ -253,20 +253,26 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         let priority: Priority;
         this.dataItems.forEach((data, idx) => {
             console.log("idx",idx)
-            console.log("----")
-            console.log("id",data.id)
-
-            if (data.order = idx) {
-                console.log(data.id)
+            // console.log("id",data.id)
+            if (data.order == idx) {
                 priority = {
                     id: data.id,
                     priority: data.priority,
                 };
             }
             data.order = idx + 1;
+            console.log("***");
+            console.log("priority",data.priority)
+            console.log("----")
             console.log("order",data.order);
             console.log("----");
-
+            console.log("id",data.id)
+            console.log("***");
+            priority = {
+                id: data.id,
+                priority: data.priority,
+            };
+            
         });
         this.sortList.push(priority)
         console.log(this.sortList)
