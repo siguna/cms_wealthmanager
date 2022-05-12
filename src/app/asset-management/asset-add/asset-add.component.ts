@@ -122,6 +122,7 @@ export class AssetAddComponent implements OnInit {
 
           if (!this.checkParam) {
 
+            //upate
             const assetDTO = {
               assetName: this.assetNameValue,
               actived: this.assetStatusValue,
@@ -132,7 +133,7 @@ export class AssetAddComponent implements OnInit {
               createdDate: this.createdDate,
               lastModifiedBy: this.lastModifiedBy,
               lastModifiedDate: this.lastModifiedDate,
-              priority: null
+              priority: this.priority
             }
             this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
               if (data && data.status && data.status.message == "successful") {
@@ -163,6 +164,7 @@ export class AssetAddComponent implements OnInit {
 
           } else {
 
+            //Add new asset
             const assetDTO = {
               assetName: this.assetNameValue,
               actived: this.assetStatusValue || true,

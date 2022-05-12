@@ -125,16 +125,17 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                     this.activated = item['actived']
                 }
                 )
+                // this.fillDataToTable(1)
             }
         });
 
-        // this.assetService.getAllAssets().subscribe(data => {
-        //     this.funcsService.getData(data);
-        //     this.fillDataToTable(1)
-        // }, err => {
-        //     console.log(err);
-        // }
-        // )
+        this.assetService.getAllAssets().subscribe(data => {
+            this.funcsService.getData(data);
+            this.fillDataToTable(1)
+        }, err => {
+            console.log(err);
+        }
+        )
 
         this.eventsSubscription = this.events.subscribe(() => {
             console.log(2);
@@ -171,7 +172,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     sortByColumn($event: TableColumnModel) {
-        this.userService.sortPaymentPartner(this.pagination.current, this.pagination.sizeOnPage, $event.columnId, $event.sortAsc).subscribe(res => {
+        this.funcsService.sortPaymentPartner(this.pagination.current, this.pagination.sizeOnPage, $event.columnId, $event.sortAsc).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -186,7 +187,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     fillDataToTable(pageNumber) {
-        this.userService.getLconfigPageNumberAndRecordNumber(pageNumber, this.recordNumber).subscribe(res => {
+        this.funcsService.getLconfigPageNumberAndRecordNumber(pageNumber, this.recordNumber).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -198,7 +199,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     setPage(event: any) {
-        this.userService.getLconfigPageNumberAndRecordNumber(event, this.pagination.sizeOnPage).subscribe(res => {
+        this.funcsService.getLconfigPageNumberAndRecordNumber(event, this.pagination.sizeOnPage).subscribe(res => {
             this.pagination = {
                 current: res[0].pageNumber,
                 sizeOnPage: res[0].itemOfPage,
@@ -212,7 +213,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     }
 
     setRecordNumber(event: any) {
-        this.userService.getLconfigPageNumberAndRecordNumber(this.pagination.current, event)
+        this.funcsService.getLconfigPageNumberAndRecordNumber(this.pagination.current, event)
             .subscribe(res => {
                 this.pagination = {
                     current: res[0].pageNumber,
@@ -229,7 +230,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
 
         this.messageBox.confirm("Xóa dữ liệu", "Bạn có chắc chắn muốn xóa dữ liệu không?").subscribe(next => {
             if (next) {
-                this.userService.removeListConfig(tableInstance.getSelectedData(), this.pagination.current, this.pagination.sizeOnPage).subscribe(res => {
+                this.funcsService.removeListConfig(tableInstance.getSelectedData(), this.pagination.current, this.pagination.sizeOnPage).subscribe(res => {
                     this.pagination = {
                         current: res[0].pageNumber,
                         sizeOnPage: res[0].itemOfPage,

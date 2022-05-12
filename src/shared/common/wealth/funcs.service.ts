@@ -13,7 +13,7 @@ export class FuncsService {
     lConfig = []
     getData(data) {
         console.log(data)
-        this.lConfig = data
+        this.lConfig = data.body.assets
     }
 
     // STT	Mã vị trí	Tên	Loại vị trí	Trạng thái	Chi nhánh	Quận / Huyện

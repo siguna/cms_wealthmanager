@@ -7,7 +7,7 @@ export class AppConfig {
         loginErrorCode: 'LOGIN_FAILED',
         successCode: '200',
         showInTab: true,
-        paginationOption: [5, 10, 20],
+        paginationOption: [10, 20, 50],
         encryptKey: 'webappvodich1234'
     };
     public static APP_CODE = environment.STORAGE_APP_CODE;

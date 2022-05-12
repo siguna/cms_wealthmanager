@@ -46,11 +46,12 @@ import { PaginationComponent } from '@shared/common/ui-component/datatables/pagi
     AssetListComponent, 
     AssetEditComponent,
     AssetAddComponent,
-    PaginationComponent
+    // PaginationComponent
   ],
   providers: [AssetService],
   exports: [
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    // PaginationComponent
     // LayoutModule
   ]
 })
