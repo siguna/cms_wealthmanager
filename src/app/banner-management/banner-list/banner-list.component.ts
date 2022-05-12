@@ -10,21 +10,64 @@ import {
     Output,
     EventEmitter
 } from '@angular/core';
-import { AssetEditComponent } from '../asset-edit/asset-edit.component';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { UserService } from '../../../shared/services/user.service';
-import { TableColumnModel } from '../../../shared/common/ui-component/datatables/models/tableColumn.model';
-import { TableActionConfigModel } from '../../../shared/common/ui-component/datatables/models/tableActionConfig.model';
-import { DatatablesDirective } from '../../../shared/common/ui-component/datatables/directives/datatables.directive';
-import { TblCheckAllBtnDirective } from '../../../shared/common/ui-component/datatables/directives/tbl-checkAll-btn.directive';
-import { PageModel } from '../../../shared/models/page.model';
-import { DialogsService } from '../../../shared/common/dialogs/dialogs.service';
-import { TableActionModel } from '../../../shared/common/ui-component/datatables/models/tableAction.model';
-import { BannerService } from '@shared/services/banner/banner.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@store/appstate';
-import { getAllBanner, loadBanners } from '@store/banner';
+import {
+    AssetEditComponent
+} from '../asset-edit/asset-edit.component';
+import {
+    BsModalRef
+} from 'ngx-bootstrap/modal';
+import {
+    BsModalService
+} from 'ngx-bootstrap/modal';
+import {
+    UserService
+} from '../../../shared/services/user.service';
+import {
+    TableColumnModel
+} from '../../../shared/common/ui-component/datatables/models/tableColumn.model';
+import {
+    TableActionConfigModel
+} from '../../../shared/common/ui-component/datatables/models/tableActionConfig.model';
+import {
+    DatatablesDirective
+} from '../../../shared/common/ui-component/datatables/directives/datatables.directive';
+import {
+    TblCheckAllBtnDirective
+} from '../../../shared/common/ui-component/datatables/directives/tbl-checkAll-btn.directive';
+import {
+    PageModel
+} from '../../../shared/models/page.model';
+import {
+    DialogsService
+} from '../../../shared/common/dialogs/dialogs.service';
+import {
+    TableActionModel
+} from '../../../shared/common/ui-component/datatables/models/tableAction.model';
+import {
+    BannerService
+} from '@shared/services/banner/banner.service';
+import {
+    Store
+} from '@ngrx/store';
+import {
+    AppState
+} from '@store/appstate';
+import {
+    getAllBanner,
+    loadBanners
+} from '@store/banner';
+import {
+    TranslateService
+} from '@ngx-translate/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+
+interface Priority {
+    id: number;
+    priority: number;
+}
+
+
 declare var $: any;
 @Component({
     selector: 'vt-banner-list',
@@ -37,8 +80,7 @@ export class BannerListComponent implements OnInit {
         responseMessage: 'successful',
         responseEntityMessages: null,
         body: {
-            banners: [
-                {
+            banners: [{
                     createdBy: 's',
                     createdDate: '2022-05-06T02:57:08Z',
                     lastModifiedBy: 's',
@@ -146,15 +188,28 @@ export class BannerListComponent implements OnInit {
     constructor(
         private userService: UserService,
         private messageBox: DialogsService,
-        private store: Store<any>,
+        private translate: TranslateService,
+        private store: Store < any > ,
         private ref: ChangeDetectorRef,
-        private bannerService: BannerService
+        private bannerService: BannerService,
+        private dialogService: DialogsService,
     ) {
-        
-        this.columnOption = [
-            { columnName: 'ID', columnId: 'id', defaultVisible: true },
-            { columnName: 'Tên cấu hình', columnId: 'bannerName', defaultVisible: true },
-            { columnName: 'Loại banner', columnId: 'bannerType', defaultVisible: true },
+
+        this.columnOption = [{
+                columnName: 'ID',
+                columnId: 'id',
+                defaultVisible: true
+            },
+            {
+                columnName: 'Tên cấu hình',
+                columnId: 'bannerName',
+                defaultVisible: true
+            },
+            {
+                columnName: 'Loại banner',
+                columnId: 'bannerType',
+                defaultVisible: true
+            },
             {
                 columnName: 'Trạng thái',
                 columnId: 'confirm',
@@ -167,9 +222,21 @@ export class BannerListComponent implements OnInit {
                 defaultVisible: true,
                 allowSort: false
             },
-            { columnName: 'Ngày tạo', columnId: 'createdDate', defaultVisible: true },
-            { columnName: 'Người cập nhật', columnId: 'lastModifiedBy', defaultVisible: true },
-            { columnName: 'Ngày cập nhật', columnId: 'lastModifiedDate', defaultVisible: true }
+            {
+                columnName: 'Ngày tạo',
+                columnId: 'createdDate',
+                defaultVisible: true
+            },
+            {
+                columnName: 'Người cập nhật',
+                columnId: 'lastModifiedBy',
+                defaultVisible: true
+            },
+            {
+                columnName: 'Ngày cập nhật',
+                columnId: 'lastModifiedDate',
+                defaultVisible: true
+            }
             // {columnName: 'Tỉnh / TP', columnId: 'province', defaultVisible: true},
             // {columnName: 'Loại hình đối tác', columnId: 'kind', defaultVisible: true},
             // {columnName: 'Thời gian tạo', columnId: 'timeTraining', defaultVisible: true},
@@ -180,13 +247,11 @@ export class BannerListComponent implements OnInit {
             allowExport: true,
             allowFilter: true,
             allowZoom: true,
-            actions: [
-                {
-                    text: 'Xóa',
-                    icon: 'assets/plugins/images/ic_delete.svg',
-                    actionId: 'delete'
-                }
-            ]
+            actions: [{
+                text: 'Xóa',
+                icon: 'assets/plugins/images/ic_delete.svg',
+                actionId: 'delete'
+            }]
         };
     }
 
@@ -201,11 +266,11 @@ export class BannerListComponent implements OnInit {
 
         this.store.select(getAllBanner).subscribe((res) => {
             console.log(res)
-            if(res.length > 0){
+            if (res.length > 0) {
                 this.dataItems = res
             }
         });
-       
+
     }
 
     sortByColumn($event: TableColumnModel) {
@@ -340,5 +405,52 @@ export class BannerListComponent implements OnInit {
 
     onResize($event: boolean) {
         this.isResize = $event;
+    }
+
+
+    showStatusPopup(id, act) {
+        this.messageBox.confirm('', this.translate.instant('Bạn có chắc chắn muốn active/ inactive loại tài sản ?')).subscribe(next => {
+            if (next) {
+                this.bannerService.updateStatus(id, !act).subscribe(res => {
+                    console.log(res);
+                });
+            }
+        });
+    }
+
+    checkUncheckAll(evt) {
+        this.dataItems.forEach((c) => c.isSelected = evt.target.checked)
+    }
+
+    sortList: Priority[] = [];
+
+    onDrop(event: CdkDragDrop<string[]>) {
+        moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
+
+        let priority: Priority;
+        this.dataItems.forEach((data, idx) => {
+            console.log(data)
+            console.log(data.order);
+
+            if (data.order = idx) {
+                console.log(data.id)
+                priority = {
+                    id: data.id,
+                    priority: data.priority,
+                };
+            }
+            data.order = idx + 1;
+
+        });
+        this.sortList.push(priority)
+        console.log(this.sortList)
+        setTimeout(() => {
+            this.dialogService.confirm('', this.translate.instant('Bạn có muốn sắp xếp lại ?')).subscribe(next => {
+                if (next) {
+                    // this.assetService.updateAssetList({sortList})
+                }
+            });
+        }, 100);
+
     }
 }

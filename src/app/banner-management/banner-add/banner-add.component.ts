@@ -12,14 +12,24 @@ import { AppState } from '@store/appstate';
     styleUrls: ['./banner-add.component.scss']
 })
 export class BannerAddComponent implements OnInit {
-    bannerType = '1';
-    bannerName: string;
-    bannerContent: string;
-    imgUrl: string;
-    buttonText: string;
-    attachedLink: string;
-    startActiveTime: Date;
-    activedStatus: boolean;
+    checkActiveBanner = "1";
+    bannerType = '1'
+  bannerId: string;
+  banner: any = {
+    bannerType: '',
+    bannerName: '',
+    bannerContent: '',
+    imgUrl: '',
+    buttonText: '',
+    attachedLink: '',
+    createdBy: '',
+    lastModifiedBy: '',
+    actived: '',
+    startActiveTime: '',
+    finishActiveTime: '',
+  };
+  actived : boolean = true
+
     constructor(
       private store: Store<AppState>,
       private bannerService: BannerService
@@ -33,29 +43,19 @@ export class BannerAddComponent implements OnInit {
 
     listFormGroupLogo = ['1'];
     ngOnInit() {}
-
+    onSelectActive(event){
+        this.actived = event.target.value == 'true' ? true : false
+    }
     submitAddBannerForm(f: NgForm) {
         const { value } = f;
-        const banner: Banner = {
-            bannerType: this.bannerType,
-            bannerName: value.bannerName,
-            bannerContent: value.bannerContent,
-            imgUrl: value.imgUrl ? value.imgUrl : 'https://jes.edu.vn/wp-content/uploads/2017/10/h%C3%ACnh-%E1%BA%A3nh.jpg',
-            buttonText: value.buttonText,
-            attachedLink: value.attachedLink,
-            createdBy: 'admin',
-            lastModifiedBy: 'admin',
-            actived: value.actived === 'true' ? true : false,
-            startActiveTime: '2022-03-17T16:29:35Z',
-            finishActiveTime: '2022-05-19T16:29:36Z'
-        };
-        const banners = {
-          body: {
-            banner: banner
-          }
-        }
+        value.bannerType = this.bannerType
+        value.actived = this.actived
+        value.startActiveTime = new Date(value.startActiveTime)
+        value.finishActiveTime = new Date(value.finishActiveTime)
+        console.log(value);
+        
         // this.store.dispatch(createBanner({banners}))
-        this.bannerService.createBanner(banners).subscribe((res) => {
+        this.bannerService.createBanner(value).subscribe((res) => {
           console.log(res)
         })
     }
@@ -63,6 +63,8 @@ export class BannerAddComponent implements OnInit {
     onSelectBanner(event: any) {
         this.bannerType = event.target.value;
     }
+
+    
 
     onAddFormGroupLogo() {
         this.listFormGroupLogo.push(this.guidGenerator());

@@ -1,0 +1,191 @@
+<div id="asset-add-new">
+  <div class="modal-header">
+      <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
+          <h4 class="text-left" style="margin-right: 10%;">Loại banner</h4>
+      </div>
+  </div>
+  <div class="row search-content">
+      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"></div>
+  </div>
+  <div class="modal-body">
+      <form>
+          <div class="row align-items-center mt-2">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p class="m-0">Loại banner <span class="text-red">(*)</span></p>
+              </div>{{viewtest()}} aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+              <p class="m-0">{{banner.bannerType}}</p>
+          </div>
+          <div class="row align-items-center mt-3">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p class="m-0">Tên cấu hình <span class="text-red">(*)</span></p>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <p class="m-0">{{banner.bannerName}}</p>
+              </div>
+              
+          </div>
+          <div *ngIf="checkActiveBanner !== '3'">
+              <div class="row align-items-center mt-3">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Ảnh banner <span class="text-red">(*)</span></p>
+                  </div>
+
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <img [src]="banner.imgUrl" alt="" width="100">
+                  </div>
+              </div>
+              <div class="row align-items-center mt-3" *ngIf="checkActiveBanner === '1'">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Mô tả banner <span class="text-red">(*)</span></p>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-0">{{banner.bannerContent}}</p>
+                  </div>
+                  
+              </div>
+          </div>
+
+          <div *ngIf="checkActiveBanner === '1'">
+              <div class="border p-3 mt-3" *ngIf="listFormGroupLogo.length === 0">
+                  <div class="d-flex align-items-center">
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="40"
+                          height="40"
+                          fill="currentColor"
+                          class="bi bi-plus-circle"
+                          viewBox="0 0 16 16"
+                      >
+                          <path
+                              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                          />
+                          <path
+                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                          />
+                      </svg>
+                      <button
+                          type="button"
+                          (click)="onAddFormGroupLogo()"
+                          class="btn btn-banner_add"
+                      >
+                          Thêm
+                      </button>
+                  </div>
+              </div>
+              <div *ngFor="let item of listFormGroupLogo; let i = index">
+                  <div class="border p-3 mt-3">
+                      <div class="row align-items-center">
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <p class="m-0">
+                                  Logo {{ i + 1 }} <span class="text-red">(*)</span>
+                              </p>
+                          </div>
+                          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                              <!-- <vt-file-upload></vt-file-upload> -->
+                          </div>
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <p class="m-0">
+                                  Mô tả logo {{ i + 1 }} <span class="text-red">(*)</span>
+                              </p>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                              <textarea type="text" class="form-control" name="" id=""  disabled="disabled"></textarea>
+                          </div>
+                          
+                      </div>
+                  </div>
+                 
+              </div>
+          </div>
+
+          <div *ngIf="checkActiveBanner === '3'">
+              <div class="row align-items-center mt-3">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Ảnh logo <span class="text-red">(*)</span></p>
+                  </div>
+
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                      <!-- <vt-file-upload></vt-file-upload> -->
+                  </div>
+              </div>
+              <div class="row align-items-center mt-3">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Link gắn banner <span class="text-red">(*)</span></p>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <input type="text" class="form-control" name="" id="" />
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">
+                          Đã nhập <span class="text-red">0 </span>còn
+                          <span class="text-red">100</span>
+                      </p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row align-items-center mt-3">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p class="m-0">Thời gian áp dụng<span class="text-red">(*)</span></p>
+              </div>
+
+              <div
+                  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center"
+              >
+                  <p class="endow-text-left">Từ ngày</p>
+                    <p class="m-0 ms-2">{{banner.startActiveTime | date : "dd-MM-yyyy HH:mm:ss"}}</p>
+              </div>
+              <div
+                  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center"
+              >
+                  <p class="endow-text-left">Đến ngày</p>
+                  <p class="m-0 ms-2">{{banner.finishActiveTime | date : "dd-MM-yyyy HH:mm:ss"}}</p>
+              </div>
+          </div>
+          <div *ngIf="checkActiveBanner !== '3'">
+              <div class="row align-items-center mt-2">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Nội dung button <span class="text-red">(*)</span></p>
+                  </div>
+
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <p class="m-0">{{banner.buttonText}}</p>
+                  </div>
+              </div>
+              <div class="row align-items-center mt-3">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                      <p class="m-0">Link gắn vào button <span class="text-red">(*)</span></p>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-0">{{banner.attachedLink}}</p>
+                  </div>
+                  
+              </div>
+          </div>
+          <div class="row align-items-center mt-2">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p class="m-0">Trạng thái</p>
+              </div>
+
+              <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                  <p class="m-0">{{banner.actived === true ? "Hoạt động" : "Không hoạt động"}}</p>
+              </div>
+          </div>
+      </form>
+  </div>
+  <div class="d-flex mb-4 justify-content-center">
+      <div class="line0 text-center modal-btn">
+          <a
+              [routerLink]="['/banner']"
+              routerLinkActive="router-link-active"
+              type="button"
+              class=" btn btn-secondary modal-btn__cancel"
+              data-dismiss="modal"
+          >
+              Đóng
+          </a>
+          
+      </div>
+  </div>
+</div>
