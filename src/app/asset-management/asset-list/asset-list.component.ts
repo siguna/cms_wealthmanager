@@ -138,7 +138,6 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         )
 
         this.eventsSubscription = this.events.subscribe(() => {
-            console.log(2);
             this.delete('')
         });
 
@@ -164,6 +163,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                     } else {
 
                     }
+                    // this.router.navigateByUrl('/asset');
+                    // this.document.location.reload()
                 })
             } else {
                 this.router.navigateByUrl('/asset');

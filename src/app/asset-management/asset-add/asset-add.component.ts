@@ -67,6 +67,7 @@ export class AssetAddComponent implements OnInit {
     private dialogService: DialogsService,
     private translate: TranslateService,
     private assetSerive: AssetService,
+    private router: Router,
     @Inject(DOCUMENT) private document: Document,
   ) { }
 
@@ -137,12 +138,14 @@ export class AssetAddComponent implements OnInit {
             }
             this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
               if (data && data.status && data.status.message == "successful") {
-                  this.toastr.success("Cập nhật thành công")
+                this.toastr.success("Cập nhật thành công")
               } else if (data && data.status && data.status.message == "error") {
-                  this.toastr.error(data.status.displayMessages[0].message)
+                this.toastr.error(data.status.displayMessages[0].message)
               } else {
 
               }
+              // this.router.navigateByUrl('/asset');
+              // this.document.location.reload()
             })
 
             // this.store.dispatch(updateAsset({ assetDTO }))
@@ -181,12 +184,14 @@ export class AssetAddComponent implements OnInit {
             this.assetSerive.createAsset(assetDTO).subscribe((data) => {
               console.log(data)
               if (data && data.status && data.status.message == "successful") {
-                  this.toastr.success("Cập nhật thành công")
+                this.toastr.success("Cập nhật thành công")
               } else if (data && data.status && data.status.message == "error") {
-                  this.toastr.error(data.status.displayMessages[0].message)
+                this.toastr.error(data.status.displayMessages[0].message)
               } else {
 
               }
+              // this.router.navigateByUrl('/asset');
+              // this.document.location.reload()
             })
 
             // this.store.dispatch(createAsset({ assetDTO }))
