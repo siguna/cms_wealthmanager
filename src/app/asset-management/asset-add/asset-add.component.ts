@@ -1,8 +1,10 @@
+import { error } from 'util';
+import { AssetService } from '@shared/services/asset/asset.service';
 import { Asset } from '@shared/models/asset.model';
 import { AppState } from '@store/appstate';
 import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { createAsset } from '@store/asset/asset.actions';
+import { createAsset, updateAsset } from '@store/asset/asset.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { getAllAssets } from '@store/asset/asset.selectors';
@@ -43,6 +45,12 @@ export class AssetAddComponent implements OnInit {
   assetId
   dataItem
   checkParam;
+  priority;
+  createdBy;
+  createdDate;
+  lastModifiedBy;
+  lastModifiedDate;
+
 
   assetStatusOption: any[] = [
     { name: "Hoạt động", value: true },
@@ -58,6 +66,7 @@ export class AssetAddComponent implements OnInit {
     private actionsSubject$: ActionsSubject,
     private dialogService: DialogsService,
     private translate: TranslateService,
+    private assetSerive: AssetService,
     @Inject(DOCUMENT) private document: Document,
   ) { }
 
@@ -72,6 +81,11 @@ export class AssetAddComponent implements OnInit {
         this.assetColorValue = this.dataItem['textColor']
         this.assetIconValue = this.dataItem['imgUrl']
         this.assetStatusValue = this.dataItem['actived']
+        this.priority = this.dataItem['priority']
+        this.createdBy = this.dataItem['createdBy']
+        this.createdDate = this.dataItem['createdDate']
+        this.lastModifiedBy = this.dataItem['lastModifiedBy']
+        this.lastModifiedDate = this.dataItem['lastModifiedDate']
       }
     });
   }
@@ -84,12 +98,14 @@ export class AssetAddComponent implements OnInit {
     this.toastr.warning(msg, '');
   }
 
+  error(msg): void {
+    this.toastr.warning(msg, '');
+  }
+
   addNewAsset() {
     console.log(this.assetNameValue)
     console.log(this.assetColorValue)
     console.log(this.assetStatusValue);
-
-    // this.successmsg('msg');
 
     // this.dialogService.confirm('', this.translate.instant('Cập nhật thành công')).subscribe(next => {
     //   if (next) {
@@ -99,44 +115,104 @@ export class AssetAddComponent implements OnInit {
 
     if ((this.assetIconValue != '') && (this.assetNameValue != '' && this.assetNameValue != undefined)) {
 
+
+
       this.dialogService.confirm('', this.translate.instant('Bạn có chắc chắn muốn cập nhật ?')).subscribe(next => {
         if (next) {
-          const assetDTO: Asset = {
-            assetName: this.assetNameValue,
-            actived: this.assetStatusValue,
-            imgUrl: "https://vtv1.mediacdn.vn/thumb_w/650/2021/2/18/photo-3-1613603568335203707649.jpg",
-            textColor: this.assetColorValue,
-            id: null,
-            createdBy: null,
-            createdDate: null,
-            lastModifiedBy: null,
-            lastModifiedDate: null,
-            priority: null
+
+          if (!this.checkParam) {
+
+            const assetDTO = {
+              assetName: this.assetNameValue,
+              actived: this.assetStatusValue,
+              imgUrl: "https://vtv1.mediacdn.vn/thumb_w/650/2021/2/18/photo-3-1613603568335203707649.jpg",
+              textColor: this.assetColorValue,
+              id: this.assetId,
+              createdBy: this.createdBy,
+              createdDate: this.createdDate,
+              lastModifiedBy: this.lastModifiedBy,
+              lastModifiedDate: this.lastModifiedDate,
+              priority: null
+            }
+            this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
+              if (data && data.status && data.status.message == "successful") {
+                  this.toastr.success("Cập nhật thành công")
+              } else if (data && data.status && data.status.message == "error") {
+                  this.toastr.error(data.status.displayMessages[0].message)
+              } else {
+
+              }
+            })
+
+            // this.store.dispatch(updateAsset({ assetDTO }))
+            // this._actions$.pipe(
+            //   catchError(err => {
+            //     console.log('Handling error locally and rethrowing it...', err);
+            //     return throwError(err);
+            //   })
+            // )
+            //   .subscribe(
+            //     res => console.log('HTTP response', res),
+            //     err => console.log('HTTP Error', err),
+            //     () => console.log('HTTP request completed.')
+            //   );
+
+            //    this._actions$.subscribe((data) => {
+            //   console.log(data)
+            // })
+
+          } else {
+
+            const assetDTO = {
+              assetName: this.assetNameValue,
+              actived: this.assetStatusValue || true,
+              imgUrl: "https://vtv1.mediacdn.vn/thumb_w/650/2021/2/18/photo-3-1613603568335203707649.jpg",
+              textColor: this.assetColorValue || null,
+              id: null,
+              createdBy: null,
+              createdDate: null,
+              lastModifiedBy: null,
+              lastModifiedDate: null,
+              priority: null
+            }
+
+            this.assetSerive.createAsset(assetDTO).subscribe((data) => {
+              console.log(data)
+              if (data && data.status && data.status.message == "successful") {
+                  this.toastr.success("Cập nhật thành công")
+              } else if (data && data.status && data.status.message == "error") {
+                  this.toastr.error(data.status.displayMessages[0].message)
+              } else {
+
+              }
+            })
+
+            // this.store.dispatch(createAsset({ assetDTO }))
+            // this._actions$.pipe(
+            //   catchError(err => {
+            //     console.log('Handling error locally and rethrowing it...', err);
+            //     return throwError(err);
+            //   })
+            // )
+            //   .subscribe(
+            //     res => console.log('HTTP response', res),
+            //     err => console.log('HTTP Error', err),
+            //     () => console.log('HTTP request completed.')
+            //   );
+
           }
 
-          this.store.dispatch(createAsset({ assetDTO }))
 
-          this._actions$.subscribe((data) => {
-            // console.log(data)
-          })
-          this._actions$.pipe(
-            catchError((error: any) => {
-              console.log(error);
-              return throwError(error);
-            })
-          );
 
-          this._actions$.pipe(
-            catchError(err => {
-              console.log('Handling error locally and rethrowing it...', err);
-              return throwError(err);
-            })
-          )
-            .subscribe(
-              res => console.log('HTTP response', res),
-              err => console.log('HTTP Error', err),
-              () => console.log('HTTP request completed.')
-            );
+          // this._actions$.subscribe((data) => {
+          //   console.log(data)
+          // })
+          // this._actions$.pipe(
+          //   catchError((error: any) => {
+          //     console.log(error);
+          //     return throwError(error);
+          //   })
+          // );
         }
       });
       // this.router.navigateByUrl('/asset');

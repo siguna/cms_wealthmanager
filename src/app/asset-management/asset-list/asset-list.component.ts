@@ -25,6 +25,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { deleteAsset } from '@store/asset/asset.actions';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $: any;
 
@@ -78,6 +79,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         private translate: TranslateService,
         private router: Router,
         private route: ActivatedRoute,
+        private toastr: ToastrService,
+        private assetSerive: AssetService,
         formBuilder: FormBuilder
     ) {
         this.formGroup = formBuilder.group({
@@ -144,23 +147,23 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         this.eventsSubscription.unsubscribe();
     }
 
-    showStatusPopup(id, act) {
+    showStatusPopup(item) {
         this.dialogService.confirm('', this.translate.instant('Bạn có chắc chắn muốn active/ inactive loại tài sản ?')).subscribe(next => {
             if (next) {
-                const assetDTO = id
-                const changes:any = {
-                    id: id,
-                    assetName: null,
-                    actived: act,
-                    imgUrl: null,
-                    textColor: null,
-                    createdBy: null,
-                    createdDate: null,
-                    lastModifiedBy: null,
-                    lastModifiedDate: null,
-                    priority: null
+                const assetDTO: Asset = {
+                    ...item,
+                    actived: !item.actived
                 }
-                // this.store.dispatch(updateAsset({ assetDTO , changes }))
+                // this.store.dispatch(updateAsset({ assetDTO }))
+                this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
+                    if (data && data.status && data.status.message == "successful") {
+                        this.toastr.success("Cập nhật thành công")
+                    } else if (data && data.status && data.status.message == "error") {
+                        this.toastr.error(data.status.displayMessages[0].message)
+                    } else {
+
+                    }
+                })
             } else {
                 this.router.navigateByUrl('/asset');
             }

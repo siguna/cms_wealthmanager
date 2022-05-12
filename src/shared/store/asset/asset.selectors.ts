@@ -16,4 +16,12 @@ export const areAssetsLoaded = createSelector(
   })
 );
 
+export const areAssetsUpdateed = createSelector(
+  assetFeatureSelector,
+  state => ({
+    ids: state.ids,
+    entities: state.entities
+  })
+);
+
 

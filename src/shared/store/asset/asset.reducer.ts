@@ -5,22 +5,23 @@ import { Asset } from '@shared/models/asset.model';
 
 export interface AssetState extends EntityState<Asset> {
   assetsLoaded: boolean;
-
+  status: any
 }
 
 export const adapter: EntityAdapter<Asset> = createEntityAdapter<Asset>();
 
 export const initialState = adapter.getInitialState({
-  assetsLoaded: false
+  assetsLoaded: false,
+  status
 });
 
 export const assetReducer = createReducer(
   initialState,
 
-  on(assetActionTypes.assetsLoaded, (state, action) => {
+  on(assetActionTypes.assetsLoaded, (state, action: any) => {
     return adapter.addAll(
-      action.assets,
-      {...state, assetsLoaded: true}
+      action.body.assets,
+      {...state, assetsLoaded: true, status: action.status}
     );
   }),
 
@@ -33,7 +34,7 @@ export const assetReducer = createReducer(
   }),
 
   on(assetActionTypes.updateAsset, (state, action) => {
-    return adapter.updateOne(action.assetDTO, state);
+    return adapter.addOne(action.assetDTO, state);
   })
 );
 

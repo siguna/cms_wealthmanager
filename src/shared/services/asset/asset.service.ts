@@ -19,8 +19,7 @@ export class AssetService {
     })
   }
 
-  createAsset(assetDTO: Asset): Observable<Asset> {
-    console.log(assetDTO)
+  createAsset(assetDTO: Asset | any): Observable<Asset> {
     return this.http.post<Asset>(`${environment.apiUrl}/api/asset/create`, { "body": { assetDTO } });
   }
 
@@ -28,8 +27,9 @@ export class AssetService {
     return this.http.post<any>(`${environment.apiUrl}/api/asset/delete`, { "body": {  "id": assetId } });
   }
 
-  updateAsset(assetId: string | number, changes: Partial<Asset>): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/api/asset/update` + assetId, changes);
+  updateAsset(assetDTO: Asset | any): Observable<any> {
+    console.log(assetDTO)
+    return this.http.post(`${environment.apiUrl}/api/asset/update`,{ "body": { assetDTO } });
   }
 
   updateAssetList(priorityList: Array<any>): Observable<any> {
