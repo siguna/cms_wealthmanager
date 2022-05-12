@@ -181,7 +181,7 @@ export class AssetAddComponent implements OnInit {
               priority: null
             }
 
-            this.assetSerive.createAsset(assetDTO).subscribe((data) => {
+            this.assetSerive.createAsset(assetDTO).subscribe((data: any) => {
               console.log(data)
               if (data && data.status && data.status.message == "successful") {
                 this.toastr.success("Cập nhật thành công")

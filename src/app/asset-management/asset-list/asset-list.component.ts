@@ -252,8 +252,9 @@ export class AssetListComponent implements OnInit, AfterViewInit {
 
         let priority: Priority;
         this.dataItems.forEach((data, idx) => {
-            console.log(data)
-            console.log(data.order);
+            console.log("idx",idx)
+            console.log("----")
+            console.log("id",data.id)
 
             if (data.order = idx) {
                 console.log(data.id)
@@ -263,6 +264,8 @@ export class AssetListComponent implements OnInit, AfterViewInit {
                 };
             }
             data.order = idx + 1;
+            console.log("order",data.order);
+            console.log("----");
 
         });
         this.sortList.push(priority)
