@@ -23,7 +23,6 @@ export class TopBarComponent implements OnInit {
   }
 
   goToHomePage() {
-    debugger;
     this.router.navigateByUrl("/").then(
       () => window.location.reload()
     );

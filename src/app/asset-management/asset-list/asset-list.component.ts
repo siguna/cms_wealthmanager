@@ -1,4 +1,4 @@
-import { filter } from 'rxjs/operators';
+import { catchError, filter } from 'rxjs/operators';
 import { async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { loadAssets, updateAsset } from './../../../shared/store/asset/asset.actions';
@@ -17,7 +17,7 @@ import { DialogsService } from "../../../shared/common/dialogs/dialogs.service";
 import { TableActionModel } from "../../../shared/common/ui-component/datatables/models/tableAction.model";
 import { AppState } from '@store/appstate';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Asset } from '@shared/models/asset.model';
 
 import { getAllAssets } from '@store/asset/asset.selectors';
@@ -245,44 +245,43 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         });
 
     }
-    sortList: Priority[] = [];
 
-    onDrop(event: CdkDragDrop<string[]>) {
+    onDrop(event: CdkDragDrop<Asset[]>) {
         moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
-
-        let priority: Priority;
-        this.dataItems.forEach((data, idx) => {
-            console.log("idx",idx)
-            // console.log("id",data.id)
-            if (data.order == idx) {
-                priority = {
-                    id: data.id,
-                    priority: data.priority,
-                };
-            }
-            data.order = idx + 1;
-            console.log("***");
-            console.log("priority",data.priority)
-            console.log("----")
-            console.log("order",data.order);
-            console.log("----");
-            console.log("id",data.id)
-            console.log("***");
-            priority = {
-                id: data.id,
-                priority: data.priority,
-            };
-            
-        });
-        this.sortList.push(priority)
-        console.log(this.sortList)
+        let priorityPrevious: Priority;
+        let priorityCurrent: Priority;
+        if(event.previousIndex == event.currentIndex){
+            return;
+        }
+        priorityPrevious = {
+            id:this.dataItems[event.previousIndex].id,
+            priority:this.dataItems[event.currentIndex].priority
+        }
+        priorityCurrent = {
+            id:this.dataItems[event.currentIndex].id,
+            priority:this.dataItems[event.previousIndex].priority
+        }
+        let sortList = [];
+        sortList.push(priorityPrevious);
+        sortList.push(priorityCurrent)
         setTimeout(() => {
             this.dialogService.confirm('', this.translate.instant('Bạn có muốn sắp xếp lại ?')).subscribe(next => {
                 if (next) {
-                    // this.assetService.updateAssetList({sortList})
+                    this.assetService.updateAssetList(sortList).subscribe(data=>{
+                        if (data && data.status && data.status.message == "successful") {
+                            this.toastr.success("Cập nhật thành công")
+                        } else if (data && data.status && data.status.message == "error") {
+                            this.toastr.error(data.status.displayMessages[0].message)
+                        } else {}
+                    })
+                }else{
+                    let currentUrl = this.router.url;
+                    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                    this.router.onSameUrlNavigation = 'reload';
+                    this.router.navigate([currentUrl]);         
                 }
             });
-        }, 2000);
+        }, 50);
 
     }
 
