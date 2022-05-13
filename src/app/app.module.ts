@@ -35,7 +35,7 @@ import { FormsModule } from '@angular/forms';
 // import { UtilsService } from '@shared/services/common/utils.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
+// import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/langs/', '.json');

@@ -8,7 +8,7 @@ import { BannerEditComponent } from './banner-edit/banner-edit.component';
 import { BannerListComponent } from './banner-list/banner-list.component';
 import { BannerViewComponent } from './banner-view/banner-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PaginationComponent } from '@shared/common/ui-component/datatables/pagination/pagination.component';
+import { PaginationComponent1 } from '@shared/common/ui-component/datatables/pagination/pagination1.component';
 
 import { BannerService } from '@shared/services/banner/banner.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -21,8 +21,8 @@ import { CKEditorModule } from 'ngx-ckeditor';
     BannerListComponent,
     BannerAddComponent,
     BannerEditComponent,
-    BannerViewComponent
-    // PaginationComponent
+    BannerViewComponent,
+    PaginationComponent1
   ],
   imports: [
     CommonModule,
@@ -37,8 +37,8 @@ import { CKEditorModule } from 'ngx-ckeditor';
     BannerListComponent,
     BannerAddComponent,
     BannerEditComponent,
-    BannerViewComponent
-    // PaginationComponent
+    BannerViewComponent,
+    PaginationComponent1
   ],
   providers: [BannerService],
   exports: [

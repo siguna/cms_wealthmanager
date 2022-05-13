@@ -1,3 +1,4 @@
+import { FuncsService } from '@shared/common/wealth/funcs.service';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -80,97 +81,97 @@ export class BannerListComponent implements OnInit {
     @Input() events: Observable<void>;
     
     res = {
-        responseCode: '200',
-        responseMessage: 'successful',
-        responseEntityMessages: null,
-        body: {
-            banners: [{
-                    createdBy: 's',
-                    createdDate: '2022-05-06T02:57:08Z',
-                    lastModifiedBy: 's',
-                    lastModifiedDate: '2022-04-26T04:10:50Z',
-                    id: 5,
-                    bannerType: '4',
-                    bannerName: 'logo',
-                    bannerContent: '',
-                    imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-                    buttonText: '',
-                    attachedLink: '',
-                    priority: 5,
-                    actived: true,
-                    startActiveTime: '2022-03-18T17:47:22Z',
-                    finishActiveTime: '2022-05-24T17:47:23Z'
-                },
-                {
-                    createdBy: 'admin',
-                    createdDate: '2022-05-06T02:57:08Z',
-                    lastModifiedBy: 'admin',
-                    lastModifiedDate: '2022-04-27T02:26:21Z',
-                    id: 15,
-                    bannerType: '4',
-                    bannerName: 'logo',
-                    bannerContent: '',
-                    imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-                    buttonText: '',
-                    attachedLink: '',
-                    priority: 6,
-                    actived: true,
-                    startActiveTime: '2022-03-17T16:29:35Z',
-                    finishActiveTime: '2022-05-19T16:29:36Z'
-                },
-                {
-                    createdBy: 'admin',
-                    createdDate: '2022-05-06T02:57:08Z',
-                    lastModifiedBy: 'admin',
-                    lastModifiedDate: '2022-04-27T02:31:59Z',
-                    id: 17,
-                    bannerType: '4',
-                    bannerName: 'logo',
-                    bannerContent: '',
-                    imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-                    buttonText: '',
-                    attachedLink: '',
-                    priority: 8,
-                    actived: false,
-                    startActiveTime: '2022-03-17T16:29:35Z',
-                    finishActiveTime: '2022-05-19T16:29:36Z'
-                },
-                {
-                    createdBy: 'admin',
-                    createdDate: '2022-05-06T02:59:03Z',
-                    lastModifiedBy: 'admin',
-                    lastModifiedDate: '2022-04-28T07:24:28Z',
-                    id: 1,
-                    bannerType: '1',
-                    bannerName: 'onboarding',
-                    bannerContent: 'Nền tảng quản lý tài sản, đầu tư cho mọi người',
-                    imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-                    buttonText: 'Tìm hiểu ngay',
-                    attachedLink: 'https://kenh14.vn/',
-                    priority: 9,
-                    actived: true,
-                    startActiveTime: '2022-03-17T16:29:35Z',
-                    finishActiveTime: '2022-05-19T16:29:36Z'
-                },
-                {
-                    createdBy: 's',
-                    createdDate: '2022-05-06T06:52:43Z',
-                    lastModifiedBy: null,
-                    lastModifiedDate: '2022-04-28T14:24:21Z',
-                    id: 41,
-                    bannerType: '4',
-                    bannerName: 'logo',
-                    bannerContent: null,
-                    imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-                    buttonText: null,
-                    attachedLink: null,
-                    priority: 10,
-                    actived: true,
-                    startActiveTime: '2022-04-28T14:24:21Z',
-                    finishActiveTime: '2022-05-28T14:24:21Z'
-                }
-            ]
-        }
+        // responseCode: '200',
+        // responseMessage: 'successful',
+        // responseEntityMessages: null,
+        // body: {
+        //     banners: [{
+        //             createdBy: 's',
+        //             createdDate: '2022-05-06T02:57:08Z',
+        //             lastModifiedBy: 's',
+        //             lastModifiedDate: '2022-04-26T04:10:50Z',
+        //             id: 5,
+        //             bannerType: '4',
+        //             bannerName: 'logo',
+        //             bannerContent: '',
+        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
+        //             buttonText: '',
+        //             attachedLink: '',
+        //             priority: 5,
+        //             actived: true,
+        //             startActiveTime: '2022-03-18T17:47:22Z',
+        //             finishActiveTime: '2022-05-24T17:47:23Z'
+        //         },
+        //         {
+        //             createdBy: 'admin',
+        //             createdDate: '2022-05-06T02:57:08Z',
+        //             lastModifiedBy: 'admin',
+        //             lastModifiedDate: '2022-04-27T02:26:21Z',
+        //             id: 15,
+        //             bannerType: '4',
+        //             bannerName: 'logo',
+        //             bannerContent: '',
+        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
+        //             buttonText: '',
+        //             attachedLink: '',
+        //             priority: 6,
+        //             actived: true,
+        //             startActiveTime: '2022-03-17T16:29:35Z',
+        //             finishActiveTime: '2022-05-19T16:29:36Z'
+        //         },
+        //         {
+        //             createdBy: 'admin',
+        //             createdDate: '2022-05-06T02:57:08Z',
+        //             lastModifiedBy: 'admin',
+        //             lastModifiedDate: '2022-04-27T02:31:59Z',
+        //             id: 17,
+        //             bannerType: '4',
+        //             bannerName: 'logo',
+        //             bannerContent: '',
+        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
+        //             buttonText: '',
+        //             attachedLink: '',
+        //             priority: 8,
+        //             actived: false,
+        //             startActiveTime: '2022-03-17T16:29:35Z',
+        //             finishActiveTime: '2022-05-19T16:29:36Z'
+        //         },
+        //         {
+        //             createdBy: 'admin',
+        //             createdDate: '2022-05-06T02:59:03Z',
+        //             lastModifiedBy: 'admin',
+        //             lastModifiedDate: '2022-04-28T07:24:28Z',
+        //             id: 1,
+        //             bannerType: '1',
+        //             bannerName: 'onboarding',
+        //             bannerContent: 'Nền tảng quản lý tài sản, đầu tư cho mọi người',
+        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
+        //             buttonText: 'Tìm hiểu ngay',
+        //             attachedLink: 'https://kenh14.vn/',
+        //             priority: 9,
+        //             actived: true,
+        //             startActiveTime: '2022-03-17T16:29:35Z',
+        //             finishActiveTime: '2022-05-19T16:29:36Z'
+        //         },
+        //         {
+        //             createdBy: 's',
+        //             createdDate: '2022-05-06T06:52:43Z',
+        //             lastModifiedBy: null,
+        //             lastModifiedDate: '2022-04-28T14:24:21Z',
+        //             id: 41,
+        //             bannerType: '4',
+        //             bannerName: 'logo',
+        //             bannerContent: null,
+        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
+        //             buttonText: null,
+        //             attachedLink: null,
+        //             priority: 10,
+        //             actived: true,
+        //             startActiveTime: '2022-04-28T14:24:21Z',
+        //             finishActiveTime: '2022-05-28T14:24:21Z'
+        //         }
+        //     ]
+        // }
     };
 
     ngAfterViewInit(): void {}
@@ -202,6 +203,7 @@ export class BannerListComponent implements OnInit {
         private ref: ChangeDetectorRef,
         private bannerService: BannerService,
         private dialogService: DialogsService,
+        private funcsService: FuncsService
     ) {
 
         this.columnOption = [{
@@ -276,7 +278,9 @@ export class BannerListComponent implements OnInit {
         this.store.select(getAllBanner).subscribe((res) => {
             console.log(res)
             if (res.length > 0) {
-                this.dataItems = res
+                this.dataItems = res;
+                this.funcsService.getData(res);
+                this.fillDataToTable(1);
             }
         });
 

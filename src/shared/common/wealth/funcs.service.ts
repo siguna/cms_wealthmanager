@@ -13,6 +13,7 @@ export class FuncsService {
     lConfig = []
     getData(data) {
         console.log(data)
+        
         this.lConfig = data.body.listAssetDTO
     }
 
