@@ -417,6 +417,7 @@ export class FuncsService {
     public advanceSearch1(LPAy, nCCDV, userDev) {
         this.resetData();
         this.p = [];
+        debugger
         this.lConfig = this.lConfig.filter(item => {
             if ((LPAy === '' || item.lPay === LPAy) && (nCCDV === '' || (item.nCCDV.toLowerCase().indexOf(nCCDV.toLowerCase()) > -1))
                 && (userDev === '' || (item.userDev.toLowerCase().indexOf(userDev.toLowerCase()) > -1))) {

@@ -280,7 +280,6 @@ export class BannerListComponent implements OnInit {
             if (res.length > 0) {
                 this.dataItems = res;
                 console.log(res)
-                debugger
                 this.funcsService.getData(res);
                 this.fillDataToTable(1);
             }
