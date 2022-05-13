@@ -13,7 +13,11 @@ export class FuncsService {
     lConfig = []
     getData(data) {
         console.log(data)
-        this.lConfig = data.body.listAssetDTO
+        if (data && data.body && data.body.listAssetDTO && data.body.listAssetDTO.length > 0) {
+            this.lConfig = data.body.listAssetDTO
+        } else {
+            this.lConfig = data
+        }
     }
 
     // STT	Mã vị trí	Tên	Loại vị trí	Trạng thái	Chi nhánh	Quận / Huyện

@@ -1,0 +1,13 @@
+<div class="pagination">
+    <a [ngClass]="{disabled:pageConfig.current === 1}" (click)="previousPage()">«</a>
+    <a *ngFor="let page of pages" [ngClass]="{active:pageConfig.current === page}" (click)="setPage(page)">{{page}}</a>
+    <a [ngClass]="{disabled:pageConfig.current === totalPage}"
+       (click)="forwardPage()">»</a>
+</div>
+<div class="count-row">
+    <span>Hiển thị
+        <select (change)="setRecordNumber($event)">
+            <option *ngFor="let val of paginationOption" value="{{val}}" [selected]="pageConfig.sizeOnPage == val">{{val}}</option>
+        </select>
+    1 trang</span>
+</div>
