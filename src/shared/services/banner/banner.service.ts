@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Banner, Logo } from '@model/banner.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BannerService {
-    constructor(private http: HttpClient) {}
-    getBannerByType(): Observable<any> {
+
+    constructor(private http: HttpClient, private router:Router) {}
+    getBannerByType(): Observable < any > {
         const data = {
             body: {
                 bannerType: '1'
@@ -86,4 +88,11 @@ export class BannerService {
         };
         return this.http.post<any>(`${environment.apiUrl}/api/banner/find-all-sort`, data);
     }
+
+    updateAssetList(priorityList: Array<any>): Observable<any> {
+        return this.http.post<any>(`${environment.apiUrl}/api/banner/sort-list-banner-by-priority`, { "body": { "sortList": priorityList } }).pipe(
+          tap((assets: any) => {
+            return this.router.navigateByUrl('/banner')
+          }));
+      }
 }
