@@ -74,18 +74,28 @@ export class BannerAddComponent implements OnInit {
     }
 
     listFormGroupLogo: any[] = ["1"];
-    logos: Logo[] = [{
-        id: null,
-        bannerType: "4",
-        bannerContent: "",
-        imgUrl: "",
-        parrentId: null
-    }]
-
+    
     ngOnInit() {}
     onSelectActive(event) {
         this.banner.actived = event.target.value == 'true' ? true : false
     }
+    
+    logos: any[] = [];
+
+    changeLogo(event, index) {
+        const check = this.logos.find((item) => item.id === index);
+        if (check) {
+            check.imgUrl = event.target.value;
+        } else {
+            const item = {
+                imgUrl: event.target.value,
+                parrentId: null,
+                id: index
+            };
+            this.logos.push(item);
+        }
+    }
+
     submitAddBannerForm(f: NgForm) {
         // const { value } = f;
         // value.bannerType = this.bannerType
@@ -113,13 +123,20 @@ export class BannerAddComponent implements OnInit {
     }
 
     clickSaveHandle() {
+        const dataLogos = []
+        if()
+        this.logos.forEach((item) => {
+          const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
+          item.bannerContent = bannerContent;
+          dataLogos.push(item)
+        })
 
         console.log("banner ", this.banner);
-        // this.bannerService.createBanner(this.banner, this.logos).subscribe(
-        //     (data) => {
-        //         console.log(data);
-        //     }
-        // );
+        this.bannerService.createBanner(this.banner, dataLogos).subscribe(
+            (data) => {
+                console.log(data);
+            }
+        );
 
     }
 

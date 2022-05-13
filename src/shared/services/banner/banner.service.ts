@@ -44,11 +44,12 @@ export class BannerService {
     }
 
 
-    updateBanner(banner: Banner): Observable < any > {
+    updateBanner(banner: Banner, logos: Logo[] = []): Observable < any > {
 
         return this.http.post < any > (`${environment.apiUrl}/api/banner/update-banner`, {
             "body": {
-                "banner": banner
+                "banner": banner,
+                "logos": logos
             }
         });
     }

@@ -5,6 +5,7 @@ import { AppState } from '@store/appstate';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { getAllBanner, loadBanners } from '@store/banner';
+import { Logo } from '@model/banner.model';
 
 @Component({
     selector: 'vt-banner-edit',
@@ -27,11 +28,16 @@ export class BannerEditComponent implements OnInit {
     finishActiveTime: string;
     actived: boolean = true;
     editorValue;
-    constructor(private store: Store<AppState>, private bannerService: BannerService, private activatedRoute: ActivatedRoute, private router: Router,) {
-      this.activatedRoute.params.subscribe((paramsId) => {
-        this.bannerId = paramsId.id;
-        console.log(this.bannerId);
-    });
+    constructor(
+        private store: Store<AppState>,
+        private bannerService: BannerService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
+    ) {
+        this.activatedRoute.params.subscribe((paramsId) => {
+            this.bannerId = paramsId.id;
+            console.log(this.bannerId);
+        });
     }
     guidGenerator() {
         var S4 = function () {
@@ -41,48 +47,59 @@ export class BannerEditComponent implements OnInit {
     }
 
     listFormGroupLogo = ['1'];
-    test: any = {}
+    test: any = {};
     banner;
-   dataItem;
+    dataItem;
     ngOnInit() {
         this.store.dispatch(loadBanners());
         this.bannerService.getBannerById(this.bannerId).subscribe((res) => {
-          this.test = res.body.banner
-          this.bannerName = this.test.bannerName
-         this.banner =  res.body.banner
-        })
-        
+            this.test = res.body.banner;
+            this.bannerName = this.test.bannerName;
+            this.banner = res.body.banner;
+        });
+
         this.bannerName = this.test.bannerName;
-        this.store.dispatch(loadBanners())
+        this.store.dispatch(loadBanners());
         this.store.select(getAllBanner).subscribe((res) => {
-          
-          if(res.length > 0){
-            console.log("saddsadsadsa", res);
-            this.dataItem = res.find((item) => item.id == this.bannerId)
-            if(this.dataItem){
-              this.banner = {
-                ...this.dataItem
-              }
-              this.bannerName = this.dataItem.bannerName
-              this.bannerType = this.dataItem.bannerType
-              this.bannerContent = this.dataItem.bannerContent
-              this.imgUrl = this.dataItem.imgUrl
-              this.startActiveTime = this.dataItem.startActiveTime
-              this.finishActiveTime = this.dataItem.finishActiveTime
-              this.actived = this.dataItem.actived
-              this.attachedLink = this.dataItem.attachedLink
-              this.buttonText = this.dataItem.buttonText
-              this.createdBy = this.dataItem.createdBy
-              this.lastModifiedBy = this.dataItem.lastModifiedBy
-              console.log("this.dataItem", this.dataItem);
-              
+            if (res.length > 0) {
+                console.log('saddsadsadsa', res);
+                this.dataItem = res.find((item) => item.id == this.bannerId);
+                if (this.dataItem) {
+                    this.banner = {
+                        ...this.dataItem
+                    };
+                    this.bannerName = this.dataItem.bannerName;
+                    this.bannerType = this.dataItem.bannerType;
+                    this.bannerContent = this.dataItem.bannerContent;
+                    this.imgUrl = this.dataItem.imgUrl;
+                    this.startActiveTime = this.dataItem.startActiveTime;
+                    this.finishActiveTime = this.dataItem.finishActiveTime;
+                    this.actived = this.dataItem.actived;
+                    this.attachedLink = this.dataItem.attachedLink;
+                    this.buttonText = this.dataItem.buttonText;
+                    this.createdBy = this.dataItem.createdBy;
+                    this.lastModifiedBy = this.dataItem.lastModifiedBy;
+                    console.log('this.dataItem', this.dataItem);
+                }
             }
-          }
-          
-          
-        })
+        });
     }
-    
+
+    logos: any[] = [];
+
+    changeLogo(event, index) {
+        const check = this.logos.find((item) => item.id === index);
+        if (check) {
+            check.imgUrl = event.target.value;
+        } else {
+            const item = {
+                imgUrl: event.target.value,
+                parrentId: this.bannerId,
+                id: index
+            };
+            this.logos.push(item);
+        }
+    }
 
     onSelectActive(event) {
         this.actived = event.target.value == 'true' ? true : false;
@@ -101,12 +118,22 @@ export class BannerEditComponent implements OnInit {
     }
 
     getResult() {
-      const data = {
-        ...this.banner,
-        actived : this.actived
-      }
-       this.bannerService.updateBanner(data).subscribe((res) => {
-        this.router.navigate(['/banner'])
-       })
+        const data = {
+            ...this.banner,
+            actived: this.actived
+        };
+        const dataLogos = []
+        this.logos.forEach((item) => {
+          const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
+          item.bannerContent = bannerContent;
+          dataLogos.push(item)
+        })
+
+         this.bannerService.updateBanner(data, dataLogos).subscribe((res) => {
+             if(res){
+                this.router.navigate(['/banner'])
+             }
+          
+         })
     }
 }
