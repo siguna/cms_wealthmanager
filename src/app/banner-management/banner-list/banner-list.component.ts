@@ -60,6 +60,7 @@ import {
     TranslateService
 } from '@ngx-translate/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Observable, Subscription } from 'rxjs';
 
 
 interface Priority {
@@ -75,6 +76,9 @@ declare var $: any;
     styleUrls: ['./banner-list.component.scss']
 })
 export class BannerListComponent implements OnInit {
+
+    @Input() events: Observable<void>;
+    
     res = {
         responseCode: '200',
         responseMessage: 'successful',
@@ -175,6 +179,8 @@ export class BannerListComponent implements OnInit {
     @Input() pagination: PageModel;
     @Output() selectEvent = new EventEmitter();
 
+    private eventsSubscription: Subscription;
+
     isResize: any;
     recordNumber: number;
     // pagination: any;
@@ -185,6 +191,9 @@ export class BannerListComponent implements OnInit {
     dataSelected: any = [];
     actionConfig: TableActionConfigModel;
     checkedAll: boolean;
+    masterSelected = false;
+    isChecked = true;
+
     constructor(
         private userService: UserService,
         private messageBox: DialogsService,
@@ -271,6 +280,15 @@ export class BannerListComponent implements OnInit {
             }
         });
 
+        this.eventsSubscription = this.events.subscribe(() => {
+            this.delete(this.assetSelectedId)
+            console.log("Xóa");
+        });
+
+    }
+
+    ngOnDestroy() {
+        this.eventsSubscription.unsubscribe();
     }
 
     sortByColumn($event: TableColumnModel) {
@@ -379,19 +397,22 @@ export class BannerListComponent implements OnInit {
     }
 
     delete(item: any) {
-        if (window.confirm('Xóa dữ liệu , Bạn có chắc chắn muốn xóa dữ liệu không?')) {
-            this.userService
-                .deleteLconfig(item, this.pagination.current, this.pagination.sizeOnPage)
-                .subscribe((res) => {
-                    this.pagination = {
-                        current: res[0].pageNumber,
-                        sizeOnPage: res[0].itemOfPage,
-                        totalItem: res[0].totalItemCount
-                    };
-                    this.dataItems = res[0].data;
-                    // this.tableOption = [{data: this.dataItems}];
-                });
-        }
+
+        console.log("Gui data API", item);
+        
+        // if (window.confirm('Xóa dữ liệu , Bạn có chắc chắn muốn xóa dữ liệu không?')) {
+        //     this.userService
+        //         .deleteLconfig(item, this.pagination.current, this.pagination.sizeOnPage)
+        //         .subscribe((res) => {
+        //             this.pagination = {
+        //                 current: res[0].pageNumber,
+        //                 sizeOnPage: res[0].itemOfPage,
+        //                 totalItem: res[0].totalItemCount
+        //             };
+        //             this.dataItems = res[0].data;
+        //             // this.tableOption = [{data: this.dataItems}];
+        //         });
+        // }
     }
 
     customActionListner($event: {
@@ -420,6 +441,21 @@ export class BannerListComponent implements OnInit {
 
     checkUncheckAll(evt) {
         this.dataItems.forEach((c) => c.isSelected = evt.target.checked)
+    }
+
+    assetSelectedId
+    isAllSelected(evt, index) {
+        console.log("450", this.dataItems)
+        this.dataItems[index].isSelected = evt.target.checked
+        this.masterSelected = this.dataItems.every((item) => item.isSelected == true);
+
+        console.log(this.masterSelected)
+        console.log("tao mang ID");
+        
+
+        console.log("454", this.dataItems[index].id)
+        this.assetSelectedId = this.dataItems[index].id
+
     }
 
     sortList: Priority[] = [];

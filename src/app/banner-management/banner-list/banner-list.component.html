@@ -6,7 +6,7 @@
                 <table class="table" vtTable (sort)="sortByColumn($event)" (dataChecked)="resetData($event)">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" vtTblCheckBtn value="m1"
+                            <th><input type="checkbox" vtTblCheckBtn value="m1" [checked]="masterSelected"
                                 (change)="checkUncheckAll($event)" /></th>
                             <th>STT</th>
                             <th *ngFor="let column of columnOption" id="{{ column.columnId }}" vtTableColDef
@@ -18,10 +18,9 @@
                     </thead>
                     <tbody *ngIf="dataItems || dataItems.length > 0" cdkDropList (cdkDropListDropped)="onDrop($event)">
                         <tr *ngFor="let item of dataItems; index as i" cdkDrag>
-                            <td>
-                                <input type="checkbox" vtTblCheckBtn (change)="onSelectData(item)"
-                                    [checked]="item.checked" />
-                            </td>
+                            <td><input type="checkbox" vtTblCheckBtn [checked]="item.isSelected"
+                                (change)="isAllSelected($event, i)" /></td>
+                        <td style="width: 5%">{{i+ 1}}
                             <td style="width: 5%;">{{ i + 1 }}</td>
 
                             <td *ngFor="let column of columnOption" vtTableColDef>

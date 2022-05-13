@@ -1009,6 +1009,207 @@
     "semver" "6.3.0"
     "semver-intersect" "1.4.0"
 
+"@syncfusion/ej2-angular-base@~20.1.55":
+  "integrity" "sha512-IIVBO1SSAycctWOyVdlgQ5Ryj6lSalQw01swlfAkf1+grJQGE7+szGwuBhQps3Mb9NMhzjXXRbNQp1cesuTNPw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-angular-base/-/ej2-angular-base-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-icons" "~20.1.55"
+    "core-js" "^3.4.8"
+    "reflect-metadata" "^0.1.9"
+    "rxjs" "^6.5.4"
+    "rxjs-compat" "^6.5.4"
+    "zone.js" "^0.10.2"
+
+"@syncfusion/ej2-angular-richtexteditor@^20.1.55":
+  "integrity" "sha512-9Kv0cfw0qe/TDeUuDwKh3k6cijqwJjDFD5Ezq/1CuSZPMapcsxAQwzDIiiwdH2YXWgJvMp/Rv7UWzouAlzvLUw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-angular-richtexteditor/-/ej2-angular-richtexteditor-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-angular-base" "~20.1.55"
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-richtexteditor" "20.1.55"
+
+"@syncfusion/ej2-base@~20.1.55":
+  "integrity" "sha512-3uaXI1i6gb9dDYXqj7mM+bhLtxeHEbOrUBpvP0v48RxOXJDHcGp7xPHQy7sDi/bxYbfwbZt/ZM0az8ZB/gLsjQ=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-base/-/ej2-base-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-icons" "~20.1.55"
+
+"@syncfusion/ej2-buttons@~20.1.55":
+  "integrity" "sha512-4Dw5z9RL5TY5z3mZ7X66pzHegdgmeSt41gRDnhXqmq6k60k9O5dqCvfSe7op4Ufo8rRt9SWDd8UEqUAfzIxGfg=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-buttons/-/ej2-buttons-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+
+"@syncfusion/ej2-calendars@~20.1.55":
+  "integrity" "sha512-q0RnVbPxWG0LhpVLh+d4yPhr4jlw8yDz/yxk+nDjLYhmlz9c8ODzbc+o4+vAHvwSyLsMgL7g2ywCTEWFb1dLjw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-calendars/-/ej2-calendars-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-lists" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+
+"@syncfusion/ej2-compression@~20.1.55":
+  "integrity" "sha512-GCnXVpLEeSyaEXDawY2hq9cuwaFqVgJmHUaPyhvhx5kQ0vmEsvhaUsefXsFzT45TxhDzTVDBoSezz7lTQIuybQ=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-compression/-/ej2-compression-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-file-utils" "~20.1.55"
+
+"@syncfusion/ej2-data@~20.1.55":
+  "integrity" "sha512-iPFnJOjXlOHTP6EV1Qlk4XSympesryDjOMTIB6uYtuUVrHJM87Zk1Wgat7LPyYSB8olVbmPfnDHgCPEOJ8O5vw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-data/-/ej2-data-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+
+"@syncfusion/ej2-dropdowns@~20.1.55":
+  "integrity" "sha512-MeP7D8P+rxl4DLAWhNjWvXFWGT/FYnHunzcPvAxboV9Zh1jpoQxag0XrHEd5U8bbtgoEViR0KVFcg92+Xv6g/Q=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-dropdowns/-/ej2-dropdowns-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-data" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-lists" "~20.1.55"
+    "@syncfusion/ej2-navigations" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+
+"@syncfusion/ej2-excel-export@~20.1.55":
+  "integrity" "sha512-069GTc9Gd0UzZnFt9bwtc/nLfPXO64t/5c3lTytOeRQl56LPtZ9kS9bxJ71KmnDw7uEh7e6JTNH9cIBfTFLlzw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-excel-export/-/ej2-excel-export-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-compression" "~20.1.55"
+
+"@syncfusion/ej2-file-utils@~20.1.55":
+  "integrity" "sha512-Npgab78/jQ8OMWTWxwkiejx/5M+pL4zfJUvkTz+4pGXqA+TfXJcxxWYbxlEa4vVVPBNiiO/3PmaNoW9koq3rdQ=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-file-utils/-/ej2-file-utils-20.1.55.tgz"
+  "version" "20.1.55"
+
+"@syncfusion/ej2-filemanager@~20.1.55":
+  "integrity" "sha512-WJJkfiVzfZIUTX21tUYGbotYPSOmkDHPFbXZgwuGqMeAOafn88tqM+pUiZ7ycFR+b0PeZk/En2CufwsBJuiZoQ=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-filemanager/-/ej2-filemanager-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-data" "~20.1.55"
+    "@syncfusion/ej2-grids" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-layouts" "~20.1.55"
+    "@syncfusion/ej2-lists" "~20.1.55"
+    "@syncfusion/ej2-navigations" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+    "@syncfusion/ej2-splitbuttons" "~20.1.55"
+
+"@syncfusion/ej2-grids@~20.1.55":
+  "integrity" "sha512-hpMbve90vfxoxwkFfzaIgdL0iMf1Ym4Kpwytny88YfGfmQz6gkp595EgFo2kq9vAOS14TD2/Y68lpLgYWqCUlA=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-grids/-/ej2-grids-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-calendars" "~20.1.55"
+    "@syncfusion/ej2-compression" "~20.1.55"
+    "@syncfusion/ej2-data" "~20.1.55"
+    "@syncfusion/ej2-dropdowns" "~20.1.55"
+    "@syncfusion/ej2-excel-export" "~20.1.55"
+    "@syncfusion/ej2-file-utils" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-lists" "~20.1.55"
+    "@syncfusion/ej2-navigations" "~20.1.55"
+    "@syncfusion/ej2-pdf-export" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+    "@syncfusion/ej2-splitbuttons" "~20.1.55"
+
+"@syncfusion/ej2-icons@~20.1.55":
+  "integrity" "sha512-+0KxvnfK1SIXHpfXoh5I0Boa73FyWn53oaJgD+UmR5Qnbd2xt2g/mRXvpsegDd+Y3fcJPAwcncHDfzeXG3Xb7w=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-icons/-/ej2-icons-20.1.55.tgz"
+  "version" "20.1.55"
+
+"@syncfusion/ej2-inputs@~20.1.55":
+  "integrity" "sha512-ymT0favfwcNohI+xF/hlt/tIOFv9hHgLd6MHxAQc8AhKCSW85X+WNilIz0I2wXt0qck6hrVVjxyksQpPH4Ia1g=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-inputs/-/ej2-inputs-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+    "@syncfusion/ej2-splitbuttons" "~20.1.55"
+
+"@syncfusion/ej2-layouts@~20.1.55":
+  "integrity" "sha512-usMANS/GcEMVF12XtYrkBJgP+mtJdq0CeB8fphqHpN/XZDqdhWFZz2XBBNoKF2uhXGbbiwPeWMktomyygqfydw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-layouts/-/ej2-layouts-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+
+"@syncfusion/ej2-lists@~20.1.55":
+  "integrity" "sha512-0GT1GxuZygn0LFfm8XHwzcpxHA3oq6bsoZDMFLMSVLaFTEPN30Cx1VMwNWSDoEHk80D2M8xxAFWB9TOjYeuLFA=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-lists/-/ej2-lists-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-data" "~20.1.55"
+
+"@syncfusion/ej2-navigations@~20.1.55":
+  "integrity" "sha512-NuiREyyh5NPV7ylK3/6riGvIOGcF4tgAt3fVcnRzsJbaYgEawJsY50a44HnRXEJBw6jKkMhsUHm/+fjTro+e7g=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-navigations/-/ej2-navigations-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-data" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-lists" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+
+"@syncfusion/ej2-pdf-export@~20.1.55":
+  "integrity" "sha512-y1e9spCvTM2dHkn9sTWvgrpDrDMcrfrXqDxP0+OtVnmg3rzSWAiDIyquzgJFCq5QPm9MSW012Trn1S6Gpb+UeQ=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-pdf-export/-/ej2-pdf-export-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-compression" "~20.1.55"
+
+"@syncfusion/ej2-popups@~20.1.55":
+  "integrity" "sha512-6uFS/uLjc/kg6Tv4o8l6Pe/+s9TBvJTHcQt+1XaZpAg1WWGsphN0FjJNkAXz0RYMVF5B1hOUPvwISJRLGChfOw=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-popups/-/ej2-popups-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+
+"@syncfusion/ej2-richtexteditor@20.1.55":
+  "integrity" "sha512-Bea0pkM7DsGVXvhklcU5uFZvKktXCCdWAkFrT4M7Jw4xLaUNeCd+CdP4nNcqRFpJVdd7bT7gELy7Bm3X46cPGA=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-richtexteditor/-/ej2-richtexteditor-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-buttons" "~20.1.55"
+    "@syncfusion/ej2-filemanager" "~20.1.55"
+    "@syncfusion/ej2-inputs" "~20.1.55"
+    "@syncfusion/ej2-navigations" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+    "@syncfusion/ej2-splitbuttons" "~20.1.55"
+
+"@syncfusion/ej2-splitbuttons@~20.1.55":
+  "integrity" "sha512-RuGoPITbB2FqC74nTR/cLjqVdXfdFlR8VlBJ8ctfXHHnB2YXrE+fkRfWTV9EJaFV8aGzy4dSJ/dmnPZf2S3n5g=="
+  "resolved" "https://registry.npmjs.org/@syncfusion/ej2-splitbuttons/-/ej2-splitbuttons-20.1.55.tgz"
+  "version" "20.1.55"
+  dependencies:
+    "@syncfusion/ej2-base" "~20.1.55"
+    "@syncfusion/ej2-popups" "~20.1.55"
+
 "@types/events@*":
   "integrity" "sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g=="
   "resolved" "https://registry.npmjs.org/@types/events/-/events-3.0.0.tgz"
@@ -2516,6 +2717,11 @@
   "integrity" "sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
   "version" "2.6.12"
+
+"core-js@^3.4.8":
+  "integrity" "sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA=="
+  "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.22.5.tgz"
+  "version" "3.22.5"
 
 "core-js@3.2.1":
   "integrity" "sha512-Qa5XSVefSVPRxy2XfUC13WbvqkxhkwB3ve+pgCQveNgYzbM/UxZeu1dcOX/xr4UmfUd+muuvsaxilQzCyUurMw=="
@@ -6355,7 +6561,7 @@
     "micromatch" "^3.1.10"
     "readable-stream" "^2.0.2"
 
-"reflect-metadata@^0.1.2":
+"reflect-metadata@^0.1.2", "reflect-metadata@^0.1.9":
   "integrity" "sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg=="
   "resolved" "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.13.tgz"
   "version" "0.1.13"
@@ -6613,10 +6819,22 @@
   dependencies:
     "aproba" "^1.1.1"
 
+"rxjs-compat@^6.5.4":
+  "integrity" "sha512-szN4fK+TqBPOFBcBcsR0g2cmTTUF/vaFEOZNuSdfU8/pGFnNmmn2u8SystYXG1QMrjOPBc6XTKHMVfENDf6hHw=="
+  "resolved" "https://registry.npmjs.org/rxjs-compat/-/rxjs-compat-6.6.7.tgz"
+  "version" "6.6.7"
+
 "rxjs@^6.4.0", "rxjs@^6.x.x", "rxjs@>=6.3.0", "rxjs@6.4.0":
   "integrity" "sha512-Z9Yfa11F6B9Sg/BK9MnqnQ+aQYicPLtilXBp2yUtDt2JRCE0h26d33EnfO3ZxoNxG0T92OUucP3Ct7cpfkdFfw=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.4.0.tgz"
   "version" "6.4.0"
+  dependencies:
+    "tslib" "^1.9.0"
+
+"rxjs@^6.5.4":
+  "integrity" "sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ=="
+  "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-6.6.7.tgz"
+  "version" "6.6.7"
   dependencies:
     "tslib" "^1.9.0"
 
@@ -8313,6 +8531,11 @@
   "integrity" "sha1-5a2ryKz0CPY4X8dklWhMiOavaJo="
   "resolved" "https://registry.npmjs.org/yn/-/yn-2.0.0.tgz"
   "version" "2.0.0"
+
+"zone.js@^0.10.2":
+  "integrity" "sha512-LXVLVEq0NNOqK/fLJo3d0kfzd4sxwn2/h67/02pjCjfKDxgx1i9QqpvtHD8CrBnSSwMw5+dy11O7FRX5mkO7Cg=="
+  "resolved" "https://registry.npmjs.org/zone.js/-/zone.js-0.10.3.tgz"
+  "version" "0.10.3"
 
 "zone.js@~0.9.1":
   "integrity" "sha512-GkPiJL8jifSrKReKaTZ5jkhrMEgXbXYC+IPo1iquBjayRa0q86w3Dipjn8b415jpitMExe9lV8iTsv8tk3DGag=="

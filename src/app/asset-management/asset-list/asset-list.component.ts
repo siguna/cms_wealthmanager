@@ -363,7 +363,7 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         this.dataItems[index].isSelected = evt.target.checked
         this.masterSelected = this.dataItems.every((item) => item.isSelected == true);
 
-        console.log(this.dataItems[index].id)
+        console.log("isAllSelected",this.dataItems[index].id)
         this.assetSelectedId = this.dataItems[index].id
     }
 }
