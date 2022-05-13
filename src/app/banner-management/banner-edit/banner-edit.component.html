@@ -12,19 +12,13 @@
             <div class="row align-items-center mt-2">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <p class="m-0">Loại banner <span class="text-red">(*)</span></p>
-                </div>  
+                </div>
 
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <select
-                        name=""
-                        (change)="onSelectBanner($event)"
-                        id="input"
-                        class="form-control"
-                        required="required"
-                    >
-                        <option selected value="1">Onboarding</option>
-                        <option value="2">Trang chủ</option>
-                        <option value="3">Thu chi trong tháng</option>
+                    <select (change)="onSelectBanner($event)" id="input" class="form-control" required="required">
+                        <option [selected]="bannerType == '1'" value="1">Onboarding</option>
+                        <option [selected]="bannerType == '2'" value="2">Trang chủ</option>
+                        <option [selected]="bannerType == '3'" value="3">Thu chi trong tháng</option>
                     </select>
                 </div>
             </div>
@@ -33,64 +27,83 @@
                     <p class="m-0">Tên cấu hình <span class="text-red">(*)</span></p>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <input type="text" class="form-control" name="" id="" />
+                    <input [(ngModel)]="banner.bannerName" name="bannerName" [value]="bannerName" type="text"
+                        class="form-control" id="" maxlength="255" class="form-control w-50" />
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <p class="m-0">
-                        Đã nhập <span class="text-red">0 </span>còn
-                        <span class="text-red">255</span>
+                    <p class="m-0" *ngIf="banner.bannerName && banner.bannerName.length > 0; else elseBlock">
+                        Đã nhập <span class="text-red"> {{banner.bannerName.length}} </span>còn
+                        <span class="text-red">{{255 - (banner.bannerName.length)}}</span>
                     </p>
+                    <ng-template #elseBlock>
+                        Đã nhập <span class="text-red"> 0 </span>còn
+                        <span class="text-red">255</span>
+                    </ng-template>
                 </div>
             </div>
-            <div *ngIf="checkActiveBanner !== '3'">
+            <!-- <p class="text-danger" *ngIf="bannerName?.invalid && (bannerName?.dirty || bannerName?.touched)">
+                Tên không hợp lệ
+            </p> -->
+            <div *ngIf="bannerType !== '3'">
                 <div class="row align-items-center mt-3">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">Ảnh banner <span class="text-red">(*)</span></p>
                     </div>
 
-                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                        <!-- <vt-file-upload></vt-file-upload> -->
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 d-flex align-items-center">
+                        <input [(ngModel)]="banner.imgUrl" type="file" name="imgUrl" #imgUrl="ngModel" ngModel>
+                        <p class="mb-0 text-image d-block">1 tệp nào được chọn</p>
+                        <a [href]="banner.imgUrl" target="_blank" rel="noopener noreferrer"
+                            ><svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                class="bi bi-folder-symlink-fill"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2l.04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3zM2.19 3c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672a1 1 0 0 1 .707.293L7.586 3H2.19zm9.608 5.271-3.182 1.97c-.27.166-.616-.036-.616-.372V9.1s-2.571-.3-4 2.4c.571-4.8 3.143-4.8 4-4.8v-.769c0-.336.346-.538.616-.371l3.182 1.969c.27.166.27.576 0 .742z"
+                                /></svg
+                        ></a>
+                        <!-- <input style="margin-left: 20px;" type="file" name="imgUrl" #imgUrl="ngModel" ngModel> -->
                     </div>
                 </div>
-                <div class="row align-items-center mt-3" *ngIf="checkActiveBanner === '1'">
+                <div class="row align-items-center mt-3" *ngIf="bannerType === '1'">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">Mô tả banner <span class="text-red">(*)</span></p>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <textarea type="text" class="form-control" name="" id=""></textarea>
+                        <textarea [(ngModel)]="banner.bannerContent" name="bannerContent" [value]="bannerContent" type="text"
+                            class="form-control" id=""
+                            ></textarea>
+                        <form>
+                            <ck-editor type="text" id="name" name="name" formControlName="name"></ck-editor>
+                        </form>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <p class="m-0">
-                            Đã nhập <span class="text-red">0 </span>còn
-                            <span class="text-red">1000</span>
+                        <p class="m-0" *ngIf="bannerContent && banner.bannerContent.length > 0; else elseBlock">
+                            Đã nhập <span class="text-red"> {{banner.bannerContent.length}} </span>còn
+                            <span class="text-red">{{255 - (banner.bannerContent.length)}}</span>
                         </p>
+                        <ng-template #elseBlock>
+                            Đã nhập <span class="text-red"> 0 </span>còn
+                            <span class="text-red">255</span>
+                        </ng-template>
                     </div>
                 </div>
             </div>
 
-            <div *ngIf="checkActiveBanner === '1'">
+            <div *ngIf="bannerType == '1'">
                 <div class="border p-3 mt-3" *ngIf="listFormGroupLogo.length === 0">
                     <div class="d-flex align-items-center">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="40"
-                            height="40"
-                            fill="currentColor"
-                            class="bi bi-plus-circle"
-                            viewBox="0 0 16 16"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                             <path
-                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                            />
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                            />
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                         </svg>
-                        <button
-                            type="button"
-                            (click)="onAddFormGroupLogo()"
-                            class="btn btn-banner_add"
-                        >
+                        <button type="button" (click)="onAddFormGroupLogo()" class="btn btn-banner_add">
                             Thêm
                         </button>
                     </div>
@@ -98,12 +111,13 @@
                 <div *ngFor="let item of listFormGroupLogo; let i = index">
                     <div class="border p-3 mt-3">
                         <div class="row align-items-center">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mb-3">
                                 <p class="m-0">
                                     Logo {{ i + 1 }} <span class="text-red">(*)</span>
                                 </p>
                             </div>
-                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 mb-3">
+                                <input (change)="changeLogo($event, item)" [(ngModel)]="banner.imgUrl" type="file" name="imgUrl" #imgUrl="ngModel" ngModel>
                                 <!-- <vt-file-upload></vt-file-upload> -->
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -112,7 +126,7 @@
                                 </p>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <textarea type="text" class="form-control" name="" id=""></textarea>
+                                <textarea type="text" class="form-control" [id]="item"></textarea>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <p class="m-0">
@@ -124,50 +138,25 @@
                     </div>
                     <div class="d-flex justify-content-end mt-3">
                         <div class="d-flex align-items-center">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="currentColor"
-                                class="bi bi-plus-circle"
-                                viewBox="0 0 16 16"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path
-                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                                />
-                                <path
-                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                                />
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                             </svg>
-                            <button
-                                (click)="onAddFormGroupLogo()"
-                                type="button"
-                                class="btn btn-banner_add"
-                            >
+                            <button (click)="onAddFormGroupLogo()" type="button" class="btn btn-banner_add">
                                 Thêm
                             </button>
                         </div>
-                        <div class="d-flex align-items-center banner-search-left__add">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="40"
-                                height="40"
-                                fill="currentColor"
-                                class="bi bi-x-circle"
-                                viewBox="0 0 16 16"
-                            >
+                        <div *ngIf="listFormGroupLogo.length > 1"
+                            class="d-flex align-items-center banner-search-left__add">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                                class="bi bi-x-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                 <path
-                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                                />
-                                <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                                />
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg>
-                            <button
-                                type="button"
-                                (click)="onRemoveAddLogo(item)"
-                                class="btn btn-banner_remove"
-                            >
+                            <button type="button" (click)="onRemoveAddLogo(item)" class="btn btn-banner_remove">
                                 Xoá
                             </button>
                         </div>
@@ -175,13 +164,15 @@
                 </div>
             </div>
 
-            <div *ngIf="checkActiveBanner === '3'">
+            <div *ngIf="bannerType === '3'">
                 <div class="row align-items-center mt-3">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">Ảnh logo <span class="text-red">(*)</span></p>
                     </div>
 
                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                        <input type="file">
+                        <input style="margin-left: 20px;" [(ngModel)]="banner.imgUrl" type="file" name="imgUrl" #imgUrl="ngModel" ngModel>
                         <!-- <vt-file-upload></vt-file-upload> -->
                     </div>
                 </div>
@@ -190,7 +181,7 @@
                         <p class="m-0">Link gắn banner <span class="text-red">(*)</span></p>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <input type="text" class="form-control" name="" id="" />
+                        <input type="text" class="form-control" id="" />
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">
@@ -206,27 +197,26 @@
                     <p class="m-0">Thời gian áp dụng<span class="text-red">(*)</span></p>
                 </div>
 
-                <div
-                    class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center"
-                >
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center">
                     <p class="endow-text-left">Từ ngày</p>
-                    <input type="date" class="form-control" name="" id="" />
+                    <input type="datetime-local" [(ngModel)]="banner.startActiveTime" name="startActiveTime"
+                        #startActiveTime="ngModel" ngModel class="form-control" id="" />
                 </div>
-                <div
-                    class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center"
-                >
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center">
                     <p class="endow-text-left">Đến ngày</p>
-                    <input type="date" class="form-control" name="" id="" />
+                    <input type="datetime-local"  [(ngModel)]="banner.finishActiveTime" name="finishActiveTime"
+                        #finishActiveTime="ngModel" ngModel class="form-control" id="" />
                 </div>
             </div>
-            <div *ngIf="checkActiveBanner !== '3'">
+            <div *ngIf="bannerType !== '3'">
                 <div class="row align-items-center mt-2">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">Nội dung button <span class="text-red">(*)</span></p>
                     </div>
 
                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                        <textarea type="text" class="form-control" name="" id=""></textarea>
+                        <textarea [(ngModel)]="banner.buttonText" name="buttonText" #buttonText="ngModel" ngModel
+                            type="text" class="form-control" id=""></textarea>
                     </div>
                 </div>
                 <div class="row align-items-center mt-3">
@@ -234,11 +224,12 @@
                         <p class="m-0">Link gắn vào button <span class="text-red">(*)</span></p>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <textarea type="text" class="form-control" name="" id=""></textarea>
+                        <textarea [(ngModel)]="banner.attachedLink" name="attachedLink" #attachedLink="ngModel" ngModel
+                            type="text" class="form-control" id=""></textarea>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">
-                            Đã nhập <span class="text-red">0 </span>còn
+                            Đã nhập <span class="text-red"> {{banner.attachedLink.length}} </span>còn
                             <span class="text-red">255</span>
                         </p>
                     </div>
@@ -250,26 +241,22 @@
                 </div>
 
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <select name="" id="input" class="form-control" required="required">
-                        <option value="">Hoạt động</option>
-                        <option value="">Không hoạt động</option>
+                    <select (change)="onSelectActive($event)" id="input" class="form-control" required="required">
+                        <option selected value="true">Hoạt động</option>
+                        <option value="false">Không hoạt động</option>
                     </select>
+                </div>
+            </div>
+            <div class="d-flex my-4 justify-content-center">
+                <div class="line0 text-center modal-btn">
+                    <a [routerLink]="['/banner']" routerLinkActive="router-link-active" type="button"
+                        class="btn-outline-green btn btn-secondary modal-btn__cancel" data-dismiss="modal">
+                        Hủy
+                    </a>
+                    <button type="submit" class="btn-green btn ms-3" (click)="getResult()">Lưu</button>
                 </div>
             </div>
         </form>
     </div>
-    <div class="d-flex mb-4 justify-content-center">
-        <div class="line0 text-center modal-btn">
-            <a
-                [routerLink]="['/banner']"
-                routerLinkActive="router-link-active"
-                type="button"
-                class="btn-outline-green btn btn-secondary modal-btn__cancel"
-                data-dismiss="modal"
-            >
-                Hủy
-            </a>
-            <button type="button" class="btn-green btn ms-3">Lưu</button>
-        </div>
-    </div>
+
 </div>

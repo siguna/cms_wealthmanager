@@ -15,10 +15,10 @@
                 </div>
 
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <select (change)="onSelectBanner($event)" id="input" class="form-control" required="required">
-                        <option [selected]="bannerType == '1'" value="1">Onboarding</option>
-                        <option [selected]="bannerType == '2'" value="2">Trang chủ</option>
-                        <option [selected]="bannerType == '3'" value="3">Thu chi trong tháng</option>
+                    <select [(ngModel)] = "banner.bannerType" (change)="onSelectBanner($event)" id="input" class="form-control" required="required">
+                        <option [selected]="banner.bannerType == '1'" value="1">Onboarding</option>
+                        <option [selected]="banner.bannerType == '2'" value="2">Trang chủ</option>
+                        <option [selected]="banner.bannerType == '3'" value="3">Thu chi trong tháng</option>
                     </select>
                 </div>
             </div>
@@ -27,13 +27,13 @@
                     <p class="m-0">Tên cấu hình <span class="text-red">(*)</span></p>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    <input [(ngModel)]="bannerName" name="bannerName" [value]="bannerName" type="text"
+                    <input [(ngModel)]="banner.bannerName" name="bannerName" [value]="bannerName" type="text"
                         class="form-control" id="" maxlength="255" class="form-control w-50" />
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <p class="m-0" *ngIf="bannerName && bannerName.length > 0; else elseBlock">
-                        Đã nhập <span class="text-red"> {{bannerName.length}} </span>còn
-                        <span class="text-red">{{255 - (bannerName.length)}}</span>
+                        Đã nhập <span class="text-red"> {{banner.bannerName.length}} </span>còn
+                        <span class="text-red">{{255 - (banner.bannerName.length)}}</span>
                     </p>
                     <ng-template #elseBlock>
                         Đã nhập <span class="text-red"> 0 </span>còn
@@ -44,7 +44,7 @@
             <!-- <p class="text-danger" *ngIf="bannerName?.invalid && (bannerName?.dirty || bannerName?.touched)">
                 Tên không hợp lệ
             </p> -->
-            <div *ngIf="bannerType !== '3'">
+            <div *ngIf="banner.bannerType !== '3'">
                 <div class="row align-items-center mt-3">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <p class="m-0">Ảnh banner <span class="text-red">(*)</span></p>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div *ngIf="bannerType === '1'">
+            <div *ngIf="banner.bannerType === '1'">
                 <div class="border p-3 mt-3" *ngIf="listFormGroupLogo.length === 0">
                     <div class="d-flex align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
@@ -101,13 +101,14 @@
                 <div *ngFor="let item of listFormGroupLogo; let i = index">
                     <div class="border p-3 mt-3">
                         <div class="row align-items-center">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mb-3">
                                 <p class="m-0">
                                     Logo {{ i + 1 }} <span class="text-red">(*)</span>
                                 </p>
                             </div>
-                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                <vt-file-upload></vt-file-upload>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 mb-3">
+                                <input (change)="changeLogo($event, item)" [(ngModel)]="banner.imgUrl" type="file" name="imgUrl" #imgUrl="ngModel" ngModel>
+                                <!-- <vt-file-upload></vt-file-upload> -->
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <p class="m-0">
@@ -115,7 +116,7 @@
                                 </p>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <textarea type="text" class="form-control" id=""></textarea>
+                                <textarea type="text" class="form-control" [id]="item"></textarea>
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 <p class="m-0">
@@ -185,15 +186,18 @@
                     <p class="m-0">Thời gian áp dụng<span class="text-red">(*)</span></p>
                 </div>
 
+
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center">
                     <p class="endow-text-left">Từ ngày</p>
-                    <!-- <input type="datetime-local" [(ngModel)]="banner.startActiveTime" name="startActiveTime"
-                        #startActiveTime="ngModel" ngModel class="form-control" id="" /> -->
+
+                    <input [(ngModel)]="banner.startActiveTime" name="startActiveTime" [value]="startActiveTime"
+                        type="datetime-local" class="form-control" id=""  class="form-control w-50" />
+
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 d-flex justify-content-between align-items-center">
                     <p class="endow-text-left">Đến ngày</p>
-                    <!-- <input type="datetime-local" [(ngModel)]="banner.finishActiveTime" name="finishActiveTime"
-                        #finishActiveTime="ngModel" ngModel class="form-control" id="" /> -->
+                    <input [(ngModel)]="banner.finishActiveTime" name="finishActiveTime" [value]="finishActiveTime"
+                    type="datetime-local" class="form-control" id=""class="form-control w-50" />
                 </div>
             </div>
             <div *ngIf="bannerType !== '3'">
@@ -203,8 +207,8 @@
                     </div>
 
                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                        <!-- <textarea [(ngModel)]="banner.buttonText" name="buttonText" #buttonText="ngModel" ngModel
-                            type="text" class="form-control" id=""></textarea> -->
+                        <input [(ngModel)]="banner.buttonText" name="buttonText" [value]="buttonText"
+                        type="text" class="form-control" id="" maxlength="255" class="form-control w-50" />
                     </div>
                 </div>
                 <div class="row align-items-center mt-3">
@@ -212,8 +216,8 @@
                         <p class="m-0">Link gắn vào button <span class="text-red">(*)</span></p>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <!-- <textarea [(ngModel)]="banner.attachedLink" name="attachedLink" #attachedLink="ngModel" ngModel
-                            type="text" class="form-control" id=""></textarea> -->
+                        <input [(ngModel)]="banner.attachedLink" name="attachedLink" [value]="attachedLink"
+                        type="text" class="form-control" id="" maxlength="800" class="form-control w-50" />
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <!-- <p class="m-0">
@@ -229,9 +233,9 @@
                 </div>
 
                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <select (change)="onSelectActive($event)" id="input" class="form-control" required="required">
-                        <option selected value="true">Hoạt động1</option>
-                        <option value="false">Không hoạt động</option>
+                    <select  (change)="onSelectActive($event)" id="input" class="form-control" required="required">
+                        <option  selected value="true | boolean" >Hoạt động</option>
+                        <option  value="false | boolean" >Không hoạt động</option>
                     </select>
                 </div>
             </div>
@@ -241,7 +245,7 @@
                         class="btn-outline-green btn btn-secondary modal-btn__cancel" data-dismiss="modal">
                         Hủy
                     </a>
-                    <button type="submit" class="btn-green btn ms-3" (click)="getResult()">Lưu</button>
+                    <button type="submit" class="btn-green btn ms-3" (click)="clickSaveHandle()">Lưu</button>
                 </div>
             </div>
         </form>

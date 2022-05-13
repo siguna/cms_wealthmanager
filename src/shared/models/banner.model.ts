@@ -11,14 +11,15 @@ export class Banner {
     attachedLink: string;
     priority: Number;
     actived: boolean;
-    startActiveTime: string;
-    finishActiveTime: string;
+    startActiveTime: Date;
+    finishActiveTime: Date;
     parentId: Number
 }
 
 export class Logo {
     id: Number;
     bannerType: string;
+    bannerContent: string;
     imgUrl: string;
     parrentId: Number;
 

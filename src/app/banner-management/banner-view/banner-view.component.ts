@@ -90,9 +90,12 @@ export class BannerViewComponent implements OnInit {
           console.log(res);
           
           if(res.body.logos && res.body.logos.length > 0){
+            localStorage.setItem('logos', JSON.stringify(res.body.logos))
+            
             this.logos = res.body.logos
           }
         })
+
         this.store.dispatch(loadBanners())
         this.store.select(getAllBanner).subscribe((res: any) => {
             if (res.length > 0) {
@@ -150,6 +153,8 @@ export class BannerViewComponent implements OnInit {
             //   this.banner = data.body.banner;
             // }
         });
+       
+        this.logos = JSON.parse(localStorage.getItem('logos'))
     }
 
     onDeleteBanner(){
