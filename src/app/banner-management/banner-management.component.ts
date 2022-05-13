@@ -101,7 +101,6 @@ export class BannerManagementComponent implements OnInit {
   }
 
   search() {
-    debugger
     let a;
     const nameForm = this.newFormGroup.controls['name'].value;
     const userDev = this.newFormGroup.controls['userDev1'].value;

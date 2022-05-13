@@ -186,13 +186,8 @@ export class BannerListComponent implements OnInit {
             console.log(res)
             if (res.length > 0) {
                 this.dataItems = res;
-                // this.pagination = {
-                //     current: 1,
-                //     sizeOnPage: 10,
-                //     totalItem: res.length
-                // };
-                // this.funcsService.getData(res);
-                // this.fillDataToTable(1);
+                this.funcsService.getData(res);
+                this.fillDataToTable(1);
             }
         });
 
@@ -208,7 +203,7 @@ export class BannerListComponent implements OnInit {
     }
 
     sortByColumn($event: TableColumnModel) {
-        this.userService
+        this.funcsService
             .sortPaymentPartner(
                 this.pagination.current,
                 this.pagination.sizeOnPage,
@@ -228,7 +223,7 @@ export class BannerListComponent implements OnInit {
     resetData($event: any) {}
 
     fillDataToTable(pageNumber) {
-        this.userService
+        this.funcsService
             .getLconfigPageNumberAndRecordNumber(pageNumber, this.recordNumber)
             .subscribe((res) => {
                 this.pagination = {
@@ -241,7 +236,7 @@ export class BannerListComponent implements OnInit {
     }
 
     setPage(event: any) {
-        this.userService
+        this.funcsService
             .getLconfigPageNumberAndRecordNumber(event, this.pagination.sizeOnPage)
             .subscribe((res) => {
                 this.pagination = {
@@ -255,7 +250,7 @@ export class BannerListComponent implements OnInit {
     }
 
     setRecordNumber(event: any) {
-        this.userService
+        this.funcsService
             .getLconfigPageNumberAndRecordNumber(this.pagination.current, event)
             .subscribe((res) => {
                 this.pagination = {
@@ -273,7 +268,7 @@ export class BannerListComponent implements OnInit {
             .confirm('Xóa dữ liệu', 'Bạn có chắc chắn muốn xóa dữ liệu không?')
             .subscribe((next) => {
                 if (next) {
-                    this.userService
+                    this.funcsService
                         .removeListConfig(
                             tableInstance.getSelectedData(),
                             this.pagination.current,
