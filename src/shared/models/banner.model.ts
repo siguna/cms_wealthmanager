@@ -19,6 +19,7 @@ export class Banner {
 export class Logo {
     id: Number;
     bannerType: string;
+    bannerContent: string;
     imgUrl: string;
     parrentId: Number;
 

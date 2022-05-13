@@ -14,7 +14,8 @@ import {
     NgForm
 } from '@angular/forms';
 import {
-    Banner, Logo
+    Banner,
+    Logo
 } from '@model/banner.model';
 import {
     Store
@@ -42,7 +43,7 @@ export class BannerAddComponent implements OnInit {
         createdBy: "admin",
         lastModifiedBy: "",
         lastModifiedDate: "",
-        bannerType: "",
+        bannerType: "1",
         bannerName: "",
         bannerContent: "",
         imgUrl: "https://cdn.thukyluat.vn/nhch-images//CauHoi_Hinh/9eb6abaa-8cda-456c-ad66-26ba4da23ffe.jpg",
@@ -55,10 +56,7 @@ export class BannerAddComponent implements OnInit {
         parentId: 0
     }
 
-    logos : Logo[] = []
 
-
-    
     constructor(
         private store: Store < AppState > ,
         private bannerService: BannerService,
@@ -75,7 +73,15 @@ export class BannerAddComponent implements OnInit {
         return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
     }
 
-    listFormGroupLogo = ['1'];
+    listFormGroupLogo: any[] = ["1"];
+    logos: Logo[] = [{
+        id: null,
+        bannerType: "4",
+        bannerContent: "",
+        imgUrl: "",
+        parrentId: null
+    }]
+
     ngOnInit() {}
     onSelectActive(event) {
         this.banner.actived = event.target.value == 'true' ? true : false
@@ -109,12 +115,12 @@ export class BannerAddComponent implements OnInit {
     clickSaveHandle() {
 
         console.log("banner ", this.banner);
-        this.bannerService.createBanner(this.banner, this.logos).subscribe(
-            (data) => {
-                console.log(data);
-            }
-        );
-    
+        // this.bannerService.createBanner(this.banner, this.logos).subscribe(
+        //     (data) => {
+        //         console.log(data);
+        //     }
+        // );
+
     }
 
 }

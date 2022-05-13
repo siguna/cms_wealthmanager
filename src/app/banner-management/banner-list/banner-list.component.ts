@@ -59,8 +59,14 @@ import {
 import {
     TranslateService
 } from '@ngx-translate/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Observable, Subscription } from 'rxjs';
+import {
+    CdkDragDrop,
+    moveItemInArray
+} from '@angular/cdk/drag-drop';
+import {
+    Observable,
+    Subscription
+} from 'rxjs';
 
 
 interface Priority {
@@ -77,8 +83,8 @@ declare var $: any;
 })
 export class BannerListComponent implements OnInit {
 
-    @Input() events: Observable<void>;
-    
+    @Input() events: Observable < void > ;
+
     res = {
         responseCode: '200',
         responseMessage: 'successful',
@@ -193,6 +199,7 @@ export class BannerListComponent implements OnInit {
     checkedAll: boolean;
     masterSelected = false;
     isChecked = true;
+    idsSelected = new Set();
 
     constructor(
         private userService: UserService,
@@ -398,21 +405,9 @@ export class BannerListComponent implements OnInit {
 
     delete(item: any) {
 
-        console.log("Gui data API", item);
-        
-        // if (window.confirm('Xóa dữ liệu , Bạn có chắc chắn muốn xóa dữ liệu không?')) {
-        //     this.userService
-        //         .deleteLconfig(item, this.pagination.current, this.pagination.sizeOnPage)
-        //         .subscribe((res) => {
-        //             this.pagination = {
-        //                 current: res[0].pageNumber,
-        //                 sizeOnPage: res[0].itemOfPage,
-        //                 totalItem: res[0].totalItemCount
-        //             };
-        //             this.dataItems = res[0].data;
-        //             // this.tableOption = [{data: this.dataItems}];
-        //         });
-        // }
+        console.log("Gui data API", this.idsSelected);
+        this.bannerService.deleteListBanner(Array.from(this.idsSelected));
+
     }
 
     customActionListner($event: {
@@ -440,7 +435,16 @@ export class BannerListComponent implements OnInit {
     }
 
     checkUncheckAll(evt) {
-        this.dataItems.forEach((c) => c.isSelected = evt.target.checked)
+        console.log(evt.target.checked);
+
+        this.dataItems.forEach((c) => {
+            c.isSelected = evt.target.checked;
+            if (evt.target.checked) {
+                this.idsSelected.add(c.id);
+            } else {
+                this.idsSelected.clear();
+            }
+        })
     }
 
     assetSelectedId
@@ -451,16 +455,21 @@ export class BannerListComponent implements OnInit {
 
         console.log(this.masterSelected)
         console.log("tao mang ID");
-        
+
 
         console.log("454", this.dataItems[index].id)
         this.assetSelectedId = this.dataItems[index].id
+
+        if (this.idsSelected.has(this.dataItems[index].id))
+            this.idsSelected.delete(this.dataItems[index].id);
+        else
+            this.idsSelected.add(this.dataItems[index].id)
 
     }
 
     sortList: Priority[] = [];
 
-    onDrop(event: CdkDragDrop<string[]>) {
+    onDrop(event: CdkDragDrop < string[] > ) {
         moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
 
         let priority: Priority;

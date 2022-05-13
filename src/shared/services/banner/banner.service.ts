@@ -65,7 +65,7 @@ export class BannerService {
         return this.http.post < any > (`${environment.apiUrl}/api/banner/delete-banners`, data);
     }
 
-    deleteListBanner(listIds: []): Observable < any > {
+    deleteListBanner(listIds: any[]): Observable < any > {
         const data = {
             "body": {
                 "ids": listIds
