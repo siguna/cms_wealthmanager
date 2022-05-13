@@ -11,8 +11,8 @@ export class Banner {
     attachedLink: string;
     priority: Number;
     actived: boolean;
-    startActiveTime: string;
-    finishActiveTime: string;
+    startActiveTime: Date;
+    finishActiveTime: Date;
     parentId: Number
 }
 

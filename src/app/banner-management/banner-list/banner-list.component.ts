@@ -320,7 +320,8 @@ export class BannerListComponent implements OnInit {
     delete(item: any) {
 
         console.log("Gui data API", this.idsSelected);
-        this.bannerService.deleteListBanner(Array.from(this.idsSelected));
+        this.bannerService.deleteListBanner(Array.from(this.idsSelected)).subscribe((res) => console.log(res)
+        );
 
     }
 

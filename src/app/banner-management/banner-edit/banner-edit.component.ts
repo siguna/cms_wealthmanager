@@ -1,11 +1,30 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { BannerService } from '@shared/services/banner/banner.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '@store/appstate';
-import { FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { getAllBanner, loadBanners } from '@store/banner';
-import { Logo } from '@model/banner.model';
+import {
+    ActivatedRoute,
+    Router
+} from '@angular/router';
+import {
+    BannerService
+} from '@shared/services/banner/banner.service';
+import {
+    Store
+} from '@ngrx/store';
+import {
+    AppState
+} from '@store/appstate';
+import {
+    FormGroup
+} from '@angular/forms';
+import {
+    Component,
+    OnInit
+} from '@angular/core';
+import {
+    getAllBanner,
+    loadBanners
+} from '@store/banner';
+import {
+    Logo
+} from '@model/banner.model';
 
 @Component({
     selector: 'vt-banner-edit',
@@ -24,12 +43,12 @@ export class BannerEditComponent implements OnInit {
     attachedLink: any;
     createdBy: string;
     lastModifiedBy: string;
-    startActiveTime: string;
-    finishActiveTime: string;
+    startActiveTime:  Date;
+    finishActiveTime:  Date;
     actived: boolean = true;
     editorValue;
     constructor(
-        private store: Store<AppState>,
+        private store: Store < AppState > ,
         private bannerService: BannerService,
         private activatedRoute: ActivatedRoute,
         private router: Router
@@ -123,17 +142,21 @@ export class BannerEditComponent implements OnInit {
             actived: this.actived
         };
         const dataLogos = []
-        this.logos.forEach((item) => {
-          const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
-          item.bannerContent = bannerContent;
-          dataLogos.push(item)
-        })
+        if (this.logos.length > 0) {
+            this.logos.forEach((item) => {
+                const bannerContent = ( < HTMLInputElement > document.getElementById(item.id)).value;
+                item.bannerContent = bannerContent;
+                dataLogos.push(item)
+            })
+        }
+        this.banner.finishActiveTime = new Date(this.banner.finishActiveTime);
+        this.banner.startActiveTime = new Date(this.banner.startActiveTime)
 
-         this.bannerService.updateBanner(data, dataLogos).subscribe((res) => {
-             if(res){
+        this.bannerService.updateBanner(data, dataLogos).subscribe((res) => {
+            if (res) {
                 this.router.navigate(['/banner'])
-             }
-          
-         })
+            }
+
+        })
     }
 }

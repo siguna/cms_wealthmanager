@@ -68,6 +68,7 @@ export class BannerService {
     }
 
     deleteListBanner(listIds: any[]): Observable < any > {
+       
         const data = {
             "body": {
                 "ids": listIds

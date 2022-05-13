@@ -51,8 +51,8 @@ export class BannerAddComponent implements OnInit {
         attachedLink: "",
         priority: 0,
         actived: true,
-        startActiveTime: "",
-        finishActiveTime: "",
+        startActiveTime: new Date(),
+        finishActiveTime: new Date(),
         parentId: 0
     }
 
@@ -124,14 +124,20 @@ export class BannerAddComponent implements OnInit {
 
     clickSaveHandle() {
         const dataLogos = []
-        if()
-        this.logos.forEach((item) => {
-          const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
-          item.bannerContent = bannerContent;
-          dataLogos.push(item)
-        })
+        if(this.logos.length > 0){
+            this.logos.forEach((item) => {
+                const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
+                item.bannerContent = bannerContent;
+                dataLogos.push(item)
+            })
+        }
+        
 
         console.log("banner ", this.banner);
+        this.banner.finishActiveTime = new Date(this.banner.finishActiveTime);
+        this.banner.startActiveTime = new Date(this.banner.startActiveTime)
+
+
         this.bannerService.createBanner(this.banner, dataLogos).subscribe(
             (data) => {
                 console.log(data);
