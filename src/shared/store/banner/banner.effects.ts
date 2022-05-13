@@ -24,6 +24,19 @@ export class BannerEffects {
     )
   );
 
+  loadBannerById$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(bannerActionTypes.bannerById),
+    concatMap((action) => 
+    this.bannerService.getBannerById(action.banner)
+    ),
+    map((banner: any) => { 
+      console.log(banner);
+      return bannerActionTypes.bannersLoaded(banner)
+    })
+  )
+);
+
   createBanner$ = createEffect(() =>
     this.actions$.pipe(
       ofType(bannerActionTypes.createBanner),

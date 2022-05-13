@@ -87,7 +87,7 @@ export function createTranslateLoader(http: HttpClient) {
         CustomSharedModule,
         ToastrModule.forRoot()
     ],
-    exports: [FormsModule, TranslateModule, ],
+    exports: [FormsModule, TranslateModule],
     providers: [
         ApiService, 
         HttpClient, 

@@ -1,3 +1,4 @@
+import { Customer } from '@model/banner.model';
 import { createAction, props } from '@ngrx/store';
 
 export const loadBanners = createAction(
@@ -15,8 +16,16 @@ export const createBanner = createAction(
   props<{ banners: any }>()
 )
 
+export const bannerById = createAction(
+  '[BannerId Effect] bannerId Loaded Successfully',
+  props<{banner: string}>()
+);
+
 export const bannerActionTypes = {
   loadBanners,
   bannersLoaded,
+  bannerById,
   createBanner, 
 };
+
+

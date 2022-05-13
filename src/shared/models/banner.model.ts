@@ -12,3 +12,7 @@ export class Banner {
     startActiveTime: string;
     finishActiveTime: string;
 }
+
+export class Customer {
+    name = '';
+  }

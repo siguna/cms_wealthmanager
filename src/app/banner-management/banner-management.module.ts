@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { FileUploadComponent } from '../upload-file/file-upload.component';
 import { BannerManagementRoutingModule } from './banner-management.routing.module';
@@ -12,6 +12,7 @@ import { PaginationComponent } from '@shared/common/ui-component/datatables/pagi
 
 import { BannerService } from '@shared/services/banner/banner.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     BannerManagementRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    CKEditorModule
   ],
   entryComponents: [
     BannerManagementComponent,
@@ -41,6 +43,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   providers: [BannerService],
   exports: [
     // PaginationComponent
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class BannerManagementModule { }

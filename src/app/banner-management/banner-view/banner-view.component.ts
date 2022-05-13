@@ -38,8 +38,9 @@ import {
   Location
 } from '@angular/common';
 import {
-  map
+  map, take
 } from 'rxjs/operators';
+import { getAllBanner } from '@store/banner/banner.selectors';
 
 
 @Component({
@@ -74,7 +75,7 @@ export class BannerViewComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store < AppState > ,
+    private store: Store<AppState>,
     private bannerService: BannerService,
     private route: Router,
     private activatedRoute: ActivatedRoute,
@@ -94,7 +95,7 @@ export class BannerViewComponent implements OnInit {
     });
   }
 
-  viewtest() : string {
+  viewtest(): string {
     return this.test;
   }
 
@@ -106,12 +107,48 @@ export class BannerViewComponent implements OnInit {
   }
 
   listFormGroupLogo = ["1"]
+
+  dataItem
   ngOnInit() {
-    console.log("init view banner");
     // this.store.dispatch(loadAssets())
+    // const data = this.bannerService.getBannerById(this.bannerId).pipe(take(1)).toPromise();
+    // this.test = data.body.banner.bannerType;
+
+    this.store.select(getAllBanner).subscribe((res: any) => {
+      if (res.length > 0) {
+        console.log(res)
+        this.dataItem = res.find(data => data.id == this.bannerId)
+        console.log(this.dataItem);
+
+        if (this.dataItem) {
+          // this.banner = data.body.banner;
+          switch (this.dataItem.bannerType) {
+            case '1':
+              this.bannerTypeName = 'Onboarding'
+              break;
+            case '2':
+              this.bannerTypeName = 'Trang chủ'
+              break;
+            case '3':
+              this.bannerTypeName = 'Thu chi trong tháng'
+              break;
+            default:
+              break;
+          }
+          console.log(this.bannerTypeName);
+        }
+        this.banner = {
+          ...this.dataItem,
+          bannerType: this.bannerTypeName
+        }
+        console.log(this.banner)
+      }
+    })
+
     let that = this;
     this.bannerService.getBannerById(this.bannerId).subscribe(data => {
-      this.test = data.body.banner.bannerType;
+
+      // this.test = data.body.banner.bannerType;
       console.log(this.test)
       that.banner = data.body.banner
       // if(data.body.banner.bannerType){
@@ -130,10 +167,10 @@ export class BannerViewComponent implements OnInit {
       //   //     break;
       //   // }
       //   console.log("data.body.banner", data.body.banner);
-        
+
       //   this.banner = data.body.banner;
       // }
-      
+
     })
   }
 

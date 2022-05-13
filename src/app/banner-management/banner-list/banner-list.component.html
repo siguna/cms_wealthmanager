@@ -6,7 +6,7 @@
                 <table class="table" vtTable (sort)="sortByColumn($event)" (dataChecked)="resetData($event)">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" vtTblCheckBtn [checked]="masterSelected" value="m1"
+                            <th><input type="checkbox" vtTblCheckBtn value="m1"
                                 (change)="checkUncheckAll($event)" /></th>
                             <th>STT</th>
                             <th *ngFor="let column of columnOption" id="{{ column.columnId }}" vtTableColDef
@@ -48,14 +48,14 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="javascript:void(0)" name="VIEW" (click)="openDialogView(item)">
-                                    <img src="../../../assets/images/ic_action_view.svg" alt="delete" 
+                                <a href="javascript:void(0)" name="VIEW">
+                                    <img src="../../../assets/images/info.svg" alt="delete" 
                                     [routerLink]="['/banner/view-banner/',item.id]"
                                     /></a>
 
-                                <a href="javascript:void(0)" (click)="openDialogEdit(item)" name="UPDATE">
+                                <a [routerLink]="['/banner/edit-banner/',item.id]" (click)="openDialogEdit(item)" name="UPDATE">
                                     <img src="../../../assets/images/ic_action_edit.svg" alt="edit"
-                                        [routerLink]="['/banner/edit-banner/',item.id]" />
+                                         />
                                 </a>
 
 
