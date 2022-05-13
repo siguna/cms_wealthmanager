@@ -12,7 +12,7 @@
                 </div>
                 
                 <div class="banner-input input-group">
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="idValue">
                 </div>
                 
             </div>
@@ -21,8 +21,8 @@
                     <p class="m-0">Trạng thái</p>
                 </div>
                 
-                <div class="banner-input input-group ">
-                    <select class="form-select form-control" aria-label="Default select example">
+                <div class="banner-input input-group">
+                    <select [(ngModel)]="statusValue" class="form-select form-control" aria-label="Default select example">
                         <option selected>Tất cả</option>
                         <option value="true">Hoạt động</option>
                         <option value="false">Không hoạt động</option>
@@ -39,7 +39,7 @@
                 </div>
                 
                 <div class="banner-input input-group">
-                    <input type="text" class="form-control" >
+                    <input type="text" class="form-control" [(ngModel)]="configValue">
                 </div>
                 
             </div>
@@ -49,7 +49,7 @@
                 </div>
                 
                 <div class="banner-input input-group ">
-                    <select class="form-select form-control" aria-label="Default select example">
+                    <select [(ngModel)]="dateValue" class="form-select form-control" aria-label="Default select example">
                         <option selected value="true">Ngày tạo</option>
                         <option value="false">Ngày cập nhật</option>
                     </select>
@@ -65,7 +65,7 @@
                 </div>
                 
                 <div class="banner-input input-group ">
-                    <select class="form-select form-control" aria-label="Default select example">
+                    <select [(ngModel)]="bannerTypeValue" class="form-select form-control" aria-label="Default select example">
                         <option selected value="all">Tất cả</option>
                         <option value="home">Trang chủ</option>
                         <option value="Onboarding">Onboarding</option>
@@ -77,20 +77,20 @@
             <div class="row align-items-center justify-content-between mt-3">
                 <div class="d-flex align-items-center col-12 col-xs-6 mt-2">
                     <p class="m-0 w-100">Từ ngày: </p>
-                    <input type="date" class="form-control" name="" id="">
+                    <input type="date" class="form-control" name="" [(ngModel)]="fromDate">
                 </div>
                 
                 <div class="d-flex align-items-center col-12 col-xs-6 mt-2">
                     <p class="m-0 w-100">Đến ngày: </p>
-                    <input type="date" class="form-control" name="" id="">
+                    <input type="date" class="form-control" name="" [(ngModel)]="toDate">
                 </div>
                 
             </div>
         </div>
     </div>
     <div class="d-flex align-items-center justify-content-center mt-3">
-        <button type="button" class="btn btn-remove-search">Xóa điều kiện</button>
-        <button type="button" class="btn btn-submit-search">Tìm kiếm</button>
+        <button type="button" class="btn btn-remove-search" (onclick)="deleteCondition()">Xóa điều kiện</button>
+        <button type="button" class="btn btn-submit-search" (onclick)="searchBanner()">Tìm kiếm</button>
     </div>
 </div>
 
@@ -102,10 +102,11 @@
         <div class="d-flex ">
             
             <a [routerLink]="['add-banner']" routerLinkActive="router-link-active"  type="button" class="btn btn-submit-search">Thêm mới</a>
-            <button type="button" class="btn btn-remove">Xoá</button>
+            <button type="button" class="btn btn-remove"
+            (click)="openModalWithComponent()">Xoá</button>
         </div>
     </div>
-    <vt-banner-list></vt-banner-list>
+    <vt-banner-list [events]="eventsSubject.asObservable()"></vt-banner-list>
 </div>
 
 <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>

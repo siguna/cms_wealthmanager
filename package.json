@@ -35,6 +35,7 @@
     "@ngrx/store-devtools": "^8.5.2",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
+    "@syncfusion/ej2-angular-richtexteditor": "^20.1.55",
     "angular-material": "^1.2.5",
     "bootstrap": "4.4.1",
     "crypto-js": "4.0.0",
