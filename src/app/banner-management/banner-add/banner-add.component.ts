@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
     BannerService
 } from '@shared/services/banner/banner.service';
@@ -26,6 +27,9 @@ import {
 import {
     AngularEditorConfig
 } from '@kolkov/angular-editor';
+import { ToastrService } from 'ngx-toastr';
+import { DialogsService } from '@shared/common/dialogs/dialogs.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'vt-banner-add',
@@ -58,9 +62,13 @@ export class BannerAddComponent implements OnInit {
 
 
     constructor(
-        private store: Store < AppState > ,
+        private store: Store<AppState>,
         private bannerService: BannerService,
-        private formBuilder: FormBuilder
+        private toastr: ToastrService,
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private dialogService: DialogsService,
+        private translate: TranslateService,
     ) {
         this.nameForm = this.formBuilder.group({
             name: ''
@@ -74,12 +82,12 @@ export class BannerAddComponent implements OnInit {
     }
 
     listFormGroupLogo: any[] = ["1"];
-    
-    ngOnInit() {}
+
+    ngOnInit() { }
     onSelectActive(event) {
         this.banner.actived = event.target.value == 'true' ? true : false
     }
-    
+
     logos: any[] = [];
 
     changeLogo(event, index) {
@@ -123,27 +131,47 @@ export class BannerAddComponent implements OnInit {
     }
 
     clickSaveHandle() {
+
+
         const dataLogos = []
-        if(this.logos.length > 0){
+        if (this.logos.length > 0) {
             this.logos.forEach((item) => {
                 const bannerContent = (<HTMLInputElement>document.getElementById(item.id)).value;
                 item.bannerContent = bannerContent;
                 dataLogos.push(item)
             })
         }
-        
+
 
         console.log("banner ", this.banner);
-        this.banner.finishActiveTime = new Date(this.banner.finishActiveTime);
-        this.banner.startActiveTime = new Date(this.banner.startActiveTime)
+        // this.banner.finishActiveTime = new Date(this.banner.finishActiveTime);
+        // this.banner.startActiveTime = new Date(this.banner.startActiveTime)
 
+        this.dialogService.confirm('', this.translate.instant('Bạn có chắc chắn muốn cập nhật ?')).subscribe(next => {
+            if (next) {
 
-        this.bannerService.createBanner(this.banner, dataLogos).subscribe(
-            (data) => {
-                console.log(data);
+                this.bannerService.createBanner(this.banner, dataLogos).subscribe(
+                    (data) => {
+                        console.log(data);
+                        if (data && data.status && data.status.message == "successful") {
+                            this.toastr.success("Cập nhật thành công")
+                            this.router.navigateByUrl('/asset');
+                        } else if (data && data.status && data.status.message == "error") {
+                            this.toastr.error(data.status.displayMessages[0].message)
+                        } else {
+
+                        }
+
+                    }
+                );
+                //   if () {
+                //     //upate
+                //   } else {
+                //     //Add new
+                //   }
+
             }
-        );
-
+        });
     }
 
 }

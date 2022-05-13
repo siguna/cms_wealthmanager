@@ -86,8 +86,8 @@ declare var $: any;
 export class BannerListComponent implements OnInit {
 
     @Input() events: Observable<void>;
-    
-    ngAfterViewInit(): void {}
+
+    ngAfterViewInit(): void { }
     @Input() listConfig: any;
     @Input() dataItems: any;
     @Input() pagination: PageModel;
@@ -108,62 +108,63 @@ export class BannerListComponent implements OnInit {
     masterSelected = false;
     isChecked = true;
     idsSelected = new Set();
+    activated: boolean;
 
     constructor(
         private userService: UserService,
         private messageBox: DialogsService,
         private translate: TranslateService,
-        private store: Store < any > ,
+        private store: Store<any>,
         private ref: ChangeDetectorRef,
         private bannerService: BannerService,
         private dialogService: DialogsService,
         private funcsService: FuncsService,
         private toastr: ToastrService,
-        private router:Router
+        private router: Router
     ) {
 
         this.columnOption = [{
-                columnName: 'ID',
-                columnId: 'idCol',
-                defaultVisible: true
-            },
-            {
-                columnName: 'Tên cấu hình',
-                columnId: 'bannerNameCol',
-                defaultVisible: true
-            },
-            {
-                columnName: 'Loại banner',
-                columnId: 'bannerType',
-                defaultVisible: true
-            },
-            {
-                columnName: 'Trạng thái',
-                columnId: 'confirm',
-                defaultVisible: true,
-                allowSort: false
-            },
-            {
-                columnName: 'Người tạo',
-                columnId: 'createdBy',
-                defaultVisible: true,
-                allowSort: false
-            },
-            {
-                columnName: 'Ngày tạo',
-                columnId: 'createdDate',
-                defaultVisible: true
-            },
-            {
-                columnName: 'Người cập nhật',
-                columnId: 'lastModifiedBy',
-                defaultVisible: true
-            },
-            {
-                columnName: 'Ngày cập nhật',
-                columnId: 'lastModifiedDate',
-                defaultVisible: true
-            }
+            columnName: 'ID',
+            columnId: 'idCol',
+            defaultVisible: true
+        },
+        {
+            columnName: 'Tên cấu hình',
+            columnId: 'bannerNameCol',
+            defaultVisible: true
+        },
+        {
+            columnName: 'Loại banner',
+            columnId: 'bannerType',
+            defaultVisible: true
+        },
+        {
+            columnName: 'Trạng thái',
+            columnId: 'confirm',
+            defaultVisible: true,
+            allowSort: false
+        },
+        {
+            columnName: 'Người tạo',
+            columnId: 'createdBy',
+            defaultVisible: true,
+            allowSort: false
+        },
+        {
+            columnName: 'Ngày tạo',
+            columnId: 'createdDate',
+            defaultVisible: true
+        },
+        {
+            columnName: 'Người cập nhật',
+            columnId: 'lastModifiedBy',
+            defaultVisible: true
+        },
+        {
+            columnName: 'Ngày cập nhật',
+            columnId: 'lastModifiedDate',
+            defaultVisible: true
+        }
         ];
         this.actionConfig = {
             columns: this.columnOption,
@@ -193,6 +194,9 @@ export class BannerListComponent implements OnInit {
                 this.dataItems = res;
                 this.funcsService.getData(res);
                 this.fillDataToTable(1);
+                this.dataItems.filter((item) => {
+                    this.activated = item['actived']
+                })
             }
         });
 
@@ -225,7 +229,7 @@ export class BannerListComponent implements OnInit {
             });
     }
 
-    resetData($event: any) {}
+    resetData($event: any) { }
 
     fillDataToTable(pageNumber) {
         this.funcsService
@@ -315,7 +319,11 @@ export class BannerListComponent implements OnInit {
     delete(item: any) {
 
         console.log("Gui data API", this.idsSelected);
-        this.bannerService.deleteListBanner(Array.from(this.idsSelected)).subscribe((res) => console.log(res)
+        this.bannerService.deleteListBanner(Array.from(this.idsSelected)).subscribe((res) => {
+            if (res.status.code === '200') {
+                this.toastr.success("Cập nhật thành công")
+            }
+        }
         );
 
     }
@@ -383,16 +391,16 @@ export class BannerListComponent implements OnInit {
         moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
         let priorityPrevious: Priority;
         let priorityCurrent: Priority;
-        if(event.previousIndex == event.currentIndex){
+        if (event.previousIndex == event.currentIndex) {
             return;
         }
         priorityPrevious = {
-            id:this.dataItems[event.previousIndex].id,
-            priority:this.dataItems[event.currentIndex].priority
+            id: this.dataItems[event.previousIndex].id,
+            priority: this.dataItems[event.currentIndex].priority
         }
         priorityCurrent = {
-            id:this.dataItems[event.currentIndex].id,
-            priority:this.dataItems[event.previousIndex].priority
+            id: this.dataItems[event.currentIndex].id,
+            priority: this.dataItems[event.previousIndex].priority
         }
         let sortList = [];
         sortList.push(priorityPrevious);
@@ -400,18 +408,18 @@ export class BannerListComponent implements OnInit {
         setTimeout(() => {
             this.dialogService.confirm('', this.translate.instant('Bạn có muốn sắp xếp lại ?')).subscribe(next => {
                 if (next) {
-                    this.bannerService.updateAssetList(sortList).subscribe(data=>{
+                    this.bannerService.updateAssetList(sortList).subscribe(data => {
                         if (data && data.status && data.status.message == "successful") {
                             this.toastr.success("Cập nhật thành công")
                         } else if (data && data.status && data.status.message == "error") {
                             this.toastr.error(data.status.displayMessages[0].message)
-                        } else {}
+                        } else { }
                     })
-                }else{
+                } else {
                     let currentUrl = this.router.url;
                     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
                     this.router.onSameUrlNavigation = 'reload';
-                    this.router.navigate([currentUrl]);         
+                    this.router.navigate([currentUrl]);
                 }
             });
         }, 50);

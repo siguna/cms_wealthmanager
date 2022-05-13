@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FuncsService } from '@shared/common/wealth/funcs.service';
 import { AssetService } from '@shared/services/asset/asset.service';
 import { Store } from '@ngrx/store';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, NgZone, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { UserService } from "../../../shared/services/user.service";
 import { TableColumnModel } from "../../../shared/common/ui-component/datatables/models/tableColumn.model";
@@ -53,6 +53,11 @@ export class AssetListComponent implements OnInit, AfterViewInit {
     private eventsSubscription: Subscription;
 
     @Input() events: Observable<void>;
+
+    ngOnChanges(changes: SimpleChanges){
+        console.log("5",this.activated);
+        
+    }
 
     isResize: any;
     recordNumber: number;
@@ -120,11 +125,9 @@ export class AssetListComponent implements OnInit, AfterViewInit {
         this.store.select(getAllAssets).subscribe(res => {
             if (res.length > 0) {
                 this.dataItems = res
-                console.log(this.dataItems)
                 this.dataItems.filter((item) => {
                     this.activated = item['actived']
-                }
-                )
+                })
                 // this.fillDataToTable(1)
             }
         });
@@ -164,11 +167,11 @@ export class AssetListComponent implements OnInit, AfterViewInit {
 
                     }
                     // this.router.navigateByUrl('/asset');
-                    // this.document.location.reload()
                 })
             } else {
                 this.router.navigateByUrl('/asset');
             }
+            this.document.location.reload()
         });
     }
 

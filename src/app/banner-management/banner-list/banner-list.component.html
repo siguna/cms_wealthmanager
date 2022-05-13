@@ -21,8 +21,6 @@
                             <td><input type="checkbox" vtTblCheckBtn [checked]="item.isSelected"
                                 (change)="isAllSelected($event, i)" /></td>
                         <td style="width: 5%">{{i+ 1}}
-                            <!-- <td style="width: 5%;">{{ i + 1 }}</td> -->
-
                             <td *ngFor="let column of columnOption" vtTableColDef>
                                 <div *ngIf="
                                         column.columnId != 'confirm' && column.columnId != 'lPay'
@@ -34,9 +32,10 @@
                                     {{item[column.columnId]?'Có':'Không'}} -->
                                     <div
                                         class="custom-control custom-switch align-items-center d-flex justify-content-center">
-                                        <input hidden type="checkbox" [checked]="item.actived" [(ngModel)]="item.actived" 
-                                            class="custom-control-input" [id]="item.id" >
-                                        <label class="custom-control-label mt-2 d-block" (click)="showStatusPopup(item.id, item.actived)"></label>
+                                        <input hidden type="checkbox" [checked]="item.actived"
+                                            class="custom-control-input" [id]="item.id"
+                                            (click)="showStatusPopup(item)">
+                                        <label class="custom-control-label mt-2 d-block" [htmlFor]="item.id"></label>
                                     </div>
                                 </div>
                                 <div *ngIf="column.columnId == 'lPay'">

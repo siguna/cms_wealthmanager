@@ -3,6 +3,7 @@
         <div class="col-lg-8 col-md-8 col-sm-8 modal-title">
             <h4 class="text-right" style="margin-right: 10%;">Sửa banner</h4>
         </div>
+        <!-- <h4 class="btn-outline-green btn btn-secondary" style="float: right; pointer-events: none;">Xem chi tiết</h4> -->
     </div>
     <div class="row search-content">
         <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"></div>
@@ -51,6 +52,7 @@
                     </div>
 
                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 d-flex align-items-center">
+                        <vt-file-upload></vt-file-upload>
                         <input [(ngModel)]="banner.imgUrl" type="file" name="imgUrl" #imgUrl="ngModel" ngModel>
                         <p class="mb-0 text-image d-block">1 tệp nào được chọn</p>
                         <a [href]="banner.imgUrl" target="_blank" rel="noopener noreferrer"
@@ -221,7 +223,7 @@
                 </div>
                 <div class="row align-items-center mt-3">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <p class="m-0">Link gắn vào button <span class="text-red">(*)</span></p>
+                        <p class="m-0">Link gắn vào button <span class="text-red"></span></p>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                         <textarea [(ngModel)]="banner.attachedLink" name="attachedLink" #attachedLink="ngModel" ngModel

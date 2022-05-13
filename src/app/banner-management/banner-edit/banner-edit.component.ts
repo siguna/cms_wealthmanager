@@ -25,6 +25,7 @@ import {
 import {
     Logo
 } from '@model/banner.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'vt-banner-edit',
@@ -51,6 +52,7 @@ export class BannerEditComponent implements OnInit {
         private store: Store < AppState > ,
         private bannerService: BannerService,
         private activatedRoute: ActivatedRoute,
+        private toastr: ToastrService,
         private router: Router
     ) {
         this.activatedRoute.params.subscribe((paramsId) => {
@@ -154,7 +156,7 @@ export class BannerEditComponent implements OnInit {
 
         this.bannerService.updateBanner(data, dataLogos).subscribe((res) => {
             if (res) {
-                this.router.navigate(['/banner'])
+              this.router.navigate(['/banner'])
             }
 
         })

@@ -139,13 +139,13 @@ export class AssetAddComponent implements OnInit {
             this.assetSerive.updateAsset(assetDTO).subscribe((data) => {
               if (data && data.status && data.status.message == "successful") {
                 this.toastr.success("Cập nhật thành công")
-              } else if (data && data.status && data.status.message == "error") {
+                // this.router.navigateByUrl('/asset');
+                // this.document.location.reload()
+              } else if (data && data.status && (data.status.message == "error" || data.status.message == "failed")) {
                 this.toastr.error(data.status.displayMessages[0].message)
               } else {
 
               }
-              // this.router.navigateByUrl('/asset');
-              // this.document.location.reload()
             })
 
             // this.store.dispatch(updateAsset({ assetDTO }))
