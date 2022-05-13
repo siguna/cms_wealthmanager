@@ -21,7 +21,7 @@
                             <td><input type="checkbox" vtTblCheckBtn [checked]="item.isSelected"
                                 (change)="isAllSelected($event, i)" /></td>
                         <td style="width: 5%">{{i+ 1}}
-                            <td style="width: 5%;">{{ i + 1 }}</td>
+                            <!-- <td style="width: 5%;">{{ i + 1 }}</td> -->
 
                             <td *ngFor="let column of columnOption" vtTableColDef>
                                 <div *ngIf="
