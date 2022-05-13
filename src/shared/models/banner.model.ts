@@ -1,18 +1,29 @@
 export class Banner {
-    id?: string;
-    bannerType: String;
+    id: Number;
+    createdBy: string;
+    lastModifiedBy: string;
+    lastModifiedDate: string;
+    bannerType: string;
     bannerName: string;
     bannerContent: string;
     imgUrl: string;
     buttonText: string;
     attachedLink: string;
-    createdBy: string;
-    lastModifiedBy: string;
+    priority: Number;
     actived: boolean;
     startActiveTime: string;
     finishActiveTime: string;
+    parentId: Number
+}
+
+export class Logo {
+    id: Number;
+    bannerType: string;
+    imgUrl: string;
+    parrentId: Number;
+
 }
 
 export class Customer {
     name = '';
-  }
+}

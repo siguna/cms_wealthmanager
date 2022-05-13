@@ -1,11 +1,30 @@
-import { BannerService } from '@shared/services/banner/banner.service';
-import { createBanner } from './../../../shared/store/banner/banner.actions';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { Banner } from '@model/banner.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@store/appstate';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import {
+    BannerService
+} from '@shared/services/banner/banner.service';
+import {
+    createBanner
+} from './../../../shared/store/banner/banner.actions';
+import {
+    Component,
+    OnInit
+} from '@angular/core';
+import {
+    FormBuilder,
+    FormGroup,
+    NgForm
+} from '@angular/forms';
+import {
+    Banner, Logo
+} from '@model/banner.model';
+import {
+    Store
+} from '@ngrx/store';
+import {
+    AppState
+} from '@store/appstate';
+import {
+    AngularEditorConfig
+} from '@kolkov/angular-editor';
 
 @Component({
     selector: 'vt-banner-add',
@@ -14,34 +33,41 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class BannerAddComponent implements OnInit {
 
-    public nameForm:FormGroup;
+    public nameForm: FormGroup;
 
     htmlContent = '';
 
+    banner: Banner = {
+        id: 0,
+        createdBy: "admin",
+        lastModifiedBy: "",
+        lastModifiedDate: "",
+        bannerType: "",
+        bannerName: "",
+        bannerContent: "",
+        imgUrl: "https://cdn.thukyluat.vn/nhch-images//CauHoi_Hinh/9eb6abaa-8cda-456c-ad66-26ba4da23ffe.jpg",
+        buttonText: "",
+        attachedLink: "",
+        priority: 0,
+        actived: true,
+        startActiveTime: "",
+        finishActiveTime: "",
+        parentId: 0
+    }
+
+    logos : Logo[] = []
+
+
     
-    checkActiveBanner = "1";
-    bannerType = '1'
-    bannerId: string;
-    bannerName: string;
-    bannerContent: string;
-    imgUrl: string;
-    buttonText: string;
-    attachedLink: string;
-    createdBy: string;
-    lastModifiedBy: string;
-    startActiveTime: string;
-    finishActiveTime: string;
-    actived: boolean = true;
-    editorValue;
     constructor(
-        private store: Store<AppState>,
+        private store: Store < AppState > ,
         private bannerService: BannerService,
         private formBuilder: FormBuilder
     ) {
         this.nameForm = this.formBuilder.group({
             name: ''
-          });
-     }
+        });
+    }
     guidGenerator() {
         var S4 = function () {
             return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -50,9 +76,9 @@ export class BannerAddComponent implements OnInit {
     }
 
     listFormGroupLogo = ['1'];
-    ngOnInit() { }
+    ngOnInit() {}
     onSelectActive(event) {
-        this.actived = event.target.value == 'true' ? true : false
+        this.banner.actived = event.target.value == 'true' ? true : false
     }
     submitAddBannerForm(f: NgForm) {
         // const { value } = f;
@@ -69,7 +95,7 @@ export class BannerAddComponent implements OnInit {
     }
 
     onSelectBanner(event: any) {
-        this.bannerType = event.target.value;
+        this.banner.bannerType = event.target.value;
     }
 
     onAddFormGroupLogo() {
@@ -80,9 +106,15 @@ export class BannerAddComponent implements OnInit {
         this.listFormGroupLogo = this.listFormGroupLogo.filter((item) => item !== index);
     }
 
-    getResult() {
-        console.log("123", this.bannerName);
-        console.log('it does nothing', this.nameForm.get('name').value);
+    clickSaveHandle() {
+
+        console.log("banner ", this.banner);
+        this.bannerService.createBanner(this.banner, this.logos).subscribe(
+            (data) => {
+                console.log(data);
+            }
+        );
+    
     }
 
 }
