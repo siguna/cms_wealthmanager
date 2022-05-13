@@ -24,7 +24,6 @@ export class Logo {
     parrentId: Number;
 
 }
-
 export class Customer {
     name = '';
-}
+  }
