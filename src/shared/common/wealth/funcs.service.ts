@@ -12,7 +12,7 @@ export class FuncsService {
 
     lConfig = []
     getData(data) {
-        console.log(data)
+       
         if (data && data.body && data.body.listAssetDTO && data.body.listAssetDTO.length > 0) {
             this.lConfig = data.body.listAssetDTO
         } else {
@@ -417,6 +417,7 @@ export class FuncsService {
     public advanceSearch1(LPAy, nCCDV, userDev) {
         this.resetData();
         this.p = [];
+        debugger
         this.lConfig = this.lConfig.filter(item => {
             if ((LPAy === '' || item.lPay === LPAy) && (nCCDV === '' || (item.nCCDV.toLowerCase().indexOf(nCCDV.toLowerCase()) > -1))
                 && (userDev === '' || (item.userDev.toLowerCase().indexOf(userDev.toLowerCase()) > -1))) {
@@ -431,164 +432,164 @@ export class FuncsService {
     }
 
     private resetData() {
-        this.lConfig = [
-            {
-                id: 1, nCCDVCode: '012945668',
-                nCCDV: 'CGV', confirm: false,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 2, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Hoàng Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 3, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 4, nCCDVCode: '012345668',
-                nCCDV: 'Lotte', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 5, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 6, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 7, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 8, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 9, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 10, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'Mobi',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 11, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 12, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            },
-            {
-                id: 13, nCCDVCode: '012345668',
-                nCCDV: 'CGV', confirm: true,
-                lPay: 'ViettelPay',
-                staffPhone: '0943170675',
-                bossPhone: '0346157556',
-                userDev: 'Trần Linh',
-                province: 'Ha Noi',
-                kind: 'Loại 1',
-                timeTraining: '25/6/2019',
-                timeAccept: '25/12/2019'
-            }
-        ];
+        // this.lConfig = [
+        //     {
+        //         id: 1, nCCDVCode: '012945668',
+        //         nCCDV: 'CGV', confirm: false,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 2, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Hoàng Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 3, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 4, nCCDVCode: '012345668',
+        //         nCCDV: 'Lotte', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 5, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 6, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 7, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 8, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 9, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 10, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'Mobi',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 11, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 12, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     },
+        //     {
+        //         id: 13, nCCDVCode: '012345668',
+        //         nCCDV: 'CGV', confirm: true,
+        //         lPay: 'ViettelPay',
+        //         staffPhone: '0943170675',
+        //         bossPhone: '0346157556',
+        //         userDev: 'Trần Linh',
+        //         province: 'Ha Noi',
+        //         kind: 'Loại 1',
+        //         timeTraining: '25/6/2019',
+        //         timeAccept: '25/12/2019'
+        //     }
+        // ];
     }
 
 

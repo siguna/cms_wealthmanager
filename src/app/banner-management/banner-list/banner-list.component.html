@@ -44,6 +44,12 @@
                                         <img src="assets/images/ic_viettelpay.svg" />
                                     </i>
                                     {{ item[column.columnId] }}
+                                </div>                            
+                                <div *ngIf="column.columnId == 'idCol'">
+                                    <a [routerLink]="['/banner/view-banner/',item.id]">  {{item.id}} </a>
+                                </div> 
+                                <div *ngIf="column.columnId == 'bannerNameCol'">
+                                    <a [routerLink]="['/banner/view-banner/',item.id]">  {{item.bannerName}} </a>                                 
                                 </div>
                             </td>
                             <td>

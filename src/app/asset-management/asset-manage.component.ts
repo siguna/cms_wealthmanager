@@ -202,8 +202,6 @@ export class AssetManageComponent implements OnInit {
 
     this.dialogService.confirm('', this.translate.instant('Bạn chắc chắn xóa ?')).subscribe(next => {
       if (next) {
-        console.log(1)
-        debugger
         this.eventsSubject.next();
       }
     });

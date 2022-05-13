@@ -60,14 +60,15 @@ import {
 import {
     TranslateService
 } from '@ngx-translate/core';
-import {
-    CdkDragDrop,
-    moveItemInArray
-} from '@angular/cdk/drag-drop';
-import {
-    Observable,
-    Subscription
-} from 'rxjs';
+
+
+
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
+import { Banner } from '@model/banner.model';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscription } from 'rxjs';
+
 
 
 interface Priority {
@@ -84,102 +85,8 @@ declare var $: any;
 })
 export class BannerListComponent implements OnInit {
 
-    @Input() events: Observable < void > ;
-
-    res = {
-        // responseCode: '200',
-        // responseMessage: 'successful',
-        // responseEntityMessages: null,
-        // body: {
-        //     banners: [{
-        //             createdBy: 's',
-        //             createdDate: '2022-05-06T02:57:08Z',
-        //             lastModifiedBy: 's',
-        //             lastModifiedDate: '2022-04-26T04:10:50Z',
-        //             id: 5,
-        //             bannerType: '4',
-        //             bannerName: 'logo',
-        //             bannerContent: '',
-        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-        //             buttonText: '',
-        //             attachedLink: '',
-        //             priority: 5,
-        //             actived: true,
-        //             startActiveTime: '2022-03-18T17:47:22Z',
-        //             finishActiveTime: '2022-05-24T17:47:23Z'
-        //         },
-        //         {
-        //             createdBy: 'admin',
-        //             createdDate: '2022-05-06T02:57:08Z',
-        //             lastModifiedBy: 'admin',
-        //             lastModifiedDate: '2022-04-27T02:26:21Z',
-        //             id: 15,
-        //             bannerType: '4',
-        //             bannerName: 'logo',
-        //             bannerContent: '',
-        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-        //             buttonText: '',
-        //             attachedLink: '',
-        //             priority: 6,
-        //             actived: true,
-        //             startActiveTime: '2022-03-17T16:29:35Z',
-        //             finishActiveTime: '2022-05-19T16:29:36Z'
-        //         },
-        //         {
-        //             createdBy: 'admin',
-        //             createdDate: '2022-05-06T02:57:08Z',
-        //             lastModifiedBy: 'admin',
-        //             lastModifiedDate: '2022-04-27T02:31:59Z',
-        //             id: 17,
-        //             bannerType: '4',
-        //             bannerName: 'logo',
-        //             bannerContent: '',
-        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-        //             buttonText: '',
-        //             attachedLink: '',
-        //             priority: 8,
-        //             actived: false,
-        //             startActiveTime: '2022-03-17T16:29:35Z',
-        //             finishActiveTime: '2022-05-19T16:29:36Z'
-        //         },
-        //         {
-        //             createdBy: 'admin',
-        //             createdDate: '2022-05-06T02:59:03Z',
-        //             lastModifiedBy: 'admin',
-        //             lastModifiedDate: '2022-04-28T07:24:28Z',
-        //             id: 1,
-        //             bannerType: '1',
-        //             bannerName: 'onboarding',
-        //             bannerContent: 'Nền tảng quản lý tài sản, đầu tư cho mọi người',
-        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-        //             buttonText: 'Tìm hiểu ngay',
-        //             attachedLink: 'https://kenh14.vn/',
-        //             priority: 9,
-        //             actived: true,
-        //             startActiveTime: '2022-03-17T16:29:35Z',
-        //             finishActiveTime: '2022-05-19T16:29:36Z'
-        //         },
-        //         {
-        //             createdBy: 's',
-        //             createdDate: '2022-05-06T06:52:43Z',
-        //             lastModifiedBy: null,
-        //             lastModifiedDate: '2022-04-28T14:24:21Z',
-        //             id: 41,
-        //             bannerType: '4',
-        //             bannerName: 'logo',
-        //             bannerContent: null,
-        //             imgUrl: 'https://www.pinterest.com/pin/552535448035224689/',
-        //             buttonText: null,
-        //             attachedLink: null,
-        //             priority: 10,
-        //             actived: true,
-        //             startActiveTime: '2022-04-28T14:24:21Z',
-        //             finishActiveTime: '2022-05-28T14:24:21Z'
-        //         }
-        //     ]
-        // }
-    };
-
+    @Input() events: Observable<void>;
+    
     ngAfterViewInit(): void {}
     @Input() listConfig: any;
     @Input() dataItems: any;
@@ -210,17 +117,19 @@ export class BannerListComponent implements OnInit {
         private ref: ChangeDetectorRef,
         private bannerService: BannerService,
         private dialogService: DialogsService,
-        private funcsService: FuncsService
+        private funcsService: FuncsService,
+        private toastr: ToastrService,
+        private router:Router
     ) {
 
         this.columnOption = [{
                 columnName: 'ID',
-                columnId: 'id',
+                columnId: 'idCol',
                 defaultVisible: true
             },
             {
                 columnName: 'Tên cấu hình',
-                columnId: 'bannerName',
+                columnId: 'bannerNameCol',
                 defaultVisible: true
             },
             {
@@ -255,10 +164,6 @@ export class BannerListComponent implements OnInit {
                 columnId: 'lastModifiedDate',
                 defaultVisible: true
             }
-            // {columnName: 'Tỉnh / TP', columnId: 'province', defaultVisible: true},
-            // {columnName: 'Loại hình đối tác', columnId: 'kind', defaultVisible: true},
-            // {columnName: 'Thời gian tạo', columnId: 'timeTraining', defaultVisible: true},
-            // {columnName: 'Thời gian ghi nhận', columnId: 'timeAccept', defaultVisible: true}
         ];
         this.actionConfig = {
             columns: this.columnOption,
@@ -286,10 +191,13 @@ export class BannerListComponent implements OnInit {
             console.log(res)
             if (res.length > 0) {
                 this.dataItems = res;
-                console.log(res)
-                debugger
-                this.funcsService.getData(res);
-                this.fillDataToTable(1);
+                // this.pagination = {
+                //     current: 1,
+                //     sizeOnPage: 10,
+                //     totalItem: res.length
+                // };
+                // this.funcsService.getData(res);
+                // this.fillDataToTable(1);
             }
         });
 
@@ -475,33 +383,42 @@ export class BannerListComponent implements OnInit {
 
     sortList: Priority[] = [];
 
-    onDrop(event: CdkDragDrop < string[] > ) {
+    onDrop(event: CdkDragDrop<Banner[]>) {
         moveItemInArray(this.dataItems, event.previousIndex, event.currentIndex);
-
-        let priority: Priority;
-        this.dataItems.forEach((data, idx) => {
-            console.log(data)
-            console.log(data.order);
-
-            if (data.order = idx) {
-                console.log(data.id)
-                priority = {
-                    id: data.id,
-                    priority: data.priority,
-                };
-            }
-            data.order = idx + 1;
-
-        });
-        this.sortList.push(priority)
-        console.log(this.sortList)
+        let priorityPrevious: Priority;
+        let priorityCurrent: Priority;
+        if(event.previousIndex == event.currentIndex){
+            return;
+        }
+        priorityPrevious = {
+            id:this.dataItems[event.previousIndex].id,
+            priority:this.dataItems[event.currentIndex].priority
+        }
+        priorityCurrent = {
+            id:this.dataItems[event.currentIndex].id,
+            priority:this.dataItems[event.previousIndex].priority
+        }
+        let sortList = [];
+        sortList.push(priorityPrevious);
+        sortList.push(priorityCurrent)
         setTimeout(() => {
             this.dialogService.confirm('', this.translate.instant('Bạn có muốn sắp xếp lại ?')).subscribe(next => {
                 if (next) {
-                    // this.assetService.updateAssetList({sortList})
+                    this.bannerService.updateAssetList(sortList).subscribe(data=>{
+                        if (data && data.status && data.status.message == "successful") {
+                            this.toastr.success("Cập nhật thành công")
+                        } else if (data && data.status && data.status.message == "error") {
+                            this.toastr.error(data.status.displayMessages[0].message)
+                        } else {}
+                    })
+                }else{
+                    let currentUrl = this.router.url;
+                    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                    this.router.onSameUrlNavigation = 'reload';
+                    this.router.navigate([currentUrl]);         
                 }
             });
-        }, 100);
+        }, 50);
 
     }
 }
